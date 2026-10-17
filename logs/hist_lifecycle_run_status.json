@@ -1,0 +1,12 @@
+[
+  {
+    "step": "hist_lifecycle_tests",
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "step": "hist_lifecycle_reconciliation",
+    "exit_code": 0,
+    "status": "PASS"
+  }
+]

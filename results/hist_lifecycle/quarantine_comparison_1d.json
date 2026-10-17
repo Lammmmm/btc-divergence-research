@@ -1,0 +1,6 @@
+{
+  "identical": true,
+  "changes": [],
+  "published_only_starts": [],
+  "reason": "TradingView pane uses its chart feed; it does not hardcode exclusions for the separate Binance download snapshot."
+}

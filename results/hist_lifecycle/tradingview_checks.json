@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "date": "2026-10-17",
+  "pine_version": 6,
+  "script_name": "Hist 背离全过程 · 结构进度 v1",
+  "saved_version": 2,
+  "source_sha256": "9b4d8e5d1795e11eb60e4cd91de78003165872db96cda7073f1062168023f658",
+  "saved_editor_matches_local": true,
+  "saved_editor_characters": 16001,
+  "chart": "BINANCE:BTCUSDT.P",
+  "timeframes_visually_checked": [
+    "1D",
+    "240"
+  ],
+  "histogram_and_dashboard_rendered": true,
+  "full_history_export_reconciliation": "PENDING",
+  "screenshots": [
+    "reports/hist_lifecycle_1d_tradingview.png",
+    "reports/hist_lifecycle_4h_tradingview.png"
+  ]
+}

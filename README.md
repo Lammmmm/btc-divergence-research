@@ -6,6 +6,10 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 **当前状态：历史研究完成；TradingView 对账和未来向前验证待完成。**
 
+**新增可用副图：Hist 背离全过程 v1。** [Pine v6 源码](pine/Hist_Divergence_Lifecycle_v1.pine) / [安装与使用说明](docs/HIST_LIFECYCLE_GUIDE.md)。显示潜在形态、生效、等待、反转确认和结构失效；价格进度不是胜率。已在 TradingView 的 BINANCE:BTCUSDT.P 日线与 4H 编译运行，保存源码与本地文件比对一致；完整历史导出对账仍待完成。离线检查：`python run_hist_lifecycle.py`。这不会改变下方旧回测结果或其统计口径。
+
+[副图 v1 发布与更新后的完整研究包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-lifecycle-v1)。旧 `research-2026-10-17` 发布保留当时快照，不覆盖。
+
 **最新：允许横盘等待的结构反转测试。** 10 个指标分别测试日线和 4H，不组合、不优化；取消固定等待期限，以信号确认时冻结的价格结构判定成功或失效。[本轮结论](reports/STRUCTURE_REVERSAL.md) / [完整报告](reports/structure_reversal.html) / [精确规则及限制](docs/STRUCTURE_REVERSAL_METHOD.md)。20 组主比较，以及各自前段、近期诊断，共 60 个账本；6 项合成测试和 4,040 条事件记录的独立复核通过。这些记录含重复的历史区间，不能合并为独立样本。单独复现：`python run_structure.py`。本轮统计结构确认率，不计算交易收益；旧研究全部保留。
 
 **新增：围绕日常参考用途的集中检验。** 只比较 12 种预设设置，另加 1 种明确标记为探索性的日线精简设置；不扩大参数搜索。[实用设置结论](reports/REFERENCE_USE.md) / [完整实用报告](reports/reference_use.html)。该轮评价信号后的顺逆波动，不是账户收益回测。单独重跑命令：`python run_reference.py`。原来的 500 组交易研究及结果完整保留。

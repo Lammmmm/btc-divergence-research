@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "datasets": [
+    {
+      "tf": "1d",
+      "source_bars": 2480,
+      "signal_lengths_match": true,
+      "completed": 38,
+      "pending": 1,
+      "successful": 27,
+      "failed": 11,
+      "streaming_matches_batch": true,
+      "identical_to_published_Hist_events": true
+    },
+    {
+      "tf": "4h",
+      "source_bars": 14880,
+      "signal_lengths_match": true,
+      "completed": 201,
+      "pending": 1,
+      "successful": 83,
+      "failed": 118,
+      "streaming_matches_batch": true,
+      "identical_to_published_Hist_events": false
+    }
+  ],
+  "scope": "Python streaming specification vs saved research; not execution of Pine by Python.",
+  "TradingView_full_export_reconciliation": "PENDING",
+  "preview_accuracy": "NOT_TESTED"
+}

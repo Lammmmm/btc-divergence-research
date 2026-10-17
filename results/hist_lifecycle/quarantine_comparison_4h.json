@@ -1,0 +1,20 @@
+{
+  "identical": false,
+  "changes": [
+    {
+      "signal_time": 1699646400000,
+      "product_event": {
+        "reference_index": 8459,
+        "resolution_index": 8590,
+        "status": "failure",
+        "confirmation_level": 35304.0,
+        "invalidation_level": 38808.88329367933
+      },
+      "published_event": null
+    }
+  ],
+  "published_only_starts": [
+    1700841600000
+  ],
+  "reason": "TradingView pane uses its chart feed; it does not hardcode exclusions for the separate Binance download snapshot."
+}
