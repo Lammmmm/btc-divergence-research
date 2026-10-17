@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "table_count": 5,
+  "body_row_counts": [
+    10,
+    10,
+    10,
+    20,
+    9
+  ],
+  "desktop_width": 1440,
+  "mobile_width": 390,
+  "document_horizontal_overflow": false,
+  "browser_errors": [],
+  "screenshot_files": [
+    "reports/qa_structure_overview.png",
+    "reports/qa_structure_daily.png"
+  ]
+}

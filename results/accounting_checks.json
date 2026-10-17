@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "groups": 500,
+  "trade_rows_all_groups": 33449,
+  "primary_trade_rows": 2735,
+  "max_equity_accounting_error": 3.637978807091713e-12,
+  "overlap_checks": true,
+  "signal_before_entry": true,
+  "fees_and_cash": true,
+  "drawdown_recomputed": true,
+  "funding_recomputed_from_individual_events": true,
+  "notes": "Repeated history across scenarios/windows is not independent sample size."
+}

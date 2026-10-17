@@ -1,0 +1,10 @@
+{
+  "url": "https://fapi.binance.com/fapi/v1/klines",
+  "symbol": "BTCUSDT",
+  "interval": "1h",
+  "startTime": 1577836800000,
+  "endTime": 1792108799999,
+  "retrieved_utc": "2026-10-16T07:44:10.154774+00:00",
+  "rows": 59520,
+  "sha256": "a38a9f547f1498cbc3efd4c0553cd9d289be9013355384ffdf708fdbfa21e8b2"
+}

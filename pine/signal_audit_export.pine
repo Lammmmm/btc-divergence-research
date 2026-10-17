@@ -1,0 +1,239 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © LonesomeTheBlue
+
+//@version=4
+study("Divergence Signal Audit Export", overlay = false, max_bars_back = 1000, max_lines_count = 400, max_labels_count = 400)
+prd = input(defval = 5, title = "Pivot Period", minval = 1, maxval = 50)
+source = input(defval = "Close", title = "Source for Pivot Points", options = ["Close", "High/Low"])
+searchdiv = input(defval = "Regular", title = "Divergence Type", options = ["Regular", "Hidden", "Regular/Hidden"])
+showindis = input(defval = "Full", title = "Show Indicator Names", options = ["Full", "First Letter", "Don't Show"])
+showlimit = input(1, title="Minimum Number of Divergence", minval = 1, maxval = 11)
+maxpp = input(defval = 10, title = "Maximum Pivot Points to Check", minval = 1, maxval = 20)
+maxbars = input(defval = 100, title = "Maximum Bars to Check", minval = 30, maxval = 200)
+shownum = input(defval = true, title = "Show Divergence Number")
+showlast = input(defval = false, title = "Show Only Last Divergence")
+dontconfirm = input(defval = false, title = "Don't Wait for Confirmation")
+showlines = input(defval = true, title = "Show Divergence Lines")
+showpivot = input(defval = false, title = "Show Pivot Points")
+calcmacd = input(defval = true, title = "MACD")
+calcmacda = input(defval = true, title = "MACD Histogram")
+calcrsi = input(defval = true, title = "RSI")
+calcstoc = input(defval = true, title = "Stochastic")
+calccci = input(defval = true, title = "CCI")
+calcmom = input(defval = true, title = "Momentum")
+calcobv = input(defval = true, title = "OBV")
+calcvwmacd = input(true, title = "VWmacd")
+calccmf = input(true, title = "Chaikin Money Flow")
+calcmfi = input(true, title = "Money Flow Index")
+calcext = input(false, title = "Check External Indicator")
+externalindi = input(defval = close, title = "External Indicator")
+pos_reg_div_col = input(defval = color.yellow, title = "Positive Regular Divergence")
+neg_reg_div_col = input(defval = color.navy, title = "Negative Regular Divergence")
+pos_hid_div_col = input(defval = color.lime, title = "Positive Hidden Divergence")
+neg_hid_div_col = input(defval = color.red, title = "Negative Hidden Divergence")
+pos_div_text_col = input(defval = color.black, title = "Positive Divergence Text Color")
+neg_div_text_col = input(defval = color.white, title = "Negative Divergence Text Color")
+reg_div_l_style_ = input(defval = "Solid", title = "Regular Divergence Line Style", options = ["Solid", "Dashed", "Dotted"])
+hid_div_l_style_ = input(defval = "Dashed", title = "Hdden Divergence Line Style", options = ["Solid", "Dashed", "Dotted"])
+reg_div_l_width = input(defval = 2, title = "Regular Divergence Line Width", minval = 1, maxval = 5)
+hid_div_l_width = input(defval = 1, title = "Hidden Divergence Line Width", minval = 1, maxval = 5)
+showmas = input(defval = false, title = "Show MAs 50 & 200", inline = "ma12")
+cma1col = input(defval = color.lime, title = "", inline = "ma12")
+cma2col = input(defval = color.red, title = "", inline = "ma12")
+
+plot(showmas ? sma(close, 50) : na, color = showmas ? cma1col : na)
+plot(showmas ? sma(close, 200) : na, color = showmas ? cma2col: na)
+
+// set line styles
+var reg_div_l_style = reg_div_l_style_ == "Solid" ? line.style_solid : 
+                       reg_div_l_style_ == "Dashed" ? line.style_dashed :
+                       line.style_dotted
+var hid_div_l_style = hid_div_l_style_ == "Solid" ? line.style_solid : 
+                       hid_div_l_style_ == "Dashed" ? line.style_dashed :
+                       line.style_dotted
+
+
+// get indicators
+rsi = rsi(close, 14) // RSI
+[macd, signal, deltamacd] = macd(close, 12, 26, 9) // MACD
+moment = mom(close, 10) // Momentum
+cci = cci(close, 10) // CCI
+Obv = obv // OBV
+stk = sma(stoch(close, high, low, 14), 3) // Stoch
+maFast = vwma(close, 12), maSlow = vwma(close, 26), vwmacd = maFast - maSlow // volume weighted macd
+Cmfm = ((close-low) - (high-close)) / (high - low), Cmfv = Cmfm * volume, cmf = sma(Cmfv, 21) / sma(volume,21) // Chaikin money flow
+Mfi = mfi(close, 14) // Moneyt Flow Index
+
+// keep indicators names and colors in arrays
+var indicators_name = array.new_string(11)
+var div_colors = array.new_color(4)
+if barstate.isfirst
+    // names
+    array.set(indicators_name, 0, showindis == "Full" ? "MACD" : "M")
+    array.set(indicators_name, 1, showindis == "Full" ? "Hist" : "H")
+    array.set(indicators_name, 2, showindis == "Full" ? "RSI" : "E")
+    array.set(indicators_name, 3, showindis == "Full" ? "Stoch" : "S")
+    array.set(indicators_name, 4, showindis == "Full" ? "CCI" : "C")
+    array.set(indicators_name, 5, showindis == "Full" ? "MOM" : "M")
+    array.set(indicators_name, 6, showindis == "Full" ? "OBV" : "O")
+    array.set(indicators_name, 7, showindis == "Full" ? "VWMACD" : "V")
+    array.set(indicators_name, 8, showindis == "Full" ? "CMF" : "C")
+    array.set(indicators_name, 9, showindis == "Full" ? "MFI" : "M")
+    array.set(indicators_name,10, showindis == "Full" ? "Extrn" : "X")
+    //colors
+    array.set(div_colors, 0, pos_reg_div_col)
+    array.set(div_colors, 1, neg_reg_div_col)
+    array.set(div_colors, 2, pos_hid_div_col)
+    array.set(div_colors, 3, neg_hid_div_col)
+
+// Check if we get new Pivot High Or Pivot Low
+float ph = pivothigh((source == "Close" ? close : high), prd, prd)
+float pl = pivotlow((source == "Close" ? close : low), prd, prd)
+plotshape(ph and showpivot, text = "H",  style = shape.labeldown, color = color.new(color.white, 100), textcolor = color.red, location = location.abovebar, offset = -prd)
+plotshape(pl and showpivot, text = "L",  style = shape.labelup, color = color.new(color.white, 100), textcolor = color.lime, location = location.belowbar, offset = -prd)
+
+// keep values and positions of Pivot Highs/Lows in the arrays
+var int maxarraysize = 20
+var ph_positions = array.new_int(maxarraysize, 0)
+var pl_positions = array.new_int(maxarraysize, 0)
+var ph_vals = array.new_float(maxarraysize, 0.)
+var pl_vals = array.new_float(maxarraysize, 0.)
+
+// add PHs to the array
+if ph
+    array.unshift(ph_positions, bar_index)
+    array.unshift(ph_vals, ph)
+    if array.size(ph_positions) > maxarraysize
+        array.pop(ph_positions)
+        array.pop(ph_vals)
+
+// add PLs to the array
+if pl
+    array.unshift(pl_positions, bar_index)
+    array.unshift(pl_vals, pl)
+    if array.size(pl_positions) > maxarraysize
+        array.pop(pl_positions)
+        array.pop(pl_vals)
+
+// functions to check Regular Divergences and Hidden Divergences
+
+// function to check positive regular or negative hidden divergence
+// cond == 1 => positive_regular, cond == 2=> negative_hidden
+positive_regular_positive_hidden_divergence(src, cond)=>
+    divlen = 0
+    prsc = source == "Close" ? close : low
+    // if indicators higher than last value and close price is higher than las close 
+    if dontconfirm or src > src[1] or close > close[1]
+        startpoint = dontconfirm ? 0 : 1 // don't check last candle
+        // we search last 15 PPs
+        for x = 0 to maxpp - 1
+            len = bar_index - array.get(pl_positions, x) + prd
+            // if we reach non valued array element or arrived 101. or previous bars then we don't search more
+            if array.get(pl_positions, x) == 0 or len > maxbars
+                break
+            if len > 5 and 
+               ((cond == 1 and src[startpoint] > src[len] and prsc[startpoint] < nz(array.get(pl_vals, x))) or
+               (cond == 2 and src[startpoint] < src[len] and prsc[startpoint] > nz(array.get(pl_vals, x))))
+                slope1 = (src[startpoint] - src[len]) / (len - startpoint)
+                virtual_line1 = src[startpoint] - slope1
+                slope2 = (close[startpoint] - close[len]) / (len - startpoint)
+                virtual_line2 = close[startpoint] - slope2
+                arrived = true
+                for y = 1 + startpoint to len - 1
+                    if src[y] < virtual_line1 or nz(close[y]) < virtual_line2
+                        arrived := false
+                        break
+                    virtual_line1 := virtual_line1 - slope1
+                    virtual_line2 := virtual_line2 - slope2
+                
+                if arrived
+                    divlen := len
+                    break
+    divlen
+
+// function to check negative regular or positive hidden divergence
+// cond == 1 => negative_regular, cond == 2=> positive_hidden
+negative_regular_negative_hidden_divergence(src, cond)=>
+    divlen = 0
+    prsc = source == "Close" ? close : high
+    // if indicators higher than last value and close price is higher than las close 
+    if dontconfirm or src < src[1] or close < close[1]
+        startpoint = dontconfirm ? 0 : 1 // don't check last candle
+        // we search last 15 PPs
+        for x = 0 to maxpp - 1
+            len = bar_index - array.get(ph_positions, x) + prd
+            // if we reach non valued array element or arrived 101. or previous bars then we don't search more
+            if array.get(ph_positions, x) == 0 or len > maxbars
+                break
+            if len > 5 and 
+               ((cond == 1 and src[startpoint] < src[len] and prsc[startpoint] > nz(array.get(ph_vals, x))) or 
+               (cond == 2 and src[startpoint] > src[len] and prsc[startpoint] < nz(array.get(ph_vals, x))))
+                slope1 = (src[startpoint] - src[len]) / (len - startpoint)
+                virtual_line1 = src[startpoint] - slope1
+                slope2 = (close[startpoint] - nz(close[len])) / (len - startpoint)
+                virtual_line2 = close[startpoint] - slope2
+                arrived = true
+                for y = 1 + startpoint to len - 1
+                    if src[y] > virtual_line1 or nz(close[y]) > virtual_line2
+                        arrived := false
+                        break
+                    virtual_line1 := virtual_line1 - slope1
+                    virtual_line2 := virtual_line2 - slope2
+                
+                if arrived
+                    divlen := len
+                    break
+    divlen
+
+// calculate 4 types of divergence if enabled in the options and return divergences in an array
+calculate_divs(cond, indicator)=>
+    divs = array.new_int(4, 0)
+    array.set(divs, 0, cond and (searchdiv == "Regular" or searchdiv == "Regular/Hidden") ? positive_regular_positive_hidden_divergence(indicator, 1) : 0)
+    array.set(divs, 1, cond and (searchdiv == "Regular" or searchdiv == "Regular/Hidden") ? negative_regular_negative_hidden_divergence(indicator, 1) : 0)
+    array.set(divs, 2, cond and (searchdiv == "Hidden" or searchdiv == "Regular/Hidden")  ? positive_regular_positive_hidden_divergence(indicator, 2) : 0)
+    array.set(divs, 3, cond and (searchdiv == "Hidden" or searchdiv == "Regular/Hidden")  ? negative_regular_negative_hidden_divergence(indicator, 2) : 0)
+    divs
+
+// array to keep all divergences
+var all_divergences = array.new_int(44) // 11 indicators * 4 divergence = 44 elements
+// set related array elements
+array_set_divs(div_pointer, index)=>
+    for x = 0 to 3
+        array.set(all_divergences, index * 4 + x, array.get(div_pointer, x))
+
+// set divergences array 
+array_set_divs(calculate_divs(calcmacd, macd), 0)
+array_set_divs(calculate_divs(calcmacda, deltamacd), 1)
+array_set_divs(calculate_divs(calcrsi, rsi), 2)
+array_set_divs(calculate_divs(calcstoc, stk), 3)
+array_set_divs(calculate_divs(calccci, cci), 4)
+array_set_divs(calculate_divs(calcmom, moment), 5)
+array_set_divs(calculate_divs(calcobv, Obv), 6)
+array_set_divs(calculate_divs(calcvwmacd, vwmacd), 7)
+array_set_divs(calculate_divs(calccmf, cmf), 8)
+array_set_divs(calculate_divs(calcmfi, Mfi), 9)
+array_set_divs(calculate_divs(calcext, externalindi), 10)
+
+
+// Research export: confirmed-bar signals. Pine compilation/export still requires TradingView.
+plot(barstate.isconfirmed and array.get(all_divergences, 0) > 0 ? 1 : 0, title="MACD_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 1) > 0 ? 1 : 0, title="MACD_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 4) > 0 ? 1 : 0, title="Hist_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 5) > 0 ? 1 : 0, title="Hist_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 8) > 0 ? 1 : 0, title="RSI_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 9) > 0 ? 1 : 0, title="RSI_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 12) > 0 ? 1 : 0, title="Stoch_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 13) > 0 ? 1 : 0, title="Stoch_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 16) > 0 ? 1 : 0, title="CCI_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 17) > 0 ? 1 : 0, title="CCI_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 20) > 0 ? 1 : 0, title="MOM_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 21) > 0 ? 1 : 0, title="MOM_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 24) > 0 ? 1 : 0, title="OBV_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 25) > 0 ? 1 : 0, title="OBV_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 28) > 0 ? 1 : 0, title="VWMACD_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 29) > 0 ? 1 : 0, title="VWMACD_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 32) > 0 ? 1 : 0, title="CMF_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 33) > 0 ? 1 : 0, title="CMF_bear")
+plot(barstate.isconfirmed and array.get(all_divergences, 36) > 0 ? 1 : 0, title="MFI_bull")
+plot(barstate.isconfirmed and array.get(all_divergences, 37) > 0 ? 1 : 0, title="MFI_bear")
+plot(atr(14), title="ATR14")

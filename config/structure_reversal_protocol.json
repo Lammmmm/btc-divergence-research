@@ -1,0 +1,21 @@
+{
+  "version": "structure-reversal-1.0",
+  "purpose": "Allow sideways consolidation and delayed confirmation without any fixed candle-count expiry; evaluate all 10 original indicators separately on 1D and 4H.",
+  "history_already_seen": true,
+  "signal_parameters": "Unchanged original Close/Regular/pivot5/maxpp10/maxbars100/wait for confirmation. No signal-parameter optimization.",
+  "structure_window": "For signal confirmation bar t and saved divergence length L, p=t-L is the previously confirmed price pivot. Freeze high=max(high[p:t+1]) and low=min(low[p:t+1]), inclusive of the confirmation bar. This is an operational structure box, not an independently validated chart-pattern definition.",
+  "bullish": "SUCCESS on first subsequent native-timeframe CLOSE > frozen high. FAILURE on first subsequent CLOSE < frozen low - 0.5*ATR14_at_signal. Wicks alone do not resolve the event.",
+  "bearish": "SUCCESS on first subsequent native-timeframe CLOSE < frozen low. FAILURE on first subsequent CLOSE > frozen high + 0.5*ATR14_at_signal.",
+  "fixed_boundaries": true,
+  "price_buffer_ATR": 0.5,
+  "time_expiry": null,
+  "reference_price": "Signal confirmation close. No trade execution, fees, funding or portfolio return are inferred.",
+  "event_lifecycle": "One active event per indicator and timeframe, shared by both directions. New signals before resolution are logged but ignored. A signal on the resolving close can open the next event, observed from the next bar. No event is retrospectively replaced by a later, better pivot.",
+  "periods": ["full:2021-01-01/2026-10-16", "earlier:2021-01-01/2025-01-01", "recent:2025-01-01/2026-10-16"],
+  "right_censoring": "No artificial duration timeout. Still active at each data-period end is PENDING, not failure or success. Each period restarts event tracking using past data for indicator warmup. Rates across periods must not be pooled.",
+  "data_quality": "Reject a new event whose frozen structure interval includes a known native/hourly OHLC-inconsistent bar. If an active event reaches such a bar, classify DATA_INTERRUPTED and do not score it. Keep full records. Native-timeframe closes define both outcomes; hourly intrabar chronology is not used.",
+  "metrics": ["success/(success+failure)", "pending count and fraction", "data-interrupted count", "completed-event coverage", "success/all eligible events and upper bound if all pending succeed", "Wilson descriptive interval on completed events", "top/bottom split", "success median/p90 waiting days", "success median/p90 maximum adverse excursion", "frozen confirmation/failure distances in ATR", "successes occurring later than the prior 10D/3D windows"],
+  "interpretation": "Confirmation means the frozen structure boundary was closed through; it does not promise a lasting new trend. Different box widths and unequal confirmation/failure distances affect event success rates, so they are reported. The new definition changes BOTH the time restriction and the price-failure criterion; improvements cannot be attributed to time alone.",
+  "scope": "20 primary settings and earlier/recent diagnostics only. No combinations, no ATR-buffer optimization, no extra filters, no causal edge claim.",
+  "pending_external_checks": "TradingView per-bar reconciliation and genuinely future validation remain incomplete."
+}

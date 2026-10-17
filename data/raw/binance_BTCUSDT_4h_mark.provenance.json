@@ -1,0 +1,10 @@
+{
+  "url": "https://fapi.binance.com/fapi/v1/markPriceKlines",
+  "symbol": "BTCUSDT",
+  "interval": "4h",
+  "startTime": 1577836800000,
+  "endTime": 1792108799999,
+  "retrieved_utc": "2026-10-16T07:44:15.805745+00:00",
+  "rows": 14880,
+  "sha256": "c48770429837dfc54f2d91c75287a4a4693e84912368ae360a6e23f6f6de11af"
+}

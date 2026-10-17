@@ -1,0 +1,8 @@
+{
+  "stage": "Before performance results, after raw-data audit",
+  "reason": "Native 4H OHLC differs from aggregated 1H OHLC in two historical bars. Nine fresh Binance responses reproduce the original snapshots.",
+  "policy": "For each timeframe, purge any entry whose maximum possible holding window contains a native bar with an OHLC mismatch against hourly data. Apply to every indicator and scenario, regardless of actual early exit. Save every exclusion in signal ledgers. Keep native volume for signal calculations; disclose volume differences.",
+  "affected_4h_open_times": [1699617600000, 1730145600000],
+  "funding_refinement": "Where funding API markPrice is absent, use the corresponding 4H mark-price kline OPEN, not trade-price open. This remains a millisecond-boundary proxy, explicitly labeled per record.",
+  "no_parameter_optimization": true
+}

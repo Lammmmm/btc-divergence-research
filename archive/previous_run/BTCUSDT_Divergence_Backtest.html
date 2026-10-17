@@ -1,0 +1,1437 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BTCUSDT 永续背离回测报告</title><style>body{font:16px/1.65 "Microsoft YaHei",Arial,sans-serif;background:#f3f5f8;color:#182333;margin:0}main{max-width:1180px;margin:auto;padding:28px}header{background:#102b44;color:white;padding:32px;border-radius:16px}h1{font-size:32px;margin:5px 0}h2{font-size:24px;color:#12324e}h3{font-size:19px}.eyebrow{letter-spacing:1px;color:#a7dbff}section{background:white;padding:24px 28px;margin:20px 0;border-radius:12px;border:1px solid #dce3eb}.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}article{padding:12px 20px;background:#f3f7fb;border-radius:10px}.note{padding:15px;border-left:4px solid #dd9a21;background:#fff8e8}.table-wrap{overflow-x:auto;margin:16px 0}table{width:100%;border-collapse:collapse;font-size:14px;white-space:nowrap}th{background:#e9f0f6;text-align:right}td,th{padding:9px 11px;border-bottom:1px solid #e0e5eb}td:first-child,th:first-child{text-align:left}td{text-align:right}tr:nth-child(even){background:#f8fafc}li{margin:8px 0}a{color:#0062ad}@media(max-width:700px){main{padding:10px}.cards{grid-template-columns:1fr}section{padding:16px}h1{font-size:26px}}</style><main><header><p class="eyebrow">BINANCE BTCUSDT USDT 永续 · 4H / 1D</p><h1>背离指标选择：实际历史回测</h1><p>计算日期：2026-10-16（北京时间）｜本地 Python 复现用户 Pine v4 算法，非 TradingView 策略测试器实跑。</p></header>
+<section><h2>先看结论</h2><div class="cards"><article><h3>4H：OBV 保留，Stochastic 候选</h3><p>近期 Stochastic 方向命中率 70.0%，平均净收益 +0.202%；OBV 为 57.3%、+0.074%。但 Stoch 前段平均净收益为负，OBV 的优势也很小，尚不足以认定长期有效。</p><p>CCI、VWmacd、CMF 在后段的 5/10/20 根持有期全部为负，可以降低优先级。RSI 在本次 4H 口径下没有显示优势。</p></article><article><h3>1D：优先观察 Hist，RSI 用于同向筛选</h3><p>MACD Histogram 的 10 根持有期在前段、后段均为正，而且逐年平均净收益均为正；MACD 主线后段表现明显较差。</p><p>Hist + RSI 同向同时出现的探索组合，后段仅 10 笔：命中率 70.0%、平均净收益 +2.055%。样本少，组合是在看过单项结果后提出的，需用后续新数据验证。</p></article></div>
+<p class="note">用于下一轮模拟观察的勾选方案：4H 勾 Stochastic + OBV，Minimum Number of Divergence = 1；1D 勾 MACD Histogram + RSI，Minimum Number of Divergence = 2。这是探索性筛选方案，不是已经证实的最优交易策略。4H 两项同时出现并不更好：后段 17 笔，平均净收益 −0.257%。</p></section>
+<section><h2>统一回测口径</h2><ul>
+<li>原始数据：币安 USDⓈ-M BTCUSDT 永续合约成交价 OHLCV，2020-01-01 至 2026-10-15（UTC），只取完整 K 线。2020 年仅用于指标预热。</li>
+<li>正式评估：2021-01-01 至 2026-10-15。前段：2021–2024；后段：2025-01-01 至 2026-10-15。日线按 UTC 00:00 划分，即北京时间 08:00。</li>
+<li>沿用原脚本：普通背离 Regular、Close 价格源、Pivot Period = 5、最多 10 个拐点、最多回看 100 根，Don't Wait for Confirmation 关闭。未回测隐藏背离；外部指标未启用。截图未展示的参数采用原脚本默认值。</li>
+<li>保留 RSI(14)、MACD(12,26,9)、Stoch(14) 平滑3、CCI(close,10)、Momentum(10)、OBV、VWMA(12)-VWMA(26)、CMF(21)、MFI(close,14)。尤其 CCI 与 MFI 均使用原脚本指定的 close。</li>
+<li>在实际检测到信号的那根收盘后，下一根开盘入场；固定持有 5、10、20 根，最后一根收盘退出。主比较为 10 根：4H=40小时，1D=10天。不是回填到历史拐点买卖。</li>
+<li>底背离按做多收益，顶背离按做空收益；无止盈止损、无杠杆。每个指标/组合、每个方向独立计数，该方向持有期间忽略新信号，退出当根收盘的新信号可下一根开盘进入。未完成持有期的事件不计；跨越前后段边界的事件排除。</li>
+<li>手续费假设单边 0.05%，滑点单边 0.02%，按成交额计算；不是账户实际费率。另按真实历史资金费率计入支付/收取。6,342 条资金记录中 3,100 条没有标记价，用当时 4H 开盘价代理，所以资金费用属于估算。</li>
+<li>命中率=退出价相对入场原始开盘价方向正确的比例，尚未扣成本；净盈利比例与平均净收益包含手续费、滑点和资金费。持平计入分母但不算命中。</li>
+<li>多空汇总是独立事件的平均结果，不是单账户组合权益曲线。不同指标可能使用同一段行情，不能相加为独立获利次数，也不能由平均每笔收益推算年化或最大回撤。</li>
+</ul><p>原脚本会删换历史标签，本统计直接记录当时已经确认的条件，不按最终留下的标签挑样本；组合要求同一根、同方向达到数量。检查到本样本普通背离没有同根多空混合，数量口径与原脚本设置相符。</p></section><section><h2>4H · 单指标排行（持有10根）</h2><p>按平均每笔净收益降序排列，不是按命中率排序。后段只是时间切分检验；从这些结果挑选新方案仍有选择偏差。</p><h3>后段：2025–2026-10-15</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Stochastic</td>
+      <td>50</td>
+      <td>70.00%</td>
+      <td>66.00%</td>
+      <td>0.20%</td>
+      <td>1.28</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>75</td>
+      <td>57.33%</td>
+      <td>56.00%</td>
+      <td>0.07%</td>
+      <td>1.08</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>73</td>
+      <td>57.53%</td>
+      <td>54.79%</td>
+      <td>-0.07%</td>
+      <td>0.94</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>55</td>
+      <td>56.36%</td>
+      <td>54.55%</td>
+      <td>-0.13%</td>
+      <td>0.87</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>44</td>
+      <td>61.36%</td>
+      <td>59.09%</td>
+      <td>-0.20%</td>
+      <td>0.80</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>67</td>
+      <td>59.70%</td>
+      <td>58.21%</td>
+      <td>-0.26%</td>
+      <td>0.79</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>71</td>
+      <td>57.75%</td>
+      <td>54.93%</td>
+      <td>-0.35%</td>
+      <td>0.68</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>47</td>
+      <td>42.55%</td>
+      <td>42.55%</td>
+      <td>-0.57%</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>48</td>
+      <td>39.58%</td>
+      <td>37.50%</td>
+      <td>-0.80%</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>46</td>
+      <td>47.83%</td>
+      <td>47.83%</td>
+      <td>-0.86%</td>
+      <td>0.49</td>
+    </tr>
+  </tbody>
+</table></div><h3>全期：2021–2026-10-15</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Momentum</td>
+      <td>218</td>
+      <td>55.96%</td>
+      <td>54.59%</td>
+      <td>0.09%</td>
+      <td>1.07</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>253</td>
+      <td>52.96%</td>
+      <td>51.78%</td>
+      <td>0.06%</td>
+      <td>1.04</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>248</td>
+      <td>56.45%</td>
+      <td>54.44%</td>
+      <td>0.00%</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>177</td>
+      <td>55.93%</td>
+      <td>54.24%</td>
+      <td>-0.07%</td>
+      <td>0.95</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>173</td>
+      <td>49.13%</td>
+      <td>47.98%</td>
+      <td>-0.13%</td>
+      <td>0.92</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>146</td>
+      <td>50.68%</td>
+      <td>49.32%</td>
+      <td>-0.18%</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>257</td>
+      <td>51.75%</td>
+      <td>50.58%</td>
+      <td>-0.20%</td>
+      <td>0.86</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>173</td>
+      <td>46.82%</td>
+      <td>44.51%</td>
+      <td>-0.33%</td>
+      <td>0.77</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>199</td>
+      <td>52.26%</td>
+      <td>49.75%</td>
+      <td>-0.35%</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>162</td>
+      <td>45.68%</td>
+      <td>44.44%</td>
+      <td>-0.56%</td>
+      <td>0.64</td>
+    </tr>
+  </tbody>
+</table></div><h3>前段：2021–2024</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Momentum</td>
+      <td>145</td>
+      <td>55.17%</td>
+      <td>54.48%</td>
+      <td>0.17%</td>
+      <td>1.11</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>127</td>
+      <td>49.61%</td>
+      <td>48.03%</td>
+      <td>0.14%</td>
+      <td>1.10</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>181</td>
+      <td>55.25%</td>
+      <td>53.04%</td>
+      <td>0.10%</td>
+      <td>1.06</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>178</td>
+      <td>51.12%</td>
+      <td>50.00%</td>
+      <td>0.05%</td>
+      <td>1.03</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>186</td>
+      <td>49.46%</td>
+      <td>48.92%</td>
+      <td>-0.15%</td>
+      <td>0.91</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>125</td>
+      <td>49.60%</td>
+      <td>47.20%</td>
+      <td>-0.15%</td>
+      <td>0.89</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>102</td>
+      <td>46.08%</td>
+      <td>45.10%</td>
+      <td>-0.18%</td>
+      <td>0.89</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>127</td>
+      <td>50.39%</td>
+      <td>49.61%</td>
+      <td>-0.18%</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>144</td>
+      <td>50.69%</td>
+      <td>47.92%</td>
+      <td>-0.43%</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>115</td>
+      <td>46.96%</td>
+      <td>45.22%</td>
+      <td>-0.56%</td>
+      <td>0.68</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>1D · 单指标排行（持有10根）</h2><p>按平均每笔净收益降序排列，不是按命中率排序。后段只是时间切分检验；从这些结果挑选新方案仍有选择偏差。</p><h3>后段：2025–2026-10-15</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CCI</td>
+      <td>4</td>
+      <td>75.00%</td>
+      <td>75.00%</td>
+      <td>4.52%</td>
+      <td>17.18</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>6</td>
+      <td>66.67%</td>
+      <td>66.67%</td>
+      <td>2.28%</td>
+      <td>5.31</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>13</td>
+      <td>53.85%</td>
+      <td>61.54%</td>
+      <td>1.61%</td>
+      <td>2.52</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>6</td>
+      <td>50.00%</td>
+      <td>66.67%</td>
+      <td>1.20%</td>
+      <td>1.77</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>14</td>
+      <td>57.14%</td>
+      <td>57.14%</td>
+      <td>0.53%</td>
+      <td>1.24</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>11</td>
+      <td>54.55%</td>
+      <td>63.64%</td>
+      <td>0.38%</td>
+      <td>1.16</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>14</td>
+      <td>50.00%</td>
+      <td>57.14%</td>
+      <td>0.09%</td>
+      <td>1.04</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>11</td>
+      <td>63.64%</td>
+      <td>63.64%</td>
+      <td>0.07%</td>
+      <td>1.03</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>8</td>
+      <td>25.00%</td>
+      <td>25.00%</td>
+      <td>-3.41%</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>10</td>
+      <td>30.00%</td>
+      <td>30.00%</td>
+      <td>-4.86%</td>
+      <td>0.17</td>
+    </tr>
+  </tbody>
+</table></div><h3>全期：2021–2026-10-15</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RSI</td>
+      <td>51</td>
+      <td>62.75%</td>
+      <td>68.63%</td>
+      <td>3.19%</td>
+      <td>3.34</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>43</td>
+      <td>67.44%</td>
+      <td>72.09%</td>
+      <td>3.06%</td>
+      <td>3.53</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>30</td>
+      <td>56.67%</td>
+      <td>60.00%</td>
+      <td>2.84%</td>
+      <td>2.67</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>29</td>
+      <td>48.28%</td>
+      <td>51.72%</td>
+      <td>2.33%</td>
+      <td>2.06</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>36</td>
+      <td>66.67%</td>
+      <td>69.44%</td>
+      <td>1.78%</td>
+      <td>1.63</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>44</td>
+      <td>43.18%</td>
+      <td>45.45%</td>
+      <td>0.30%</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>31</td>
+      <td>45.16%</td>
+      <td>48.39%</td>
+      <td>-0.16%</td>
+      <td>0.96</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>27</td>
+      <td>44.44%</td>
+      <td>44.44%</td>
+      <td>-0.78%</td>
+      <td>0.80</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>39</td>
+      <td>46.15%</td>
+      <td>48.72%</td>
+      <td>-0.81%</td>
+      <td>0.78</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>33</td>
+      <td>54.55%</td>
+      <td>54.55%</td>
+      <td>-1.19%</td>
+      <td>0.72</td>
+    </tr>
+  </tbody>
+</table></div><h3>前段：2021–2024</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RSI</td>
+      <td>37</td>
+      <td>67.57%</td>
+      <td>72.97%</td>
+      <td>4.36%</td>
+      <td>5.41</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>29</td>
+      <td>72.41%</td>
+      <td>79.31%</td>
+      <td>4.28%</td>
+      <td>6.76</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>24</td>
+      <td>54.17%</td>
+      <td>58.33%</td>
+      <td>2.98%</td>
+      <td>2.49</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>25</td>
+      <td>68.00%</td>
+      <td>72.00%</td>
+      <td>2.53%</td>
+      <td>1.83</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>25</td>
+      <td>44.00%</td>
+      <td>48.00%</td>
+      <td>1.98%</td>
+      <td>1.79</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>23</td>
+      <td>65.22%</td>
+      <td>65.22%</td>
+      <td>0.40%</td>
+      <td>1.11</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>19</td>
+      <td>52.63%</td>
+      <td>52.63%</td>
+      <td>0.33%</td>
+      <td>1.09</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>33</td>
+      <td>39.39%</td>
+      <td>39.39%</td>
+      <td>0.28%</td>
+      <td>1.07</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>25</td>
+      <td>44.00%</td>
+      <td>44.00%</td>
+      <td>-0.48%</td>
+      <td>0.89</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>26</td>
+      <td>42.31%</td>
+      <td>42.31%</td>
+      <td>-2.02%</td>
+      <td>0.61</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>当前勾选与候选组合</h2><p>当前4项=MACD、RSI、OBV、MFI。探索组合在单项结果出炉后补测，不是独立的样本外发现；不把组合的高胜率当成确定优势。</p><h3>4H · 后段、持有10根</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>当前4项：至少1项</td>
+      <td>135</td>
+      <td>55.56%</td>
+      <td>53.33%</td>
+      <td>-0.17%</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <td>当前4项：至少2项</td>
+      <td>68</td>
+      <td>64.71%</td>
+      <td>61.76%</td>
+      <td>-0.01%</td>
+      <td>0.98</td>
+    </tr>
+    <tr>
+      <td>当前4项：至少3项</td>
+      <td>29</td>
+      <td>55.17%</td>
+      <td>55.17%</td>
+      <td>-0.40%</td>
+      <td>0.66</td>
+    </tr>
+    <tr>
+      <td>全部10项：至少1项</td>
+      <td>184</td>
+      <td>54.35%</td>
+      <td>52.17%</td>
+      <td>-0.24%</td>
+      <td>0.79</td>
+    </tr>
+    <tr>
+      <td>全部10项：至少2项</td>
+      <td>130</td>
+      <td>56.92%</td>
+      <td>54.62%</td>
+      <td>-0.14%</td>
+      <td>0.86</td>
+    </tr>
+    <tr>
+      <td>全部10项：至少3项</td>
+      <td>84</td>
+      <td>51.19%</td>
+      <td>48.81%</td>
+      <td>-0.40%</td>
+      <td>0.66</td>
+    </tr>
+    <tr>
+      <td>OBV + Stoch：至少1项（探索）</td>
+      <td>102</td>
+      <td>60.78%</td>
+      <td>58.82%</td>
+      <td>0.14%</td>
+      <td>1.17</td>
+    </tr>
+    <tr>
+      <td>OBV + Stoch：至少2项（探索）</td>
+      <td>17</td>
+      <td>64.71%</td>
+      <td>58.82%</td>
+      <td>-0.26%</td>
+      <td>0.74</td>
+    </tr>
+    <tr>
+      <td>Hist + RSI：至少1项（探索）</td>
+      <td>104</td>
+      <td>57.69%</td>
+      <td>55.77%</td>
+      <td>-0.26%</td>
+      <td>0.77</td>
+    </tr>
+    <tr>
+      <td>Hist + RSI：至少2项（探索）</td>
+      <td>33</td>
+      <td>60.61%</td>
+      <td>57.58%</td>
+      <td>-0.49%</td>
+      <td>0.63</td>
+    </tr>
+  </tbody>
+</table></div><h3>1D · 后段、持有10根</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>净盈利比例</th>
+      <th>平均每笔净收益</th>
+      <th>盈利因子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>当前4项：至少1项</td>
+      <td>24</td>
+      <td>50.00%</td>
+      <td>54.17%</td>
+      <td>-0.82%</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>当前4项：至少2项</td>
+      <td>16</td>
+      <td>43.75%</td>
+      <td>50.00%</td>
+      <td>-0.48%</td>
+      <td>0.81</td>
+    </tr>
+    <tr>
+      <td>当前4项：至少3项</td>
+      <td>6</td>
+      <td>33.33%</td>
+      <td>50.00%</td>
+      <td>-0.31%</td>
+      <td>0.79</td>
+    </tr>
+    <tr>
+      <td>全部10项：至少1项</td>
+      <td>29</td>
+      <td>44.83%</td>
+      <td>48.28%</td>
+      <td>-1.27%</td>
+      <td>0.63</td>
+    </tr>
+    <tr>
+      <td>全部10项：至少2项</td>
+      <td>22</td>
+      <td>50.00%</td>
+      <td>54.55%</td>
+      <td>0.11%</td>
+      <td>1.04</td>
+    </tr>
+    <tr>
+      <td>全部10项：至少3项</td>
+      <td>19</td>
+      <td>52.63%</td>
+      <td>57.89%</td>
+      <td>-0.12%</td>
+      <td>0.95</td>
+    </tr>
+    <tr>
+      <td>OBV + Stoch：至少1项（探索）</td>
+      <td>15</td>
+      <td>60.00%</td>
+      <td>66.67%</td>
+      <td>0.99%</td>
+      <td>1.52</td>
+    </tr>
+    <tr>
+      <td>OBV + Stoch：至少2项（探索）</td>
+      <td>2</td>
+      <td>50.00%</td>
+      <td>50.00%</td>
+      <td>1.49%</td>
+      <td>3.67</td>
+    </tr>
+    <tr>
+      <td>Hist + RSI：至少1项（探索）</td>
+      <td>18</td>
+      <td>44.44%</td>
+      <td>50.00%</td>
+      <td>-0.65%</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <td>Hist + RSI：至少2项（探索）</td>
+      <td>10</td>
+      <td>70.00%</td>
+      <td>70.00%</td>
+      <td>2.05%</td>
+      <td>2.52</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>持有时间敏感性</h2><p>下表为后段平均每笔净收益。5、10、20 根会产生不同的去重及已完成样本集合，不是同一批信号的简单延长。</p><h3>4H</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>持有5根</th>
+      <th>持有10根</th>
+      <th>持有20根</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MACD</th>
+      <td>+0.066%</td>
+      <td>-0.198%</td>
+      <td>+0.500%</td>
+    </tr>
+    <tr>
+      <th>MACD Histogram</th>
+      <td>-0.068%</td>
+      <td>-0.257%</td>
+      <td>+0.083%</td>
+    </tr>
+    <tr>
+      <th>RSI</th>
+      <td>-0.138%</td>
+      <td>-0.348%</td>
+      <td>+0.111%</td>
+    </tr>
+    <tr>
+      <th>Stochastic</th>
+      <td>+0.180%</td>
+      <td>+0.202%</td>
+      <td>+0.508%</td>
+    </tr>
+    <tr>
+      <th>CCI</th>
+      <td>-0.080%</td>
+      <td>-0.575%</td>
+      <td>-0.225%</td>
+    </tr>
+    <tr>
+      <th>Momentum</th>
+      <td>-0.097%</td>
+      <td>-0.066%</td>
+      <td>+0.417%</td>
+    </tr>
+    <tr>
+      <th>OBV</th>
+      <td>-0.070%</td>
+      <td>+0.074%</td>
+      <td>+0.677%</td>
+    </tr>
+    <tr>
+      <th>VWmacd</th>
+      <td>-0.361%</td>
+      <td>-0.804%</td>
+      <td>-0.518%</td>
+    </tr>
+    <tr>
+      <th>Chaikin Money Flow</th>
+      <td>-0.249%</td>
+      <td>-0.864%</td>
+      <td>-0.534%</td>
+    </tr>
+    <tr>
+      <th>Money Flow Index</th>
+      <td>+0.126%</td>
+      <td>-0.129%</td>
+      <td>+0.367%</td>
+    </tr>
+  </tbody>
+</table></div><h3>1D</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>持有5根</th>
+      <th>持有10根</th>
+      <th>持有20根</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MACD</th>
+      <td>-2.442%</td>
+      <td>-4.862%</td>
+      <td>-2.352%</td>
+    </tr>
+    <tr>
+      <th>MACD Histogram</th>
+      <td>+0.545%</td>
+      <td>+0.531%</td>
+      <td>+2.057%</td>
+    </tr>
+    <tr>
+      <th>RSI</th>
+      <td>+0.335%</td>
+      <td>+0.094%</td>
+      <td>+1.895%</td>
+    </tr>
+    <tr>
+      <th>Stochastic</th>
+      <td>+0.975%</td>
+      <td>+2.279%</td>
+      <td>+3.390%</td>
+    </tr>
+    <tr>
+      <th>CCI</th>
+      <td>+2.384%</td>
+      <td>+4.516%</td>
+      <td>+7.547%</td>
+    </tr>
+    <tr>
+      <th>Momentum</th>
+      <td>+1.132%</td>
+      <td>+0.074%</td>
+      <td>+2.728%</td>
+    </tr>
+    <tr>
+      <th>OBV</th>
+      <td>-0.552%</td>
+      <td>+0.385%</td>
+      <td>+3.307%</td>
+    </tr>
+    <tr>
+      <th>VWmacd</th>
+      <td>-1.417%</td>
+      <td>-3.413%</td>
+      <td>-1.720%</td>
+    </tr>
+    <tr>
+      <th>Chaikin Money Flow</th>
+      <td>+1.140%</td>
+      <td>+1.200%</td>
+      <td>+0.995%</td>
+    </tr>
+    <tr>
+      <th>Money Flow Index</th>
+      <td>+0.427%</td>
+      <td>+1.607%</td>
+      <td>+3.438%</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>顶、底背离分开看</h2><p>同一指标的顶背离与底背离可能表现相反；尤其日线分方向后每组样本更少。</p><h3>4H · 后段、持有10根</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>方向</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>平均每笔净收益</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MACD</td>
+      <td>底背离/做多</td>
+      <td>19</td>
+      <td>73.68%</td>
+      <td>0.37%</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>顶背离/做空</td>
+      <td>25</td>
+      <td>52.00%</td>
+      <td>-0.63%</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>底背离/做多</td>
+      <td>35</td>
+      <td>68.57%</td>
+      <td>-0.21%</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>顶背离/做空</td>
+      <td>32</td>
+      <td>50.00%</td>
+      <td>-0.31%</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>底背离/做多</td>
+      <td>35</td>
+      <td>62.86%</td>
+      <td>-0.43%</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>顶背离/做空</td>
+      <td>36</td>
+      <td>52.78%</td>
+      <td>-0.27%</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>底背离/做多</td>
+      <td>22</td>
+      <td>86.36%</td>
+      <td>1.10%</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>顶背离/做空</td>
+      <td>28</td>
+      <td>57.14%</td>
+      <td>-0.50%</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>底背离/做多</td>
+      <td>24</td>
+      <td>41.67%</td>
+      <td>-0.71%</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>顶背离/做空</td>
+      <td>23</td>
+      <td>43.48%</td>
+      <td>-0.44%</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>底背离/做多</td>
+      <td>34</td>
+      <td>52.94%</td>
+      <td>-0.37%</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>顶背离/做空</td>
+      <td>39</td>
+      <td>61.54%</td>
+      <td>0.20%</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>底背离/做多</td>
+      <td>35</td>
+      <td>62.86%</td>
+      <td>0.20%</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>顶背离/做空</td>
+      <td>40</td>
+      <td>52.50%</td>
+      <td>-0.04%</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>底背离/做多</td>
+      <td>22</td>
+      <td>45.45%</td>
+      <td>-0.49%</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>顶背离/做空</td>
+      <td>26</td>
+      <td>34.62%</td>
+      <td>-1.07%</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>底背离/做多</td>
+      <td>21</td>
+      <td>42.86%</td>
+      <td>-1.16%</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>顶背离/做空</td>
+      <td>25</td>
+      <td>52.00%</td>
+      <td>-0.62%</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>底背离/做多</td>
+      <td>26</td>
+      <td>65.38%</td>
+      <td>0.32%</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>顶背离/做空</td>
+      <td>29</td>
+      <td>48.28%</td>
+      <td>-0.54%</td>
+    </tr>
+  </tbody>
+</table></div><h3>1D · 后段、持有10根</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>指标/组合</th>
+      <th>方向</th>
+      <th>已完成事件</th>
+      <th>方向命中率</th>
+      <th>平均每笔净收益</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MACD</td>
+      <td>底背离/做多</td>
+      <td>4</td>
+      <td>0.00%</td>
+      <td>-10.68%</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>顶背离/做空</td>
+      <td>6</td>
+      <td>50.00%</td>
+      <td>-0.98%</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>底背离/做多</td>
+      <td>8</td>
+      <td>50.00%</td>
+      <td>-0.44%</td>
+    </tr>
+    <tr>
+      <td>MACD Histogram</td>
+      <td>顶背离/做空</td>
+      <td>6</td>
+      <td>66.67%</td>
+      <td>1.82%</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>底背离/做多</td>
+      <td>7</td>
+      <td>42.86%</td>
+      <td>-1.24%</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>顶背离/做空</td>
+      <td>7</td>
+      <td>57.14%</td>
+      <td>1.43%</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>底背离/做多</td>
+      <td>2</td>
+      <td>100.00%</td>
+      <td>3.71%</td>
+    </tr>
+    <tr>
+      <td>Stochastic</td>
+      <td>顶背离/做空</td>
+      <td>4</td>
+      <td>50.00%</td>
+      <td>1.56%</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>底背离/做多</td>
+      <td>1</td>
+      <td>100.00%</td>
+      <td>1.18%</td>
+    </tr>
+    <tr>
+      <td>CCI</td>
+      <td>顶背离/做空</td>
+      <td>3</td>
+      <td>66.67%</td>
+      <td>5.63%</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>底背离/做多</td>
+      <td>5</td>
+      <td>40.00%</td>
+      <td>-2.08%</td>
+    </tr>
+    <tr>
+      <td>Momentum</td>
+      <td>顶背离/做空</td>
+      <td>6</td>
+      <td>83.33%</td>
+      <td>1.87%</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>底背离/做多</td>
+      <td>3</td>
+      <td>66.67%</td>
+      <td>-1.74%</td>
+    </tr>
+    <tr>
+      <td>OBV</td>
+      <td>顶背离/做空</td>
+      <td>8</td>
+      <td>50.00%</td>
+      <td>1.18%</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>底背离/做多</td>
+      <td>2</td>
+      <td>0.00%</td>
+      <td>-8.61%</td>
+    </tr>
+    <tr>
+      <td>VWmacd</td>
+      <td>顶背离/做空</td>
+      <td>6</td>
+      <td>33.33%</td>
+      <td>-1.68%</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>底背离/做多</td>
+      <td>1</td>
+      <td>100.00%</td>
+      <td>1.18%</td>
+    </tr>
+    <tr>
+      <td>Chaikin Money Flow</td>
+      <td>顶背离/做空</td>
+      <td>5</td>
+      <td>40.00%</td>
+      <td>1.20%</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>底背离/做多</td>
+      <td>4</td>
+      <td>50.00%</td>
+      <td>1.32%</td>
+    </tr>
+    <tr>
+      <td>Money Flow Index</td>
+      <td>顶背离/做空</td>
+      <td>9</td>
+      <td>55.56%</td>
+      <td>1.74%</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>逐年检查</h2><p>每格为“平均净收益 / 事件数”，按入场年份划分，持有10根。2026 年截至10月15日。均为正也不等于统计显著，日线每年往往只有几笔。</p><h3>4H</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>year</th>
+      <th>2021</th>
+      <th>2022</th>
+      <th>2023</th>
+      <th>2024</th>
+      <th>2025</th>
+      <th>2026</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MACD</th>
+      <td>+0.66% / 33</td>
+      <td>+0.68% / 16</td>
+      <td>-0.77% / 24</td>
+      <td>-1.12% / 29</td>
+      <td>-0.32% / 32</td>
+      <td>+0.12% / 12</td>
+    </tr>
+    <tr>
+      <th>Hist</th>
+      <td>+0.38% / 59</td>
+      <td>+1.05% / 40</td>
+      <td>-0.42% / 39</td>
+      <td>-0.72% / 43</td>
+      <td>-0.34% / 40</td>
+      <td>-0.13% / 27</td>
+    </tr>
+    <tr>
+      <th>RSI</th>
+      <td>+0.15% / 54</td>
+      <td>+0.75% / 36</td>
+      <td>-0.42% / 45</td>
+      <td>-0.86% / 51</td>
+      <td>-0.30% / 41</td>
+      <td>-0.41% / 30</td>
+    </tr>
+    <tr>
+      <th>Stoch</th>
+      <td>-0.08% / 34</td>
+      <td>+0.22% / 31</td>
+      <td>-0.08% / 32</td>
+      <td>-0.81% / 30</td>
+      <td>-0.16% / 35</td>
+      <td>+1.05% / 15</td>
+    </tr>
+    <tr>
+      <th>CCI</th>
+      <td>-0.41% / 29</td>
+      <td>-0.75% / 27</td>
+      <td>-0.47% / 33</td>
+      <td>-0.64% / 26</td>
+      <td>-0.53% / 29</td>
+      <td>-0.64% / 18</td>
+    </tr>
+    <tr>
+      <th>MOM</th>
+      <td>+0.62% / 49</td>
+      <td>+1.08% / 36</td>
+      <td>-0.80% / 25</td>
+      <td>-0.71% / 35</td>
+      <td>-0.27% / 44</td>
+      <td>+0.25% / 29</td>
+    </tr>
+    <tr>
+      <th>OBV</th>
+      <td>-0.06% / 48</td>
+      <td>+0.91% / 42</td>
+      <td>+0.54% / 44</td>
+      <td>-1.15% / 44</td>
+      <td>-0.07% / 44</td>
+      <td>+0.28% / 31</td>
+    </tr>
+    <tr>
+      <th>VWMACD</th>
+      <td>+0.86% / 33</td>
+      <td>-0.39% / 30</td>
+      <td>-0.07% / 33</td>
+      <td>-1.16% / 29</td>
+      <td>-0.67% / 34</td>
+      <td>-1.13% / 14</td>
+    </tr>
+    <tr>
+      <th>CMF</th>
+      <td>+1.05% / 41</td>
+      <td>+0.74% / 21</td>
+      <td>-0.78% / 32</td>
+      <td>-0.48% / 33</td>
+      <td>-0.71% / 29</td>
+      <td>-1.12% / 17</td>
+    </tr>
+    <tr>
+      <th>MFI</th>
+      <td>-1.84% / 34</td>
+      <td>+0.58% / 37</td>
+      <td>+0.28% / 38</td>
+      <td>-0.91% / 35</td>
+      <td>-0.32% / 27</td>
+      <td>+0.06% / 28</td>
+    </tr>
+  </tbody>
+</table></div><h3>1D</h3><div class="table-wrap"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>year</th>
+      <th>2021</th>
+      <th>2022</th>
+      <th>2023</th>
+      <th>2024</th>
+      <th>2025</th>
+      <th>2026</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>MACD</th>
+      <td>-0.65% / 7</td>
+      <td>-0.87% / 8</td>
+      <td>+1.88% / 5</td>
+      <td>+3.80% / 3</td>
+      <td>-2.46% / 6</td>
+      <td>-8.46% / 4</td>
+    </tr>
+    <tr>
+      <th>Hist</th>
+      <td>+7.26% / 7</td>
+      <td>+5.91% / 6</td>
+      <td>+1.72% / 8</td>
+      <td>+3.00% / 8</td>
+      <td>+0.11% / 8</td>
+      <td>+1.09% / 6</td>
+    </tr>
+    <tr>
+      <th>RSI</th>
+      <td>+8.39% / 11</td>
+      <td>+3.56% / 9</td>
+      <td>-0.13% / 11</td>
+      <td>+6.40% / 6</td>
+      <td>+1.19% / 8</td>
+      <td>-1.37% / 6</td>
+    </tr>
+    <tr>
+      <th>Stoch</th>
+      <td>+11.41% / 7</td>
+      <td>+1.96% / 5</td>
+      <td>+0.11% / 6</td>
+      <td>-3.13% / 6</td>
+      <td>+2.14% / 4</td>
+      <td>+2.56% / 2</td>
+    </tr>
+    <tr>
+      <th>CCI</th>
+      <td>+25.86% / 2</td>
+      <td>+1.94% / 8</td>
+      <td>-0.59% / 10</td>
+      <td>-2.38% / 5</td>
+      <td>+1.18% / 1</td>
+      <td>+5.63% / 3</td>
+    </tr>
+    <tr>
+      <th>MOM</th>
+      <td>+7.19% / 8</td>
+      <td>+3.43% / 5</td>
+      <td>-3.80% / 7</td>
+      <td>+3.03% / 5</td>
+      <td>+1.55% / 4</td>
+      <td>-0.77% / 7</td>
+    </tr>
+    <tr>
+      <th>OBV</th>
+      <td>+3.57% / 9</td>
+      <td>+2.07% / 10</td>
+      <td>-2.30% / 8</td>
+      <td>-4.22% / 6</td>
+      <td>+2.93% / 6</td>
+      <td>-2.67% / 5</td>
+    </tr>
+    <tr>
+      <th>VWMACD</th>
+      <td>-6.41% / 5</td>
+      <td>+2.28% / 6</td>
+      <td>+7.41% / 4</td>
+      <td>-1.26% / 4</td>
+      <td>-0.71% / 5</td>
+      <td>-7.91% / 3</td>
+    </tr>
+    <tr>
+      <th>CMF</th>
+      <td>+4.95% / 8</td>
+      <td>-5.50% / 4</td>
+      <td>-2.19% / 6</td>
+      <td>-2.36% / 7</td>
+      <td>-0.56% / 5</td>
+      <td>+10.02% / 1</td>
+    </tr>
+    <tr>
+      <th>MFI</th>
+      <td>-10.71% / 6</td>
+      <td>+2.44% / 12</td>
+      <td>-1.99% / 4</td>
+      <td>-2.43% / 4</td>
+      <td>+2.69% / 6</td>
+      <td>+0.68% / 7</td>
+    </tr>
+  </tbody>
+</table></div></section><section><h2>结论的边界与校验</h2><ul>
+<li>1D 后段各单项只有 4–14 笔（10根口径）；CCI 75% 命中率只有4笔，不能据此认定它最好。4H Stoch 近期70%是50笔，全期命中率约55.9%，平均净收益仍为负。</li>
+<li>4H OBV 的全期平均净收益约+0.055%，后段约+0.074%，优势很薄；更高实际成本可以抹掉这一优势。不能把这个排名当作无需风控的开仓规则。</li>
+<li>已检查：全部 K 线连续且无重复；日线 OHLC 与6根4H聚合一致；裁掉未来数据不会改变过去指标/信号；每周期120个事件/非事件用独立逐行算法核对；验证入场时间、持有期、同方向不重叠、跨分段泄露与多空成本符号。</li>
+<li>日线成交量有两天与4H聚合不同：2023-08-16（272,023.138 对 280,542.952 BTC）、2023-11-10（299,373.892 对 287,320.597 BTC）。复查日线 API 返回一致；保留原生周期数据，未擅自修改。</li>
+<li>未与 TradingView 同时逐根导出结果进行交叉核验；这是经过内部校验的本地复现，不宣称与 TradingView 撮合器完全一致。历史价格与成交量供应差异、初始化、真实费用、资金费时间和滑点均可能影响结果。</li>
+<li>这是固定持有时间的事件回测，不包含止盈止损、杠杆、爆仓模拟，也不提供完整资金曲线。后段已被查看，后续再调参应使用新的前向样本验证。</li>
+</ul><p>数据接口：<a href="https://fapi.binance.com/fapi/v1/klines?symbol=BTCUSDT&amp;interval=4h&amp;limit=1">Binance 合约 K 线</a> · <a href="https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&amp;limit=1">历史资金费率</a>。已下载的原始响应、逐笔事件、统计结果与复现代码均在随附 ZIP 中。</p></section></main></html>

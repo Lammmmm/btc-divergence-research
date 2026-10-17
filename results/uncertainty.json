@@ -1,0 +1,322 @@
+[
+  {
+    "group": "4h_MACD_risk_base_full",
+    "n": 176,
+    "low": -0.24031205680523554,
+    "high": 0.04087534261029039,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_Hist_risk_base_full",
+    "n": 302,
+    "low": -0.1384527311874835,
+    "high": 0.12344684198611844,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_RSI_risk_base_full",
+    "n": 296,
+    "low": -0.21249042014364755,
+    "high": 0.029927274117155837,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_Stoch_risk_base_full",
+    "n": 199,
+    "low": -0.20832688316455913,
+    "high": 0.07597876555834536,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_CCI_risk_base_full",
+    "n": 179,
+    "low": -0.30454295494409833,
+    "high": -0.01934218102977557,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_MOM_risk_base_full",
+    "n": 264,
+    "low": -0.17835794550881706,
+    "high": 0.06100356393824922,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_OBV_risk_base_full",
+    "n": 287,
+    "low": -0.1195964130831367,
+    "high": 0.13955661045514475,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_VWMACD_risk_base_full",
+    "n": 201,
+    "low": -0.29314190043880783,
+    "high": -0.027201427438067784,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_CMF_risk_base_full",
+    "n": 202,
+    "low": -0.2615162070543045,
+    "high": 0.022445220911660197,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_MFI_risk_base_full",
+    "n": 232,
+    "low": -0.23532794041212513,
+    "high": 0.053039178191762563,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_MACD_fixed10_1x_full",
+    "n": 147,
+    "low": -0.4048297964680991,
+    "high": 0.044973994867586985,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_Hist_fixed10_1x_full",
+    "n": 246,
+    "low": -0.27675397513692984,
+    "high": 0.13353854210822896,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_RSI_fixed10_1x_full",
+    "n": 257,
+    "low": -0.26878421376233735,
+    "high": 0.0828432225888142,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_Stoch_fixed10_1x_full",
+    "n": 176,
+    "low": -0.28184040503603003,
+    "high": 0.11597477127480454,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_CCI_fixed10_1x_full",
+    "n": 158,
+    "low": -0.48724915825592924,
+    "high": -0.060319123725895506,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_MOM_fixed10_1x_full",
+    "n": 218,
+    "low": -0.23191542688942243,
+    "high": 0.14128505032447503,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_OBV_fixed10_1x_full",
+    "n": 247,
+    "low": -0.16269532376963317,
+    "high": 0.2749461032231292,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_VWMACD_fixed10_1x_full",
+    "n": 171,
+    "low": -0.3782516370379026,
+    "high": -0.0027884475120505126,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_CMF_fixed10_1x_full",
+    "n": 173,
+    "low": -0.41874702297908806,
+    "high": 0.10501097694883656,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_MFI_fixed10_1x_full",
+    "n": 193,
+    "low": -0.3851824784599823,
+    "high": 0.05991617874578455,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_MACD_risk_base_full",
+    "n": 37,
+    "low": -0.19493647036984976,
+    "high": 0.4086317314456556,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_Hist_risk_base_full",
+    "n": 47,
+    "low": 0.08991861162708235,
+    "high": 0.7282725426773339,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_RSI_risk_base_full",
+    "n": 55,
+    "low": 0.05048103843032593,
+    "high": 0.586622175594409,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_Stoch_risk_base_full",
+    "n": 30,
+    "low": -0.25728317716901433,
+    "high": 0.7706373532555638,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_CCI_risk_base_full",
+    "n": 32,
+    "low": -0.10820303015177131,
+    "high": 0.5167785674017769,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_MOM_risk_base_full",
+    "n": 37,
+    "low": 0.24409393250073483,
+    "high": 0.6789582812250352,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_OBV_risk_base_full",
+    "n": 53,
+    "low": -0.301690468894134,
+    "high": 0.25280685511867623,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_VWMACD_risk_base_full",
+    "n": 30,
+    "low": -0.35144591141188364,
+    "high": 0.3043014331125488,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_CMF_risk_base_full",
+    "n": 34,
+    "low": -0.4268599144811553,
+    "high": 0.20715106772752195,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_MFI_risk_base_full",
+    "n": 42,
+    "low": -0.13260421522831142,
+    "high": 0.5271495793909642,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_MACD_fixed10_1x_full",
+    "n": 33,
+    "low": -0.7344393193576954,
+    "high": 0.38114450408714784,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_Hist_fixed10_1x_full",
+    "n": 43,
+    "low": 0.2220903792538658,
+    "high": 0.8102880041769683,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_RSI_fixed10_1x_full",
+    "n": 51,
+    "low": 0.06051615688893326,
+    "high": 0.7565384274843594,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_Stoch_fixed10_1x_full",
+    "n": 30,
+    "low": -0.17208538410778418,
+    "high": 0.8893087558811195,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_CCI_fixed10_1x_full",
+    "n": 28,
+    "low": -0.3783102655595888,
+    "high": 0.9256065953581836,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_MOM_fixed10_1x_full",
+    "n": 35,
+    "low": -0.5132966714455729,
+    "high": 0.6568311489897353,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_OBV_fixed10_1x_full",
+    "n": 44,
+    "low": -0.4958228889200358,
+    "high": 0.42933102827253944,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_VWMACD_fixed10_1x_full",
+    "n": 26,
+    "low": -0.503463457799275,
+    "high": 0.5384661274127953,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_CMF_fixed10_1x_full",
+    "n": 30,
+    "low": -0.585013460791565,
+    "high": 0.6345540647162705,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_MFI_fixed10_1x_full",
+    "n": 38,
+    "low": -0.3722728379925164,
+    "high": 0.538940224100547,
+    "block_trades": 5,
+    "resamples": 2000
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "six_tables": true,
+  "no_page_overflow": true,
+  "viewport": [
+    1440,
+    1280
+  ],
+  "visual_review_passed": true
+}

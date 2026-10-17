@@ -1,0 +1,9 @@
+test_barrier_long_short_and_tie (test_reference_use.ReferenceTests.test_barrier_long_short_and_tie) ... ok
+test_daily_unclosed_cannot_leak (test_reference_use.ReferenceTests.test_daily_unclosed_cannot_leak) ... ok
+test_expiry (test_reference_use.ReferenceTests.test_expiry) ... ok
+test_trend_adx_and_prefix (test_reference_use.ReferenceTests.test_trend_adx_and_prefix) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.042s
+
+OK

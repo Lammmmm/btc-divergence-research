@@ -1,0 +1,36 @@
+{
+  "continuous_candles": true,
+  "daily_OHLC_matches_six_4h_candles": true,
+  "daily_volume_discrepancies": [
+    {
+      "day": "2023-08-16 00:00:00+00:00",
+      "daily": 272023.138,
+      "aggregated": 280542.952
+    },
+    {
+      "day": "2023-11-10 00:00:00+00:00",
+      "daily": 299373.892,
+      "aggregated": 287320.597
+    }
+  ],
+  "funding_mark_price_proxy_records": 3100,
+  "funding_total": 6342,
+  "prefix_checks": {
+    "4h": 7440,
+    "1d": 1240
+  },
+  "scalar_checks": {
+    "4h": 120,
+    "1d": 120
+  },
+  "pivot_ties": {
+    "4h": 0,
+    "1d": 0
+  },
+  "next_open_entry_verified": true,
+  "holding_period_off_by_one_verified": true,
+  "directional_nonoverlap_verified": true,
+  "no_split_boundary_leakage": true,
+  "synthetic_cost_sign_checks": true,
+  "trade_records_all_scenarios": 28644
+}

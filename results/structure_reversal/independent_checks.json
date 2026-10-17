@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "period_runs": 60,
+  "event_rows": 4040,
+  "frozen_levels_from_raw_OHLC": true,
+  "first_close_resolution_replayed": true,
+  "excursions_recomputed": true,
+  "no_overlap": true,
+  "pivot_known_at_signal": true,
+  "censored_events_not_scored": true
+}

@@ -1,0 +1,7 @@
+Original Pine indicator: Divergence for Many Indicators v4.
+Copyright LonesomeTheBlue. Original source carries Mozilla Public License 2.0.
+The user's original source is preserved in pine/original_user_source.pine.
+Signal port and research modifications: 2026, provided under MPL-2.0.
+Third-party Binance market data and referenced documentation retain their own rights.
+The archive contains earlier exploratory results. Trading-study protocol: config/protocol.json.
+Reference-use protocol: config/reference_use_protocol.json. Structure-reversal protocol: config/structure_reversal_protocol.json.

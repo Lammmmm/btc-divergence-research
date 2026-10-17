@@ -1,0 +1,5 @@
+{
+  "common_credential_pattern_matches": [],
+  "scan_scope": "text source, data, docs and logs; not a guarantee of exhaustive secret detection",
+  "api_keys_required": false
+}

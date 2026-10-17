@@ -1,0 +1,8 @@
+{
+  "stage": "After inspecting the 12 predeclared settings; explicitly exploratory follow-up",
+  "reason": "The question asks for a smaller practical daily indicator set. RSI single-alert first-1ATR outcomes were weaker than Hist and MOM. Test exactly one proposed simplification rather than recommending an untested union.",
+  "one_additional_configuration": "1D Hist OR MOM, minimum divergence count 1",
+  "unchanged": "All signal parameters, horizons, exclusions, outcomes, periods and regime classification stay fixed. The original three-indicator daily context remains unchanged for the existing 4H gate tests.",
+  "total_configurations": 13,
+  "no_independent_validation_claim": true
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "step": "reference_tests",
+    "returncode": 0,
+    "utc": "2026-10-16T13:22:59.460893+00:00"
+  },
+  {
+    "step": "reference_events",
+    "returncode": 0,
+    "utc": "2026-10-16T13:23:00.807576+00:00"
+  },
+  {
+    "step": "reference_verify",
+    "returncode": 0,
+    "utc": "2026-10-16T13:23:02.469015+00:00"
+  },
+  {
+    "step": "reference_report",
+    "returncode": 0,
+    "utc": "2026-10-16T13:23:02.896995+00:00"
+  }
+]

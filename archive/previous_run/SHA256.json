@@ -1,0 +1,17 @@
+{
+  "README.txt": "cb42a0a9d5d76b019342426616ca701dedfcd8a7f56e0687992e10d85f663c94",
+  "fetch_market.py": "7b9d3675bc9597ac6f17d3509849160f41898a55c05827ef00b929a5d398bcd8",
+  "backtest_divergence.py": "c51946456d57a592e73b719d0ed559b4897d42f8da5820b1f7933f6b68f76206",
+  "verify_backtest.py": "fcf8355f69d3a396586def638e77eea02ff11f47494a282aede5121442a93432",
+  "data_manifest.json": "1199a871194ca52ade874b4de5d2274300847d215810980730f791b141d727e0",
+  "checks.json": "da5ba52c224dae63ebbb75bbdbc5db92c61a40ab0e568930111f1c0e18fee654",
+  "results.json": "82b387f6fff32b303b3028cc413839cff368954e81447585357dbf6080be158a",
+  "trades.json": "5ba8babe0892d5cc0172faac6b60e8b623667157a9506019a6952f82be9c1888",
+  "binance_BTCUSDT_4h.json": "721e2bab9e9d35eb87e73196852a80c947a84d5aa3f67b9797a76122dbada8ed",
+  "binance_BTCUSDT_1d.json": "55136818047e541924442e1b6331071bc90707e44d828a8d974288ab2ed4a5bd",
+  "binance_BTCUSDT_funding.json": "cb5b5484a49f821b6aace93b6f79a0f5aaaf88e3e5c9392c18c567220e2acb95",
+  "signals_4h.npz": "b1e422387c0a2267e2632c19c6e7817c91a3006aae801c2d26759cf5f9865a3c",
+  "signals_1d.npz": "9832b52bbab61e038fccccd1b4fce05727a6211c6c077f55537d8440af8273ae",
+  "BTCUSDT_Divergence_Backtest.html": "d3b30f28c38b27b7f096d50472e2258eafa6fde241cf19cd0ded1c7852f9143d",
+  "Divergence_Candles_Labels_v4.pine": "172141a3236dc41a11937f3f9b2d7e6a0fff3a11c435cb8fb2e18c603db1fc6d"
+}

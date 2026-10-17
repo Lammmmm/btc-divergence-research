@@ -1,0 +1,22 @@
+[
+  {
+    "step": "unit_tests",
+    "returncode": 0,
+    "finished_utc": "2026-10-16T12:57:50.742619+00:00"
+  },
+  {
+    "step": "research",
+    "returncode": 0,
+    "finished_utc": "2026-10-16T12:58:41.807790+00:00"
+  },
+  {
+    "step": "accounting",
+    "returncode": 0,
+    "finished_utc": "2026-10-16T12:58:45.932100+00:00"
+  },
+  {
+    "step": "report",
+    "returncode": 0,
+    "finished_utc": "2026-10-16T12:58:46.374839+00:00"
+  }
+]

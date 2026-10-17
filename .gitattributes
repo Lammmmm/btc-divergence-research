@@ -1,0 +1,6 @@
+# Preserve release checksums across Windows/macOS/Linux checkouts.
+* -text
+*.py diff
+*.md diff
+*.json diff
+*.pine diff

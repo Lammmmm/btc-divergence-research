@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "configuration_period_runs": 39,
+  "event_rows": 2432,
+  "independent_barrier_replay": true,
+  "independent_daily_context_replay": true,
+  "nonoverlap_verified": true,
+  "mfe_mae_verified": true,
+  "max_summary_error": 0,
+  "notes": "Event rows repeat across settings/periods; not independent sample count."
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "202301",
+    "development_start": 1609459200000,
+    "evaluation_start": 1672531200000,
+    "evaluation_end": 1688169600000,
+    "complete": true
+  },
+  {
+    "id": "202307",
+    "development_start": 1625097600000,
+    "evaluation_start": 1688169600000,
+    "evaluation_end": 1704067200000,
+    "complete": true
+  },
+  {
+    "id": "202401",
+    "development_start": 1640995200000,
+    "evaluation_start": 1704067200000,
+    "evaluation_end": 1719792000000,
+    "complete": true
+  },
+  {
+    "id": "202407",
+    "development_start": 1656633600000,
+    "evaluation_start": 1719792000000,
+    "evaluation_end": 1735689600000,
+    "complete": true
+  },
+  {
+    "id": "202501",
+    "development_start": 1672531200000,
+    "evaluation_start": 1735689600000,
+    "evaluation_end": 1751328000000,
+    "complete": true
+  },
+  {
+    "id": "202507",
+    "development_start": 1688169600000,
+    "evaluation_start": 1751328000000,
+    "evaluation_end": 1767225600000,
+    "complete": true
+  },
+  {
+    "id": "202601",
+    "development_start": 1704067200000,
+    "evaluation_start": 1767225600000,
+    "evaluation_end": 1782864000000,
+    "complete": true
+  },
+  {
+    "id": "202607",
+    "development_start": 1719792000000,
+    "evaluation_start": 1782864000000,
+    "evaluation_end": 1792108800000,
+    "complete": false
+  }
+]

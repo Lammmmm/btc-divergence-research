@@ -1,0 +1,9 @@
+{
+  "primary_settings": 20,
+  "period_runs": 60,
+  "protocol_hash_verified": true,
+  "no_duration_expiry": true,
+  "frozen_boundaries": true,
+  "nonoverlap_verified": true,
+  "TradingView": "PENDING"
+}

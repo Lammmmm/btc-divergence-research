@@ -1,0 +1,12 @@
+{
+  "html_tables": 7,
+  "equity_charts": 2,
+  "offline_no_scripts": true,
+  "all_ten_indicators_present": true,
+  "visual_browser_review": true,
+  "viewport": {
+    "width": 1440,
+    "height": 1350
+  },
+  "horizontal_page_overflow": false
+}

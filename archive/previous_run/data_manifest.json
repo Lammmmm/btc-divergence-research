@@ -1,0 +1,17 @@
+{
+  "exchange": "Binance USD-M BTCUSDT perpetual",
+  "server_time_ms": 1792134306495,
+  "exclusive_end_ms": 1792108800000,
+  "start": "2020-01-01",
+  "analysis_start": "2021-01-01",
+  "validation_start": "2025-01-01",
+  "counts": {
+    "4h": 14880,
+    "1d": 2480,
+    "funding": 6342
+  },
+  "urls": [
+    "https://fapi.binance.com/fapi/v1/klines",
+    "https://fapi.binance.com/fapi/v1/fundingRate"
+  ]
+}

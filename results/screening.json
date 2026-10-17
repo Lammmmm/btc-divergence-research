@@ -1,0 +1,222 @@
+[
+  {
+    "tf": "4h",
+    "indicator": "MACD",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 2,
+    "complete_windows": 7,
+    "cost_2x_return": -0.13299113639467308,
+    "mean_R_block_low": -0.24031205680523554,
+    "mean_R_block_high": 0.04087534261029039,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "Hist",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 3,
+    "complete_windows": 7,
+    "cost_2x_return": -0.10837345271919929,
+    "mean_R_block_low": -0.1384527311874835,
+    "mean_R_block_high": 0.12344684198611844,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "RSI",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 1,
+    "complete_windows": 7,
+    "cost_2x_return": -0.20688833706571563,
+    "mean_R_block_low": -0.21249042014364755,
+    "mean_R_block_high": 0.029927274117155837,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "Stoch",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 1,
+    "complete_windows": 7,
+    "cost_2x_return": -0.12599645988054686,
+    "mean_R_block_low": -0.20832688316455913,
+    "mean_R_block_high": 0.07597876555834536,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "CCI",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 1,
+    "complete_windows": 7,
+    "cost_2x_return": -0.18208727329239838,
+    "mean_R_block_low": -0.30454295494409833,
+    "mean_R_block_high": -0.01934218102977557,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "MOM",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 2,
+    "complete_windows": 7,
+    "cost_2x_return": -0.16467477329209756,
+    "mean_R_block_low": -0.17835794550881706,
+    "mean_R_block_high": 0.06100356393824922,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "OBV",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 2,
+    "complete_windows": 7,
+    "cost_2x_return": -0.0741540055843718,
+    "mean_R_block_low": -0.1195964130831367,
+    "mean_R_block_high": 0.13955661045514475,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "VWMACD",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 1,
+    "complete_windows": 7,
+    "cost_2x_return": -0.19838611177903842,
+    "mean_R_block_low": -0.29314190043880783,
+    "mean_R_block_high": -0.027201427438067784,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "CMF",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 0,
+    "complete_windows": 7,
+    "cost_2x_return": -0.1729446284630599,
+    "mean_R_block_low": -0.2615162070543045,
+    "mean_R_block_high": 0.022445220911660197,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "4h",
+    "indicator": "MFI",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 1,
+    "complete_windows": 7,
+    "cost_2x_return": -0.16040165271461249,
+    "mean_R_block_low": -0.23532794041212513,
+    "mean_R_block_high": 0.053039178191762563,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "1d",
+    "indicator": "MACD",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 3,
+    "complete_windows": 7,
+    "cost_2x_return": 0.014009732976459466,
+    "mean_R_block_low": -0.19493647036984976,
+    "mean_R_block_high": 0.4086317314456556,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "1d",
+    "indicator": "Hist",
+    "passes_historical_screen": true,
+    "positive_complete_windows": 4,
+    "complete_windows": 7,
+    "cost_2x_return": 0.09800314765867069,
+    "mean_R_block_low": 0.08991861162708235,
+    "mean_R_block_high": 0.7282725426773339,
+    "status": "历史筛选通过，仍待独立验证"
+  },
+  {
+    "tf": "1d",
+    "indicator": "RSI",
+    "passes_historical_screen": true,
+    "positive_complete_windows": 4,
+    "complete_windows": 7,
+    "cost_2x_return": 0.08442162727752267,
+    "mean_R_block_low": 0.05048103843032593,
+    "mean_R_block_high": 0.586622175594409,
+    "status": "历史筛选通过，仍待独立验证"
+  },
+  {
+    "tf": "1d",
+    "indicator": "Stoch",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 3,
+    "complete_windows": 7,
+    "cost_2x_return": 0.033836220977484954,
+    "mean_R_block_low": -0.25728317716901433,
+    "mean_R_block_high": 0.7706373532555638,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "1d",
+    "indicator": "CCI",
+    "passes_historical_screen": true,
+    "positive_complete_windows": 4,
+    "complete_windows": 7,
+    "cost_2x_return": 0.027935077909388983,
+    "mean_R_block_low": -0.10820303015177131,
+    "mean_R_block_high": 0.5167785674017769,
+    "status": "历史筛选通过，仍待独立验证"
+  },
+  {
+    "tf": "1d",
+    "indicator": "MOM",
+    "passes_historical_screen": true,
+    "positive_complete_windows": 5,
+    "complete_windows": 7,
+    "cost_2x_return": 0.08075909009800442,
+    "mean_R_block_low": 0.24409393250073483,
+    "mean_R_block_high": 0.6789582812250352,
+    "status": "历史筛选通过，仍待独立验证"
+  },
+  {
+    "tf": "1d",
+    "indicator": "OBV",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 2,
+    "complete_windows": 7,
+    "cost_2x_return": -0.01193340329539172,
+    "mean_R_block_low": -0.301690468894134,
+    "mean_R_block_high": 0.25280685511867623,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "1d",
+    "indicator": "VWMACD",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 2,
+    "complete_windows": 7,
+    "cost_2x_return": -0.009048044158632695,
+    "mean_R_block_low": -0.35144591141188364,
+    "mean_R_block_high": 0.3043014331125488,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "1d",
+    "indicator": "CMF",
+    "passes_historical_screen": false,
+    "positive_complete_windows": 3,
+    "complete_windows": 7,
+    "cost_2x_return": -0.021740877753421817,
+    "mean_R_block_low": -0.4268599144811553,
+    "mean_R_block_high": 0.20715106772752195,
+    "status": "未通过本轮历史筛选"
+  },
+  {
+    "tf": "1d",
+    "indicator": "MFI",
+    "passes_historical_screen": true,
+    "positive_complete_windows": 4,
+    "complete_windows": 7,
+    "cost_2x_return": 0.038075280560114555,
+    "mean_R_block_low": -0.13260421522831142,
+    "mean_R_block_high": 0.5271495793909642,
+    "status": "历史筛选通过，仍待独立验证"
+  }
+]

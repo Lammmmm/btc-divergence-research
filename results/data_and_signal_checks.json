@@ -1,0 +1,102 @@
+{
+  "hourly_rows": 59520,
+  "TradingView_reconciliation": "PENDING_NO_EXPORT",
+  "future_forward_validation": "PENDING_FUTURE_DATA",
+  "datasets": {
+    "4h": {
+      "rows": 14880,
+      "hourly_aggregate_differences": {
+        "open": [
+          {
+            "time": 1730145600000,
+            "native": 69650.0,
+            "hourly_aggregate": 69605.8
+          }
+        ],
+        "high": [],
+        "low": [
+          {
+            "time": 1730145600000,
+            "native": 69480.3,
+            "hourly_aggregate": 69389.0
+          }
+        ],
+        "close": [
+          {
+            "time": 1699617600000,
+            "native": 37118.4,
+            "hourly_aggregate": 37092.6
+          }
+        ],
+        "volume": [
+          {
+            "time": 1657944000000,
+            "native": 62235.67,
+            "hourly_aggregate": 62207.626000000004
+          },
+          {
+            "time": 1699617600000,
+            "native": 68307.178,
+            "hourly_aggregate": 80360.473
+          },
+          {
+            "time": 1730145600000,
+            "native": 31542.185,
+            "hourly_aggregate": 34481.841
+          }
+        ]
+      },
+      "bad_execution_bars": [
+        1699617600000,
+        1730145600000
+      ],
+      "scalar_signal_checks": 160,
+      "prefix_checks": 2,
+      "pivot_ties": 0
+    },
+    "1d": {
+      "rows": 2480,
+      "hourly_aggregate_differences": {
+        "open": [],
+        "high": [],
+        "low": [],
+        "close": [],
+        "volume": [
+          {
+            "time": 1657929600000,
+            "native": 539206.87,
+            "hourly_aggregate": 539178.826
+          },
+          {
+            "time": 1692144000000,
+            "native": 272023.138,
+            "hourly_aggregate": 280542.952
+          },
+          {
+            "time": 1730073600000,
+            "native": 256128.622,
+            "hourly_aggregate": 259068.278
+          }
+        ]
+      },
+      "bad_execution_bars": [],
+      "scalar_signal_checks": 160,
+      "prefix_checks": 2,
+      "pivot_ties": 0
+    }
+  },
+  "funding": {
+    "records": 6342,
+    "mark_kline_proxy": 3100,
+    "max_timestamp_hour_offset_ms": 47
+  },
+  "protocol_sha256": "d55b737e62e442afef2f249f9fe19f51b0fb4df60b1bbb20dc0490fc2b00c2b3",
+  "experiment_groups": 500,
+  "single_position_and_cash_reconciliation": true,
+  "environment": {
+    "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+    "numpy": "2.4.0",
+    "pandas": "2.3.3",
+    "platform": "Windows-10-10.0.19045-SP0"
+  }
+}

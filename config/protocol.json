@@ -1,0 +1,104 @@
+{
+  "protocol_version": "1.0",
+  "registered_utc": "2026-10-16T07:43:41.277856+00:00",
+  "history_already_inspected": true,
+  "exchange": "BINANCE USD-M BTCUSDT perpetual",
+  "data_start": "2020-01-01",
+  "test_start": "2021-01-01",
+  "end_exclusive": "2026-10-16",
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "indicators": [
+    "MACD",
+    "Hist",
+    "RSI",
+    "Stoch",
+    "CCI",
+    "MOM",
+    "OBV",
+    "VWMACD",
+    "CMF",
+    "MFI"
+  ],
+  "signal": {
+    "pivot_period": 5,
+    "pivot_source": "close",
+    "max_pivots": 10,
+    "max_bars": 100,
+    "regular_only": true,
+    "dontconfirm": false
+  },
+  "initial_equity": 10000,
+  "fee_per_side": 0.0005,
+  "slippage_per_side": 0.0002,
+  "risk_fraction": 0.005,
+  "notional_cap": 1.0,
+  "atr_period": 14,
+  "atr_multiple": 1.5,
+  "target_R": 2.0,
+  "max_hold_bars": 10,
+  "execution": "next open; stops and targets based on slipped entry; hourly resolution; stop first if both hit in same hour; adverse slippage on every exit",
+  "funding": "exclude entry instant, include funding at subsequent hourly open while held; exit instant unknown within hour recorded as interval",
+  "boundary": "purge entries whose maximum holding horizon crosses segment boundary",
+  "scenarios": [
+    {
+      "id": "risk_base"
+    },
+    {
+      "id": "cost_2x",
+      "cost_multiplier": 2
+    },
+    {
+      "id": "atr_1p25",
+      "atr_multiple": 1.25
+    },
+    {
+      "id": "atr_1p75",
+      "atr_multiple": 1.75
+    },
+    {
+      "id": "target_1p5",
+      "target_R": 1.5
+    },
+    {
+      "id": "target_2p5",
+      "target_R": 2.5
+    },
+    {
+      "id": "hold_8",
+      "max_hold_bars": 8
+    },
+    {
+      "id": "hold_12",
+      "max_hold_bars": 12
+    },
+    {
+      "id": "fixed10_1x",
+      "fixed_hold": true
+    }
+  ],
+  "rolling": {
+    "development_months": 24,
+    "evaluation_months": 6,
+    "first_evaluation": "2023-01-01",
+    "selection": "no selection, all 10 retained; partial final segment labeled"
+  },
+  "diagnostics": {
+    "regime": "signal close vs EMA200, current timeframe, information available at signal close",
+    "bootstrap": "circular blocks of 5 consecutive trades, 2000 resamples, descriptive only",
+    "seed": 20261016
+  },
+  "acceptance_screen": {
+    "minimum_trades": 30,
+    "positive_net_expectancy": true,
+    "cost_2x_positive": true,
+    "majority_complete_evaluation_windows_positive": true,
+    "max_hourly_close_drawdown": 0.15
+  },
+  "pending": [
+    "TradingView exported bar-by-bar reconciliation",
+    "genuine future forward paper validation"
+  ]
+}

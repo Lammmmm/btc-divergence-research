@@ -1,0 +1,11 @@
+{
+  "configurations": 13,
+  "predeclared_configurations": 12,
+  "exploratory_added": 1,
+  "period_runs": 39,
+  "all_events_nonoverlap": true,
+  "asof_daily_join": true,
+  "protocol_hash_verified": true,
+  "source": "previous audited frozen snapshots",
+  "TradingView": "PENDING"
+}
