@@ -213,6 +213,10 @@
       "bytes": 7342,
       "sha256": "f7d3b6558be0da4b1c72b2f7243a7bdd4bee6a2c2a97df26dfa7129a8e778c53"
     },
+    "docs/HIST_LINE_V2_GUIDE.md": {
+      "bytes": 2353,
+      "sha256": "7d1eaa662fced2ae34e051de79227834f341573a10280ab828fedc7de50993b9"
+    },
     "docs/METHODOLOGY.md": {
       "bytes": 7571,
       "sha256": "6a93405bcc439c203ab922056adaaed9e519f75ac072e7f00f9e113c0504ba71"
@@ -321,6 +325,10 @@
       "bytes": 17708,
       "sha256": "9b4d8e5d1795e11eb60e4cd91de78003165872db96cda7073f1062168023f658"
     },
+    "pine/Hist_Divergence_Line_v2.pine": {
+      "bytes": 16906,
+      "sha256": "78a512b39ab97e8483910ade1f4e05749402729c92e157a40f8feb7fd3b950f9"
+    },
     "pine/original_user_source.pine": {
       "bytes": 20924,
       "sha256": "6f4c60d954c856c4ec88f95169829df434c9b78e8492651ef1e79f5eb37ff372"
@@ -330,8 +338,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 7509,
-      "sha256": "2438a9ce27437b8cde721702e1be968e5608c46cb4a5889bb9b7de9cde99e5c9"
+      "bytes": 8033,
+      "sha256": "bda7de8c34b194eb5b3d10412dcfdd641a84b700caafb412e5290719396b641d"
     },
     "reports/hist_lifecycle_1d_tradingview.png": {
       "bytes": 135361,
@@ -340,6 +348,14 @@
     "reports/hist_lifecycle_4h_tradingview.png": {
       "bytes": 136494,
       "sha256": "b262670dbc37ae5c12986cb92c6192c6033435f21ca9ffa3da1b3c4e36141dda"
+    },
+    "reports/hist_line_v2_1d_tradingview.png": {
+      "bytes": 159589,
+      "sha256": "6039623354bf610ef1e744cc084b05e2ad95e5749c721c19306360e071e31154"
+    },
+    "reports/hist_line_v2_4h_tradingview.png": {
+      "bytes": 164579,
+      "sha256": "2ea0bcaf04b30e2717d79da83305e0ce8fdc82ef8981004fc67211b882da943b"
     },
     "reports/qa_equity_preview.png": {
       "bytes": 160772,
@@ -2404,6 +2420,10 @@
     "results/equity/4h_VWMACD_target_2p5_full.jsonl.gz": {
       "bytes": 75323,
       "sha256": "ef36817d1bdbbec7d93e06621c3e26c9e622c427e450c8acfd639fabf4fce207"
+    },
+    "results/hist_lifecycle/line_v2_checks.json": {
+      "bytes": 848,
+      "sha256": "7c88a0eae253ba94bab4384955b8b135e0aa5da9e92d2b84d2d37e8d8c2489af"
     },
     "results/hist_lifecycle/offline_checks.json": {
       "bytes": 801,

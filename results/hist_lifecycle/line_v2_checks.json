@@ -1,0 +1,24 @@
+{
+  "source_sha256": "78a512b39ab97e8483910ade1f4e05749402729c92e157a40f8feb7fd3b950f9",
+  "signal_and_lifecycle_core_identical_to_v1": true,
+  "alerts_identical_to_v1": true,
+  "no_columns_bands_shapes_candles_or_connectors": true,
+  "default_labels": false,
+  "normal": "#9099AB",
+  "bullish_active": "#FFD400",
+  "bearish_active": "#377DFF",
+  "default_width": 3,
+  "tradingview_compile": "PASS: saved Pine v6 version 3 and rendered on both intervals",
+  "saved_editor_matches_local": true,
+  "chart": "BINANCE:BTCUSDT.P",
+  "intervals": [
+    "1D",
+    "240"
+  ],
+  "checked_at": "2026-10-17 Asia/Shanghai",
+  "screenshots": [
+    "reports/hist_line_v2_1d_tradingview.png",
+    "reports/hist_line_v2_4h_tradingview.png"
+  ],
+  "full_history_reconciliation": "PENDING; display-only update, no additional backtest claims"
+}
