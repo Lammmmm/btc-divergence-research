@@ -217,6 +217,10 @@
       "bytes": 2353,
       "sha256": "7d1eaa662fced2ae34e051de79227834f341573a10280ab828fedc7de50993b9"
     },
+    "docs/HIST_STATE_V3_1_STYLE.md": {
+      "bytes": 667,
+      "sha256": "47cf2a8952aeb94d7b7d90b48cb663b5a58a3f2779c9c43dfee50029df20bc83"
+    },
     "docs/HIST_STATE_V3_GUIDE.md": {
       "bytes": 3850,
       "sha256": "77a68bcb00bb21327c1d5bb7ddde9c25bbbd5f2a9fb0e17cd00d7f28a71b2e7c"
@@ -353,6 +357,10 @@
       "bytes": 17810,
       "sha256": "cf0e810ab712cb1bef807560a0a0bea3a7356348b4845e6e7b0e87ec7900268a"
     },
+    "pine/Hist_Divergence_State_v3_1.pine": {
+      "bytes": 17814,
+      "sha256": "0790beb5f0a0a5e54fdc736a00862f95fa895d40693340ccd0c66a41ffc045a5"
+    },
     "pine/original_user_source.pine": {
       "bytes": 20924,
       "sha256": "6f4c60d954c856c4ec88f95169829df434c9b78e8492651ef1e79f5eb37ff372"
@@ -362,8 +370,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 8610,
-      "sha256": "aa2f0b7c029c8f1e84fe92679c65555225ed10b650513693a8bbda17719fe4c4"
+      "bytes": 8845,
+      "sha256": "676d4b88cb8d51ad15646ddfdfe76dd823061ba2714bd6bdbdae0517bf6846fd"
     },
     "reports/hist_lifecycle_1d_tradingview.png": {
       "bytes": 135361,
@@ -380,6 +388,10 @@
     "reports/hist_line_v2_4h_tradingview.png": {
       "bytes": 164579,
       "sha256": "2ea0bcaf04b30e2717d79da83305e0ce8fdc82ef8981004fc67211b882da943b"
+    },
+    "reports/hist_state_v3_1_style.png": {
+      "bytes": 158551,
+      "sha256": "f0d912373c42758dfbe3e15e1bfddbacdcad745df8ac8b5d00da1542b4aa8376"
     },
     "reports/hist_state_v3_1d_tradingview.png": {
       "bytes": 122582,
@@ -2492,6 +2504,10 @@
     "results/hist_state_v3/offline_checks.json": {
       "bytes": 1091,
       "sha256": "420df353982cbafc0a845de7f9a5f2160a53ea305941c176936decfaa906e192"
+    },
+    "results/hist_state_v3/style_v3_1_checks.json": {
+      "bytes": 371,
+      "sha256": "d939d95abce56a0bfe2fde4fbd1ebf6b31aef9ba70384cc17a2f221cbdde3f6c"
     },
     "results/hist_state_v3/tradingview_checks.json": {
       "bytes": 874,

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "only_title_default_width_and_two_colors_changed": true,
+  "source_sha256": "0790beb5f0a0a5e54fdc736a00862f95fa895d40693340ccd0c66a41ffc045a5",
+  "linewidth": 2,
+  "bull_color": "#C2410C",
+  "bear_color": "#1744D1",
+  "tradingview_visual_check": "PASS: Pine v6 saved version 5, rendered thinner orange/blue lines on BINANCE:BTCUSDT.P 4H"
+}
