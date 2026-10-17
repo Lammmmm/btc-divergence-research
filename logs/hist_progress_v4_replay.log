@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "source_sha256": "2dc31ec1873db8895cd61f681284edb836342658d37338236a02b037f3f1f763",
+  "formal_pine_core_unchanged": true,
+  "alerts_unchanged": true,
+  "datasets": [
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "formal_events": 39,
+      "formal_rules_and_lifecycle_match_v3": true,
+      "prefix_checks": [
+        1240,
+        2367
+      ],
+      "pivot_resets": 238,
+      "structure_touch_bars": 26,
+      "formation_broken_bars": 2485
+    },
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "formal_events": 202,
+      "formal_rules_and_lifecycle_match_v3": true,
+      "prefix_checks": [
+        7440,
+        14767
+      ],
+      "pivot_resets": 1123,
+      "structure_touch_bars": 271,
+      "formation_broken_bars": 11908
+    }
+  ],
+  "scope": "Python causal specification and Pine source equivalence; TradingView full-history reconciliation not completed; intrabar formation tick paths cannot be reconstructed from OHLC."
+}

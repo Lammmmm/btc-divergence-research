@@ -6,6 +6,8 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 **当前状态：历史研究完成；TradingView 对账和未来向前验证待完成。**
 
+**当前版本：枢轴形成与结构进度 v4。** [完整 Pine](pine/Hist_Divergence_Progress_v4.pine) / [精确公式、阶段和复盘限制](docs/HIST_PROGRESS_V4_GUIDE.md)。形成阶段以原始已确认 Close 枢轴及同根 Hist 为基准，价格按 ATR、Hist 按近期标准差归一化，综合取两项较低值且最高 99；正式触发以 100 处三角标记。之后显示冻结失效价 0 到确认价 100 的结构位置。触线立即预警、正式结果等收盘。原始正式信号与研究规则保持一致。复现：`python run_hist_progress_v4.py`。[v4 完整发布](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-progress-v4)。
+
 **显示微调 v3.1：** [完整源码](pine/Hist_Divergence_State_v3_1.pine) / [变更说明](docs/HIST_STATE_V3_1_STYLE.md)。线宽 2、底背离深橙色、顶背离深蓝色，适配浅黄/浅绿背景；状态规则沿用 v3。
 
 **最新显示版本：Hist 背离状态 0–100 v3。** [Pine 源码](pine/Hist_Divergence_State_v3.pine) / [说明与测试范围](docs/HIST_STATE_V3_GUIDE.md)。底背离生效固定在 0 并变黄，顶背离生效固定在 100 并变蓝；观察段灰色 10–90，潜在形态用灰色 5/95，结束后离开边界并回灰。坐标是状态编码，不是胜率。保留原信号、结构判定及进度面板。复现：`python run_hist_state_v3.py`。[v3 发布与完整研究包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-lifecycle-v3)。

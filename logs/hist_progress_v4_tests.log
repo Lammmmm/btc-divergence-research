@@ -1,0 +1,19 @@
+test_bear_mirror (__main__.ProgressTests.test_bear_mirror) ... ok
+test_bull_approach_both_required (__main__.ProgressTests.test_bull_approach_both_required) ... ok
+test_equality_cannot_confirm (__main__.ProgressTests.test_equality_cannot_confirm) ... ok
+test_expiry_and_episode_end (__main__.ProgressTests.test_expiry_and_episode_end) ... ok
+test_intrabar_cannot_commit_candidate_state (__main__.ProgressTests.test_intrabar_cannot_commit_candidate_state) ... ok
+test_line_obstruction_is_red_without_fake_confirmation (__main__.ProgressTests.test_line_obstruction_is_red_without_fake_confirmation) ... ok
+test_newest_eligible_not_best_score (__main__.ProgressTests.test_newest_eligible_not_best_score) ... ok
+test_no_touch_before_activation_and_same_bar_restart (__main__.ProgressTests.test_no_touch_before_activation_and_same_bar_restart) ... ok
+test_previously_satisfied_price_is_revoked (__main__.ProgressTests.test_previously_satisfied_price_is_revoked) ... ok
+test_reference_reset_and_scales_frozen (__main__.ProgressTests.test_reference_reset_and_scales_frozen) ... ok
+test_reversible (__main__.ProgressTests.test_reversible) ... ok
+test_structure_both_directions (__main__.ProgressTests.test_structure_both_directions) ... ok
+test_touch_equality_and_recovery_not_failure (__main__.ProgressTests.test_touch_equality_and_recovery_not_failure) ... ok
+test_units_and_translation_invariance (__main__.ProgressTests.test_units_and_translation_invariance) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.000s
+
+OK

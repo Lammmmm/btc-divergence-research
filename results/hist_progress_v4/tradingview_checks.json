@@ -1,0 +1,15 @@
+{
+  "status": "PASS_COMPILE_AND_VISUAL_SMOKE_CHECK",
+  "checked_at": "2026-10-18T07:33:14+08:00",
+  "source_sha256": "2dc31ec1873db8895cd61f681284edb836342658d37338236a02b037f3f1f763",
+  "saved_script_name": "Hist 枢轴形成与结构进度 v4",
+  "saved_version": 7,
+  "editor_source_matches_local_file": true,
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes": {
+    "4h": {"displayed_phase": "bullish_structure", "structure_percent_snapshot": 17.8, "invalidation": 79881.4, "confirmation": 87249.6, "screenshot": "reports/hist_progress_v4_4h_tradingview.png"},
+    "1d": {"displayed_phase": "bearish_structure", "structure_percent_snapshot": 54.1, "invalidation": 88619.0, "confirmation": 74909.4, "screenshot": "reports/hist_progress_v4_1d_tradingview.png"}
+  },
+  "observations": ["Both timeframes render historical formation and structural curves", "Formal starts, success/failure and reference reset markers render", "No explicit vertical lines or divergence connector drawings", "Historical values remain inside 0-100; formation capped at 99", "No compiler or runtime error displayed"],
+  "limits": ["Live prices and percentages change after screenshot", "Visual smoke check is not a full historical Pine-versus-Python export reconciliation", "Historical OHLC cannot reconstruct vanished intrabar formation ticks"]
+}
