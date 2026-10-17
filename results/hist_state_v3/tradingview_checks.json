@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-17 Asia/Shanghai",
+  "pine_version": 6,
+  "saved_editor_version": 4,
+  "source_sha256": "cf0e810ab712cb1bef807560a0a0bea3a7356348b4845e6e7b0e87ec7900268a",
+  "saved_editor_equals_local_normalized": true,
+  "chart": "BINANCE:BTCUSDT.P",
+  "screenshots": [
+    "reports/hist_state_v3_1d_tradingview.png",
+    "reports/hist_state_v3_4h_tradingview.png"
+  ],
+  "visual_checks": {
+    "1D": "current active bearish at 100, blue; previous gray observation and yellow bullish segments visible",
+    "240": "current active bullish at 0, yellow; previous gray observation and blue bearish segments visible",
+    "axis": "All curve values 0–100; TradingView automatic margin may show ticks outside these bounds",
+    "no_raw_hist_on_pane": true
+  },
+  "full_historical_TradingView_export_reconciliation": "PENDING"
+}

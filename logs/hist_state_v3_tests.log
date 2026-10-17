@@ -1,0 +1,13 @@
+test_active_state_overrides_hist_and_preview (__main__.StateCoordinatesTests.test_active_state_overrides_hist_and_preview) ... ok
+test_bounded_random_inputs (__main__.StateCoordinatesTests.test_bounded_random_inputs) ... ok
+test_constant_and_missing_history (__main__.StateCoordinatesTests.test_constant_and_missing_history) ... ok
+test_failure_and_same_bar_restart (__main__.StateCoordinatesTests.test_failure_and_same_bar_restart) ... ok
+test_hist_extremes_cannot_claim_divergence (__main__.StateCoordinatesTests.test_hist_extremes_cannot_claim_divergence) ... ok
+test_intrabar_and_end_transitions (__main__.StateCoordinatesTests.test_intrabar_and_end_transitions) ... ok
+test_prefix_causality (__main__.StateCoordinatesTests.test_prefix_causality) ... ok
+test_preview_never_hits_endpoint_or_colors (__main__.StateCoordinatesTests.test_preview_never_hits_endpoint_or_colors) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.018s
+
+OK

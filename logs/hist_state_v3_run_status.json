@@ -1,0 +1,17 @@
+[
+  {
+    "step": "hist_state_v3_tests",
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "step": "hist_state_v3_lifecycle_regression",
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  {
+    "step": "hist_state_v3_coordinates",
+    "exit_code": 0,
+    "status": "PASS"
+  }
+]

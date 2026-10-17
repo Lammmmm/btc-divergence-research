@@ -6,7 +6,9 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 **当前状态：历史研究完成；TradingView 对账和未来向前验证待完成。**
 
-**当前推荐显示版本：Hist 背离折线 v2。** [Pine 源码](pine/Hist_Divergence_Line_v2.pine) / [使用说明](docs/HIST_LINE_V2_GUIDE.md)。连续 Hist 折线：普通灰色、底背离生效黄色、顶背离生效蓝色，事件结束恢复灰色；无柱状图、竖向色带或背离连线，保留进度面板。仅调整显示，背离与结构跟踪逻辑、警报规则均与 v1 一致。[v2 发布及完整研究包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-lifecycle-v2)。
+**最新显示版本：Hist 背离状态 0–100 v3。** [Pine 源码](pine/Hist_Divergence_State_v3.pine) / [说明与测试范围](docs/HIST_STATE_V3_GUIDE.md)。底背离生效固定在 0 并变黄，顶背离生效固定在 100 并变蓝；观察段灰色 10–90，潜在形态用灰色 5/95，结束后离开边界并回灰。坐标是状态编码，不是胜率。保留原信号、结构判定及进度面板。复现：`python run_hist_state_v3.py`。[v3 发布与完整研究包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-lifecycle-v3)。
+
+**保留历史显示版本：Hist 背离折线 v2。** [Pine 源码](pine/Hist_Divergence_Line_v2.pine) / [使用说明](docs/HIST_LINE_V2_GUIDE.md)。连续 Hist 折线：普通灰色、底背离生效黄色、顶背离生效蓝色，事件结束恢复灰色；无柱状图、竖向色带或背离连线，保留进度面板。仅调整显示，背离与结构跟踪逻辑、警报规则均与 v1 一致。[v2 发布及完整研究包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-lifecycle-v2)。
 
 **新增可用副图：Hist 背离全过程 v1。** [Pine v6 源码](pine/Hist_Divergence_Lifecycle_v1.pine) / [安装与使用说明](docs/HIST_LIFECYCLE_GUIDE.md)。显示潜在形态、生效、等待、反转确认和结构失效；价格进度不是胜率。已在 TradingView 的 BINANCE:BTCUSDT.P 日线与 4H 编译运行，保存源码与本地文件比对一致；完整历史导出对账仍待完成。离线检查：`python run_hist_lifecycle.py`。这不会改变下方旧回测结果或其统计口径。
 

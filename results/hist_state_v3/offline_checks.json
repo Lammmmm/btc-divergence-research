@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "signal_lifecycle_unchanged_except_label_coordinates": true,
+  "alerts_unchanged": true,
+  "visible_plots_only_state_score": true,
+  "datasets": [
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "color_bars": {
+        "gray": 1417,
+        "blue": 438,
+        "yellow": 259
+      },
+      "starts": {
+        "-1": 24,
+        "1": 15
+      },
+      "all_endpoint_and_resolution_assertions": true
+    },
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "minimum": 0.0,
+      "maximum": 100.0,
+      "color_bars": {
+        "gray": 6742,
+        "blue": 2838,
+        "yellow": 3104
+      },
+      "starts": {
+        "-1": 116,
+        "1": 86
+      },
+      "all_endpoint_and_resolution_assertions": true
+    }
+  ],
+  "source_sha256": "cf0e810ab712cb1bef807560a0a0bea3a7356348b4845e6e7b0e87ec7900268a",
+  "scope": "Python display specification over saved lifecycle records, plus Pine source equivalence; not a Pine interpreter or full TradingView history reconciliation."
+}
