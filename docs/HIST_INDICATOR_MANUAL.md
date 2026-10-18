@@ -1,5 +1,7 @@
 # MACD Histogram 背离连续进度线：完整使用手册
 
+> 本手册对应保留的 v4.1。最新 v4.2 的评分、参照保持及切换显示已经调整，请阅读 [v4.2 完整说明](HIST_LINE_V4_2_GUIDE.md)。
+
 适用版本：**Hist Line v4.1**。文档更新：2026-10-18。
 
 [指标源码](../pine/Hist_Divergence_Line_v4_1.pine) · [v4.1 显示变更](HIST_LINE_V4_1_GUIDE.md) · [原始进度公式说明](HIST_PROGRESS_V4_GUIDE.md) · [验证记录](../results/hist_line_v4_1/checks.json)

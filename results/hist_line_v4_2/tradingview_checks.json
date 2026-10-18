@@ -1,0 +1,28 @@
+{
+  "status": "PASS_SMOKE_TEST",
+  "date": "2026-10-18",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes": [
+    "4H",
+    "1D"
+  ],
+  "source_sha256": "1141769059166f6f32da8410440613d0819ebd4d133b046dbbb8a222860ad37d",
+  "saved_script": "Hist 枢轴动态进度 v4.2",
+  "source_copy_back_matched": true,
+  "separate_v41_script_preserved": true,
+  "observations": {
+    "4H": "Compiled, saved, plotted; original and new active structure value both 24.6 at initial comparison; final live value 23.8.",
+    "1D": "Reloaded saved layout; both versions plotted, active structure value both 50.9.",
+    "display": "One thin primary line, short context seams, no historical risk-dot clutter; default labels disabled."
+  },
+  "screenshots": [
+    "reports/hist_line_v4_2_vs_v4_1_4h.png",
+    "reports/hist_line_v4_2_vs_v4_1_1d.png",
+    "reports/hist_line_v4_2_tradingview_4h.png",
+    "reports/hist_line_v4_2_tradingview_1d.png"
+  ],
+  "limits": [
+    "Visual compilation/runtime smoke test, not full historical TradingView export reconciliation.",
+    "Intrabar warning branches covered by synthetic tests and historical high/low replay; no claim of observing every live failure scenario."
+  ]
+}

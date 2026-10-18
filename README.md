@@ -8,13 +8,15 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
-**使用入口：[MACD Histogram 连续进度线完整手册](docs/HIST_INDICATOR_MANUAL.md)**。包含安装步骤、颜色与阶段、枢轴比较基准、ATR / Hist 标准化公式、平滑与方向选择、正式确认与失效规则、参数表、警报、历史复盘方法、实图及验证范围。
+**当前显示版本：Hist Line v4.2 枢轴动态进度。** [完整源码](pine/Hist_Divergence_Line_v4_2.pine) · [新版完整说明及 v4.1 对比](docs/HIST_LINE_V4_2_GUIDE.md) · [完整归档下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-2)。
 
-[最新源码](pine/Hist_Divergence_Line_v4_1.pine) · [含详细手册的完整归档](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-1-manual-2026-10-18) · [显示验证](results/hist_line_v4_1/checks.json)
+v4.2 重新设计展示评分：以原始历史 Close 枢轴及同根 Hist 为参照，关系临界为 50，价格和 Hist 共同约束，长短波动尺度防止分母过小，稳定保持候选及显示方向。同一参照内连续，跨参照/方向/阶段不强行连接。结构位置保持原值，风险颜色即时更新。正式背离、确认、失效核心与 v4.1 逐字一致；旧版和历史研究不覆盖。百分比不是成功概率。
 
-2026-10-18 本次更新补充详细文档和归档入口，指标仍为 v4.1，未改变信号或参数，旧数据及旧发布继续保留。下文按版本列出显示演变与原研究材料。
+13 项测试及 14,798 根离线显示回放通过，已在 TradingView 的 BINANCE:BTCUSDT.P 4H、1D 编译运行。完整历史 Pine 导出对账仍待完成。[离线检查](results/hist_line_v4_2/checks.json) · [实图验证记录](results/hist_line_v4_2/tradingview_checks.json)。复现：`python run_hist_line_v42.py`。
 
-**最新显示版本：连续单折线 v4.1。** [完整 Pine](pine/Hist_Divergence_Line_v4_1.pine) / [显示口径与限制](docs/HIST_LINE_V4_1_GUIDE.md)。只有一条连续细线，无密集图形标记；形成阶段轻微平滑、稳定选择主要方向，结构阶段保持真实位置，正式触发不再人为拉到 100 形成尖峰。参照或阶段切换以灰色连接段和数据窗口记录区分，风险红色优先。原始信号及候选算法与 v4 完全一致。复现显示检查：`python src/verify_hist_line_v41.py`。
+**旧版手册保留：** [v4.1 完整手册](docs/HIST_INDICATOR_MANUAL.md) · [v4.1 历史归档](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-1-manual-2026-10-18)。其中旧评分、平滑和灰色连接规则仅适用于 v4.1，使用新版请以上方 v4.2 说明为准。
+
+**保留的上一显示版本：连续单折线 v4.1。** [完整 Pine](pine/Hist_Divergence_Line_v4_1.pine) / [显示口径与限制](docs/HIST_LINE_V4_1_GUIDE.md)。只有一条连续细线，无密集图形标记；形成阶段轻微平滑、稳定选择主要方向，结构阶段保持真实位置，正式触发不再人为拉到 100 形成尖峰。参照或阶段切换以灰色连接段和数据窗口记录区分，风险红色优先。原始信号及候选算法与 v4 完全一致。复现显示检查：`python src/verify_hist_line_v41.py`。
 
 **上一版：枢轴形成与结构进度 v4。** [完整 Pine](pine/Hist_Divergence_Progress_v4.pine) / [精确公式、阶段和复盘限制](docs/HIST_PROGRESS_V4_GUIDE.md)。形成阶段以原始已确认 Close 枢轴及同根 Hist 为基准，价格按 ATR、Hist 按近期标准差归一化，综合取两项较低值且最高 99；正式触发以 100 处三角标记。之后显示冻结失效价 0 到确认价 100 的结构位置。触线立即预警、正式结果等收盘。原始正式信号与研究规则保持一致。复现：`python run_hist_progress_v4.py`。[v4 完整发布](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-progress-v4)。
 

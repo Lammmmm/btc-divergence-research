@@ -1,0 +1,83 @@
+{
+  "status": "PASS",
+  "source_sha256": "1141769059166f6f32da8410440613d0819ebd4d133b046dbbb8a222860ad37d",
+  "formal_core_byte_equal_v41": true,
+  "alerts_byte_equal_v41": true,
+  "datasets": [
+    {
+      "tf": "1d",
+      "events": 39,
+      "v41": {
+        "bars": 2114,
+        "raw_jumps_ge30": 214,
+        "context_jumps_ge30": 131,
+        "within_context_jumps_ge30": 83,
+        "drawn_jumps_ge30": 214,
+        "within_context_delta_p95": 28.447224282450797,
+        "context_changes": 249,
+        "formation_bars": 1379,
+        "formation_at_extremes": 563,
+        "missing_values": 0,
+        "within_formation_jumps_ge30": 62,
+        "within_structure_jumps_ge30": 21,
+        "within_formation_delta_p95": 30.280684837068403
+      },
+      "v42": {
+        "bars": 2114,
+        "raw_jumps_ge30": 131,
+        "context_jumps_ge30": 88,
+        "within_context_jumps_ge30": 43,
+        "drawn_jumps_ge30": 43,
+        "within_context_delta_p95": 23.049663183133614,
+        "context_changes": 204,
+        "formation_bars": 1379,
+        "formation_at_extremes": 138,
+        "missing_values": 0,
+        "within_formation_jumps_ge30": 16,
+        "within_structure_jumps_ge30": 21,
+        "within_formation_delta_p95": 19.264358874051567
+      },
+      "prefix_stable": true,
+      "structure_exact": true,
+      "all_structure_touch_warnings_immediate": true
+    },
+    {
+      "tf": "4h",
+      "events": 202,
+      "v41": {
+        "bars": 12684,
+        "raw_jumps_ge30": 915,
+        "context_jumps_ge30": 621,
+        "within_context_jumps_ge30": 294,
+        "drawn_jumps_ge30": 915,
+        "within_context_delta_p95": 24.01694611880901,
+        "context_changes": 1207,
+        "formation_bars": 6542,
+        "formation_at_extremes": 2744,
+        "missing_values": 0,
+        "within_formation_jumps_ge30": 201,
+        "within_structure_jumps_ge30": 93,
+        "within_formation_delta_p95": 26.654132118048828
+      },
+      "v42": {
+        "bars": 12684,
+        "raw_jumps_ge30": 527,
+        "context_jumps_ge30": 344,
+        "within_context_jumps_ge30": 183,
+        "drawn_jumps_ge30": 183,
+        "within_context_delta_p95": 20.38103299716302,
+        "context_changes": 937,
+        "formation_bars": 6542,
+        "formation_at_extremes": 489,
+        "missing_values": 0,
+        "within_formation_jumps_ge30": 53,
+        "within_structure_jumps_ge30": 93,
+        "within_formation_delta_p95": 18.38554439597962
+      },
+      "prefix_stable": true,
+      "structure_exact": true,
+      "all_structure_touch_warnings_immediate": true
+    }
+  ],
+  "interpretation": "Display diagnostics only. Different scoring semantics: v4.2 50=endpoint equality. Context jumps are intentionally not connected; raw jumps are reported separately. Genuine structural price moves are unfiltered. No claim of improved predictive accuracy or full Pine historical export reconciliation."
+}
