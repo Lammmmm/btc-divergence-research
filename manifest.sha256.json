@@ -229,6 +229,10 @@
       "bytes": 12481,
       "sha256": "7670ad8d6514ff95bf51bfc7b01afa51d56f0eff7d6a8b311d6b38514ca2b7cf"
     },
+    "docs/HIST_LINE_V4_3_GUIDE.md": {
+      "bytes": 2755,
+      "sha256": "f3f948bfbcdc4e5971b983fce283e0bd8e1c9f896f6506f29eb7e145d626fa09"
+    },
     "docs/HIST_PROGRESS_V4_GUIDE.md": {
       "bytes": 7759,
       "sha256": "490120bd1bc3901401ffd1e4c5581a671cb78908eeeed756adc7c8f853947b6e"
@@ -405,6 +409,10 @@
       "bytes": 21807,
       "sha256": "1141769059166f6f32da8410440613d0819ebd4d133b046dbbb8a222860ad37d"
     },
+    "pine/Hist_Divergence_Line_v4_3.pine": {
+      "bytes": 22224,
+      "sha256": "766d9485d66c8bc65a2a313ebcd0754c3e52d36b6e373e0bbb03f5cc7e2be843"
+    },
     "pine/Hist_Divergence_Progress_v4.pine": {
       "bytes": 21009,
       "sha256": "2dc31ec1873db8895cd61f681284edb836342658d37338236a02b037f3f1f763"
@@ -426,8 +434,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 11625,
-      "sha256": "aa3ce8347403d7b6d7e2ed0cf73589a9d5dc53995427ed8b7d73c7d92587a091"
+      "bytes": 12319,
+      "sha256": "ad520323834b4f6ffbbe97a7ccdd2d8238d4ed9b55627617f0d8dcca63af5676"
     },
     "reports/hist_lifecycle_1d_tradingview.png": {
       "bytes": 135361,
@@ -2604,6 +2612,22 @@
     "results/hist_line_v4_2/tradingview_checks.json": {
       "bytes": 1219,
       "sha256": "b397a707f8bf47a191494cfd22b21add4822e39406947336bcfef20b5c52b728"
+    },
+    "results/hist_line_v4_3/checks.json": {
+      "bytes": 803,
+      "sha256": "081493bf81693649ffc4323e43a45b11479a6874f4305966b38d62023063378d"
+    },
+    "results/hist_line_v4_3/timeline_1d.jsonl.gz": {
+      "bytes": 34459,
+      "sha256": "f8f9cf9e508a1e4dc602ab2a1ebe159c073cd1297a9530eb01a554e3e8b3ac18"
+    },
+    "results/hist_line_v4_3/timeline_4h.jsonl.gz": {
+      "bytes": 197390,
+      "sha256": "91445dd0f8102f981999ee45b83e1823cdea261d0fbc4a2ca12abb6ba4da1ae6"
+    },
+    "results/hist_line_v4_3/tradingview_checks.json": {
+      "bytes": 424,
+      "sha256": "7d053c0a40e61b8827a141902c5ae4890d8746bece32592671c67f3554a4ace1"
     },
     "results/hist_progress_v4/checks.json": {
       "bytes": 1000,
@@ -7612,6 +7636,10 @@
     "src/verify_hist_line_v42.py": {
       "bytes": 5657,
       "sha256": "9cd769ddfde9893524c0269391b774bb5887dd1a0e97d5b0193664bbd3696a69"
+    },
+    "src/verify_hist_line_v43.py": {
+      "bytes": 3528,
+      "sha256": "fdc4c9cc32eb918234bd01ef0acbf1f05220654611b917f14bbcd248629acc7b"
     },
     "src/verify_hist_progress_v4.py": {
       "bytes": 5462,

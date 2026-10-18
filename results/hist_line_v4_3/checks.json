@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "formal_core_equal_v42": true,
+  "formation_algorithm_equal_v42": true,
+  "alerts_equal_v42": true,
+  "source_sha256": "766d9485d66c8bc65a2a313ebcd0754c3e52d36b6e373e0bbb03f5cc7e2be843",
+  "datasets": [
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "active_horizontal_bars": 697,
+      "terminal_bars": 38,
+      "immediate_warning_bars": 26,
+      "no_missing_values": true
+    },
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "active_horizontal_bars": 5942,
+      "terminal_bars": 200,
+      "immediate_warning_bars": 271,
+      "no_missing_values": true
+    }
+  ],
+  "limits": "Saved formal records reused. This checks the display specification and unchanged Pine source, not a new signal backtest or complete Pine export reconciliation."
+}

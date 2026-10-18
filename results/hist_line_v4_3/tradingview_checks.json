@@ -1,0 +1,10 @@
+{
+  "status": "BLOCKED_ADD_TO_CHART",
+  "date": "2026-10-18",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframe": "4H",
+  "saved_script": "Hist 背离持续横线 v4.3",
+  "source_copy_back_matched": true,
+  "source_sha256": "766d9485d66c8bc65a2a313ebcd0754c3e52d36b6e373e0bbb03f5cc7e2be843",
+  "reason": "TradingView Basic indicator-count limit prevented adding the new script. No v4.3 chart-runtime PASS claimed."
+}

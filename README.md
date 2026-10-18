@@ -8,7 +8,9 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
-**当前显示版本：Hist Line v4.2 枢轴动态进度。** [完整源码](pine/Hist_Divergence_Line_v4_2.pine) · [新版完整说明及 v4.1 对比](docs/HIST_LINE_V4_2_GUIDE.md) · [完整归档下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-2)。
+**当前显示版本：Hist Line v4.3 背离持续横线。** [新版代码](pine/Hist_Divergence_Line_v4_3.pine) · [使用说明](docs/HIST_LINE_V4_3_GUIDE.md) · [完整下载包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3)。底背离生效期间固定 0，顶背离固定 100，直到原规则确认或失效；取消断口，所有阶段连续连接。风险实时变红，真实结构位置保留在数据窗口。正式规则与 v4.2 完全相同。14,798 根离线显示检查通过；TradingView 已保存独立脚本并回读核对一致，但当前账号的指标数量上限阻止添加新版，**本版尚未完成图表运行验证**。
+
+**保留的上一版本：Hist Line v4.2 枢轴动态进度。** [完整源码](pine/Hist_Divergence_Line_v4_2.pine) · [新版完整说明及 v4.1 对比](docs/HIST_LINE_V4_2_GUIDE.md) · [完整归档下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-2)。
 
 v4.2 重新设计展示评分：以原始历史 Close 枢轴及同根 Hist 为参照，关系临界为 50，价格和 Hist 共同约束，长短波动尺度防止分母过小，稳定保持候选及显示方向。同一参照内连续，跨参照/方向/阶段不强行连接。结构位置保持原值，风险颜色即时更新。正式背离、确认、失效核心与 v4.1 逐字一致；旧版和历史研究不覆盖。百分比不是成功概率。
 
