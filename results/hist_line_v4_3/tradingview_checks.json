@@ -1,10 +1,22 @@
 {
-  "status": "BLOCKED_ADD_TO_CHART",
+  "status": "PASS_SMOKE_TEST",
   "date": "2026-10-18",
   "symbol": "BINANCE:BTCUSDT.P",
-  "timeframe": "4H",
   "saved_script": "Hist 背离持续横线 v4.3",
   "source_copy_back_matched": true,
   "source_sha256": "766d9485d66c8bc65a2a313ebcd0754c3e52d36b6e373e0bbb03f5cc7e2be843",
-  "reason": "TradingView Basic indicator-count limit prevented adding the new script. No v4.3 chart-runtime PASS claimed."
+  "timeframes": [
+    "4H",
+    "1D"
+  ],
+  "observations": {
+    "1D": "Active bearish divergence stays at 100; live structure position remains about 50.8 in panel.",
+    "4H": "Active bullish divergence stays at 0; live structure position remains about 24.1 in panel.",
+    "chart": "Thin connected line, no transparent seams; saved independent script compiled and ran."
+  },
+  "screenshots": [
+    "reports/hist_line_v4_3_tradingview_1d.png",
+    "reports/hist_line_v4_3_tradingview_4h.png"
+  ],
+  "limits": "Runtime/visual smoke tests plus offline display checks; not a complete historical Pine export reconciliation. Live invalidation scenarios were not all observed during the short session."
 }

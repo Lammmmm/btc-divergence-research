@@ -25,4 +25,10 @@
 
 安装时新建脚本粘贴 v4.3，再隐藏旧版显示即可。默认细线 1，无额外标签；全部旧文件保留。
 
-TradingView 实测状态：独立脚本“Hist 背离持续横线 v4.3”已保存，编辑器回读与本地文件一致。尝试添加到图表时遇到 Basic 方案指标数量上限，未完成本版的图表运行验证，不将旧版运行截图视作新版验证。
+TradingView 实测状态：独立脚本“Hist 背离持续横线 v4.3”已保存，编辑器回读与本地文件一致。切换到用户已隐藏旧指标的图表后，新版成功编译运行。日线顶背离保持 100，4H 底背离保持 0；面板仍实时显示结构位置。完整历史 Pine 导出对账尚未完成。
+
+[实测记录](../results/hist_line_v4_3/tradingview_checks.json)
+
+![4H 横线实际运行](../reports/hist_line_v4_3_tradingview_4h.png)
+
+![日线横线实际运行](../reports/hist_line_v4_3_tradingview_1d.png)
