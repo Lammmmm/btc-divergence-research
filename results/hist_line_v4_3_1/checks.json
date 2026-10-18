@@ -1,0 +1,12 @@
+{
+  "status": "PASS_STATIC_DISPLAY_DIFF",
+  "source_sha256": "d9dee06338e02bad0044a5cae6a9a25ac399cb47f6371c6894e97d238bdeb32c",
+  "changed_lines": 4,
+  "formal_logic_and_main_values_unchanged": true,
+  "colors": {
+    "active_bear": "#D50032",
+    "active_bull": "#1744D1",
+    "inactive": "#9099AB"
+  },
+  "notes": "Main line follows active state only. Intrabar warnings remain in panel and audit, not line color. Existing v4.3 runtime/replay coverage applies to unchanged values and rules."
+}
