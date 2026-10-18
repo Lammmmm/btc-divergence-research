@@ -6,7 +6,9 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 **当前状态：历史研究完成；TradingView 对账和未来向前验证待完成。**
 
-**当前版本：枢轴形成与结构进度 v4。** [完整 Pine](pine/Hist_Divergence_Progress_v4.pine) / [精确公式、阶段和复盘限制](docs/HIST_PROGRESS_V4_GUIDE.md)。形成阶段以原始已确认 Close 枢轴及同根 Hist 为基准，价格按 ATR、Hist 按近期标准差归一化，综合取两项较低值且最高 99；正式触发以 100 处三角标记。之后显示冻结失效价 0 到确认价 100 的结构位置。触线立即预警、正式结果等收盘。原始正式信号与研究规则保持一致。复现：`python run_hist_progress_v4.py`。[v4 完整发布](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-progress-v4)。
+**最新显示版本：连续单折线 v4.1。** [完整 Pine](pine/Hist_Divergence_Line_v4_1.pine) / [显示口径与限制](docs/HIST_LINE_V4_1_GUIDE.md)。只有一条连续细线，无密集图形标记；形成阶段轻微平滑、稳定选择主要方向，结构阶段保持真实位置，正式触发不再人为拉到 100 形成尖峰。参照或阶段切换以灰色连接段和数据窗口记录区分，风险红色优先。原始信号及候选算法与 v4 完全一致。复现显示检查：`python src/verify_hist_line_v41.py`。
+
+**上一版：枢轴形成与结构进度 v4。** [完整 Pine](pine/Hist_Divergence_Progress_v4.pine) / [精确公式、阶段和复盘限制](docs/HIST_PROGRESS_V4_GUIDE.md)。形成阶段以原始已确认 Close 枢轴及同根 Hist 为基准，价格按 ATR、Hist 按近期标准差归一化，综合取两项较低值且最高 99；正式触发以 100 处三角标记。之后显示冻结失效价 0 到确认价 100 的结构位置。触线立即预警、正式结果等收盘。原始正式信号与研究规则保持一致。复现：`python run_hist_progress_v4.py`。[v4 完整发布](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-progress-v4)。
 
 **显示微调 v3.1：** [完整源码](pine/Hist_Divergence_State_v3_1.pine) / [变更说明](docs/HIST_STATE_V3_1_STYLE.md)。线宽 2、底背离深橙色、顶背离深蓝色，适配浅黄/浅绿背景；状态规则沿用 v3。
 

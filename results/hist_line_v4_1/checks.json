@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "source_sha256": "11bd91ab39573055b801474a4b0e826fc0f0a6aba8d0c5e9cd68a54196717df9",
+  "formal_and_candidate_core_byte_equal_v4": true,
+  "alerts_byte_equal_v4": true,
+  "visible_curve_count": 1,
+  "shape_count": 0,
+  "datasets": [
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "finite_continuous_values": true,
+      "range_0_100": true,
+      "structure_values_exact": true,
+      "prefix_stable": true
+    },
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "finite_continuous_values": true,
+      "range_0_100": true,
+      "structure_values_exact": true,
+      "prefix_stable": true
+    }
+  ],
+  "scope": "Source regression plus offline display specification, not a Pine interpreter or full TradingView history export."
+}

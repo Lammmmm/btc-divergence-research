@@ -1,0 +1,13 @@
+{
+  "status": "PASS_COMPILE_AND_VISUAL_CHECK",
+  "checked_at": "2026-10-18T08:49:25+08:00",
+  "source_sha256": "11bd91ab39573055b801474a4b0e826fc0f0a6aba8d0c5e9cd68a54196717df9",
+  "editor_source_matches_local_file": true,
+  "saved_version": 8,
+  "saved_script_name": "Hist 连续进度线 v4.1",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes_checked": ["1D", "4H"],
+  "observations": ["Single thin continuous line", "No plotshape markers", "Two-row compact panel", "Live structural value renders on both timeframes", "No compiler or runtime error displayed"],
+  "screenshots": ["reports/hist_line_v4_1_1d_tradingview.png", "reports/hist_line_v4_1_4h_tradingview.png"],
+  "scope": "Visual and compilation verification; full-history TradingView export reconciliation not performed."
+}
