@@ -209,6 +209,10 @@
       "bytes": 1659,
       "sha256": "72453bc738932840deea8bac5c00301ffc0c54a50973e974e2b77a4ef7cbc02e"
     },
+    "docs/HIST_INDICATOR_MANUAL.md": {
+      "bytes": 17596,
+      "sha256": "4e91208fa599e2592f71447d9f830da304ff378c519fe54238f27e6a2fdabece"
+    },
     "docs/HIST_LIFECYCLE_GUIDE.md": {
       "bytes": 7342,
       "sha256": "f7d3b6558be0da4b1c72b2f7243a7bdd4bee6a2c2a97df26dfa7129a8e778c53"
@@ -218,8 +222,8 @@
       "sha256": "7d1eaa662fced2ae34e051de79227834f341573a10280ab828fedc7de50993b9"
     },
     "docs/HIST_LINE_V4_1_GUIDE.md": {
-      "bytes": 2476,
-      "sha256": "5290220113cc5ae7048227e28eb9f255d2344afb3b371093f4c1b52b91a66a58"
+      "bytes": 2591,
+      "sha256": "29035218e82eeebefd203c1732953d5bbc0f9a91624ace314cf64bd909008c55"
     },
     "docs/HIST_PROGRESS_V4_GUIDE.md": {
       "bytes": 7759,
@@ -402,8 +406,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 10184,
-      "sha256": "415bfdfb51f7518d48ca26298c2aebdea9a887b59af4df7fd67ed92b4bc0c102"
+      "bytes": 10971,
+      "sha256": "ed702515e9589624bc5b518635589adcb4b6fbb240a940fada2d2e19b82c74e4"
     },
     "reports/hist_lifecycle_1d_tradingview.png": {
       "bytes": 135361,
