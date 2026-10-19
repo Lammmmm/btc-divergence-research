@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "source_sha256": "451af2ca7e4aec2f59e0f46c4dac538e2fceb57e36c926c7ae28b1438cb37c58",
+  "formal_candidate_core_exact_v432": true,
+  "audit_plots_and_alerts_exact_v432": true,
+  "synthetic_edge_assertions": 8,
+  "datasets": [
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "events": 202,
+      "old_mode_values_and_colors_identical": true,
+      "structure_position_matches_frozen_prices": true,
+      "within_event_segments": 5740,
+      "dynamic_segments": 5738,
+      "no_missing_values": true
+    },
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "events": 39,
+      "old_mode_values_and_colors_identical": true,
+      "structure_position_matches_frozen_prices": true,
+      "within_event_segments": 658,
+      "dynamic_segments": 658,
+      "no_missing_values": true
+    }
+  ],
+  "limit": "Display specification over saved records plus exact Pine core comparison; not full historical Pine export reconciliation or a new profitability backtest."
+}

@@ -1,0 +1,41 @@
+{
+  "status": "PASS_SMOKE_TEST",
+  "date_local": "2026-10-19",
+  "timezone": "Asia/Shanghai",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "source_sha256": "451af2ca7e4aec2f59e0f46c4dac538e2fceb57e36c926c7ae28b1438cb37c58",
+  "saved_as_independent_script": "Hist 背离结构位置 v4.4",
+  "editor_clipboard_readback_matches_local_source": true,
+  "compilation_and_runtime_visible_without_error": [
+    "4H",
+    "1D"
+  ],
+  "visual_checks": [
+    {
+      "timeframe": "1D",
+      "mode": "结构位置",
+      "result": "Continuous directional structure curve; panel says triggered and waiting for structure result",
+      "screenshot": "reports/hist_line_v4_4_1d_structure.png"
+    },
+    {
+      "timeframe": "1D",
+      "mode": "持续横线",
+      "result": "Red top 100 and blue bottom 0 plateaus; other connections gray",
+      "screenshot": "reports/hist_line_v4_4_1d_hold.png"
+    },
+    {
+      "timeframe": "4H",
+      "mode": "结构位置",
+      "result": "Red/blue dynamic event curve; latest active bottom event shows structure position around 35 percent instead of fixed 0",
+      "screenshot": "reports/hist_line_v4_4_4h_structure.png"
+    }
+  ],
+  "final_chart_timeframe": "4H",
+  "final_mode": "结构位置",
+  "prior_v432_instance_hidden_not_removed": true,
+  "limitations": [
+    "Visual compile/runtime smoke test, not full historical Pine export reconciliation.",
+    "No live invalidation touch was induced or observed in this smoke test; warning code is unchanged.",
+    "Displayed latest values can change intrabar; screenshots are point-in-time evidence."
+  ]
+}
