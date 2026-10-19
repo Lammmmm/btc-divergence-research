@@ -8,7 +8,9 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
-**当前配色版本：Hist Line v4.3.1。** [源码](pine/Hist_Divergence_Line_v4_3_1.pine) · [配色说明](docs/HIST_LINE_V4_3_1_COLORS.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3-1)。正式顶背离生效显示红色，正式底背离生效显示蓝色，其他阶段全部灰色；横线和全部判定规则保持 v4.3 不变。风险信息保留在面板及数据窗口，不再覆盖主线颜色。已在 TradingView 4H、1D 运行检查，旧版保留。
+**当前修复版：Hist Line v4.3.2。** [源码](pine/Hist_Divergence_Line_v4_3_2.pine) · [修复说明](docs/HIST_LINE_V4_3_2_SEGMENTS.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3-2)。修复进入横线的斜线提前变红/蓝：只有同一次正式事件内的 0/100 水平段着色，其余连接保持灰色且不断线。主线数值、触发、确认、失效和警报不变。已对 14,798 根保存记录检查，彩色斜线为 0，并在 TradingView 核对实际绘制。
+
+**保留配色版本：Hist Line v4.3.1。** [源码](pine/Hist_Divergence_Line_v4_3_1.pine) · [配色说明](docs/HIST_LINE_V4_3_1_COLORS.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3-1)。正式顶背离生效显示红色，正式底背离生效显示蓝色，其他阶段全部灰色；横线和全部判定规则保持 v4.3 不变。风险信息保留在面板及数据窗口，不再覆盖主线颜色。已在 TradingView 4H、1D 运行检查，旧版保留。
 
 **保留版本：Hist Line v4.3 背离持续横线。** [新版代码](pine/Hist_Divergence_Line_v4_3.pine) · [使用说明](docs/HIST_LINE_V4_3_GUIDE.md) · [完整下载包](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3-tested)。底背离生效期间固定 0，顶背离固定 100，直到原规则确认或失效；取消断口，所有阶段连续连接。风险实时变红，真实结构位置保留在数据窗口。正式规则与 v4.2 完全相同。14,798 根离线显示检查通过；TradingView 已保存独立脚本并回读核对一致，已在 BTCUSDT 永续 4H、1D 编译运行：底背离固定 0、顶背离固定 100。[实测记录](results/hist_line_v4_3/tradingview_checks.json)。
 

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "only_title_and_plot_segment_color_changed": true,
+  "formal_logic_and_values_unchanged": true,
+  "source_sha256": "636755aa24a544222df48135bf224fd58f3dadc7dfb0e64499dc1fdb6ddd9844",
+  "datasets": [
+    {
+      "timeframe": "1d",
+      "bars": 2114,
+      "colored_horizontal_segments": 658,
+      "entries_with_gray_incoming_segment": 39,
+      "colored_slopes": 0
+    },
+    {
+      "timeframe": "4h",
+      "bars": 12684,
+      "colored_horizontal_segments": 5740,
+      "entries_with_gray_incoming_segment": 202,
+      "colored_slopes": 0
+    }
+  ],
+  "limits": "Display-spec regression checks using saved event records; Pine visual checks recorded separately."
+}
