@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "change_scope": "Title + panel rows only; exact inverse comparison against v4.5.1",
+  "formal_and_curve_code_unchanged": true,
+  "price_source": "Existing confirmationPrice/invalidationPrice frozen on formal activation",
+  "active_only": true,
+  "strict_close_comparisons": {
+    "bull": {
+      "confirmation": ">",
+      "invalidation": "<"
+    },
+    "bear": {
+      "confirmation": "<",
+      "invalidation": ">"
+    }
+  },
+  "source_sha256": "065ed1c1dd96d14a44ee92111906e3de944641e86e8c19ddfb8c297519fd8f78",
+  "tradingview": {
+    "date": "2026-10-19",
+    "symbol": "BINANCE:BTCUSDT.P",
+    "compiled_rendered": [
+      "4H",
+      "1D"
+    ],
+    "editor_readback_matches": true,
+    "scope": "UI smoke check, not full-history export reconciliation",
+    "screenshots": [
+      "reports/hist_line_v4_5_2_4h.png",
+      "reports/hist_line_v4_5_2_1d.png"
+    ]
+  }
+}

@@ -8,7 +8,9 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
-**当前修正版：Hist Line v4.5.1。** [源码](pine/Hist_Divergence_Line_v4_5_1.pine) · [修正说明](docs/HIST_LINE_V4_5_1_FIX.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-5-1)。默认恢复持续横线：正式顶背离100横线红色、底背离0横线蓝色，所有中间折线及进出横线的斜线灰色。形成阶段保留平滑，正式事件直接固定端点；MACD及全部正式规则未改。14,798根双模式显示检查通过，彩色斜线和中间线段均为0。TradingView 4H/1D已运行核对。
+**当前面板版本：Hist Line v4.5.2。** [源码](pine/Hist_Divergence_Line_v4_5_2.pine) · [说明](docs/HIST_LINE_V4_5_2_PANEL.md)。右侧新增冻结反转确认价、背离失效价，并显示收盘大于/小于条件；曲线和判断规则与v4.5.1一致。
+
+**保留修正版：Hist Line v4.5.1。** [源码](pine/Hist_Divergence_Line_v4_5_1.pine) · [修正说明](docs/HIST_LINE_V4_5_1_FIX.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-5-1)。默认恢复持续横线：正式顶背离100横线红色、底背离0横线蓝色，所有中间折线及进出横线的斜线灰色。形成阶段保留平滑，正式事件直接固定端点；MACD及全部正式规则未改。14,798根双模式显示检查通过，彩色斜线和中间线段均为0。TradingView 4H/1D已运行核对。
 
 **保留显示版本：Hist Line v4.5（中间结构曲线配色已由v4.5.1修正）。** [源码](pine/Hist_Divergence_Line_v4_5.pine) · [平滑公式与使用说明](docs/HIST_LINE_V4_5_GUIDE.md) · [下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-5)。只对最终显示曲线增加因果平滑，默认周期3、单根变化上限15点；关闭即可恢复v4.4原值，横线模式不受影响。MACD、正式信号、确认/失效及配色规则未改。4H和1D的平均单根变化分别由7.74/9.60点降到4.28/5.44点；数值会滞后，面板保留“平滑 / 原值”，状态、风险和变色不等待平滑。14,798根显示回归通过，TradingView 4H/1D已编译运行。非概率，不代表收益或准确率提升。复现：`python src/verify_hist_line_v45.py`。
 

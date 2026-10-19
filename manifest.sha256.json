@@ -253,6 +253,10 @@
       "bytes": 2460,
       "sha256": "1c743a86df1a9bd96e93d88903393f3fcbf1daa0828cf75b17211fd1724d3956"
     },
+    "docs/HIST_LINE_V4_5_2_PANEL.md": {
+      "bytes": 1460,
+      "sha256": "689879884c6945ebf7e081f04de1ebfec41acbd2cc7468c7d58d1a8b7c4b8bbb"
+    },
     "docs/HIST_LINE_V4_5_GUIDE.md": {
       "bytes": 4584,
       "sha256": "416d25aa65d7f2f2baf4f9bff354bea5ec7a3418cb0286221d2424362633ba74"
@@ -485,6 +489,10 @@
       "bytes": 25125,
       "sha256": "7929231d10d036675ee047edd36c831b5551c9eec5e6ab2363fc8d4638270571"
     },
+    "pine/Hist_Divergence_Line_v4_5_2.pine": {
+      "bytes": 25721,
+      "sha256": "065ed1c1dd96d14a44ee92111906e3de944641e86e8c19ddfb8c297519fd8f78"
+    },
     "pine/Hist_Divergence_Progress_v4.pine": {
       "bytes": 21009,
       "sha256": "2dc31ec1873db8895cd61f681284edb836342658d37338236a02b037f3f1f763"
@@ -506,8 +514,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 16469,
-      "sha256": "74263bdf49f6d20bee667acba228b1e2fb48f0f8f5a7799a012d9fd5a69b9ca4"
+      "bytes": 16742,
+      "sha256": "092cf133d5e9a7e5eda7e039498c02a8dcdb65bbce1ea304f6ff9332275eee69"
     },
     "reports/hist_lifecycle_1d_tradingview.png": {
       "bytes": 135361,
@@ -596,6 +604,14 @@
     "reports/hist_line_v4_5_1d_smooth.png": {
       "bytes": 79900,
       "sha256": "9c30e72f8d4b4f76e72b567dba6d023d15439e9de81b3368f314e32faeb0c0d1"
+    },
+    "reports/hist_line_v4_5_2_1d.png": {
+      "bytes": 82354,
+      "sha256": "9b8a4dfca845f162a1e69d7621aae5a59f8f3603de303ceb67cc16d037af834d"
+    },
+    "reports/hist_line_v4_5_2_4h.png": {
+      "bytes": 80288,
+      "sha256": "5b33768de4afd60c2846d77b04fd6951720c36ef64bd92a2944ad762098d60b8"
     },
     "reports/hist_line_v4_5_4h_raw.png": {
       "bytes": 93450,
@@ -2848,6 +2864,10 @@
     "results/hist_line_v4_5_1/tradingview_checks.json": {
       "bytes": 653,
       "sha256": "40794dae3b16658951624c354aa468482b20cbf87967f622d477454310e09b39"
+    },
+    "results/hist_line_v4_5_2/checks.json": {
+      "bytes": 930,
+      "sha256": "3850a43aea53bff9376529149a0e209a8a58cb1b8975560aeead040f44eade54"
     },
     "results/hist_progress_v4/checks.json": {
       "bytes": 1000,
