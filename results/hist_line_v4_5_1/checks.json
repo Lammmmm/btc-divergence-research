@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "source_sha256": "7929231d10d036675ee047edd36c831b5551c9eec5e6ab2363fc8d4638270571",
+  "formal_core_and_audits_alerts_exact_v45": true,
+  "default_mode": "hold",
+  "datasets": [
+    {
+      "tf": "4h",
+      "mode": "hold",
+      "bars": 12684,
+      "colored_horizontal_endpoint_segments": 5740,
+      "colored_slopes": 0,
+      "colored_interior_segments": 0,
+      "colored_outside_active": 0,
+      "smoothed_candidate_bars": 6541
+    },
+    {
+      "tf": "4h",
+      "mode": "structure",
+      "bars": 12684,
+      "colored_horizontal_endpoint_segments": 0,
+      "colored_slopes": 0,
+      "colored_interior_segments": 0,
+      "colored_outside_active": 0,
+      "smoothed_candidate_bars": 6541
+    },
+    {
+      "tf": "1d",
+      "mode": "hold",
+      "bars": 2114,
+      "colored_horizontal_endpoint_segments": 658,
+      "colored_slopes": 0,
+      "colored_interior_segments": 0,
+      "colored_outside_active": 0,
+      "smoothed_candidate_bars": 1378
+    },
+    {
+      "tf": "1d",
+      "mode": "structure",
+      "bars": 2114,
+      "colored_horizontal_endpoint_segments": 0,
+      "colored_slopes": 0,
+      "colored_interior_segments": 0,
+      "colored_outside_active": 0,
+      "smoothed_candidate_bars": 1378
+    }
+  ],
+  "limit": "Offline display replay and source comparison. Entry into held endpoint is intentionally immediate and gray; not subject to smoothing cap."
+}
