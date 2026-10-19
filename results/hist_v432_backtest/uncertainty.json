@@ -1,0 +1,50 @@
+[
+  {
+    "group": "4h_current_starts_risk_base_full",
+    "n": 202,
+    "low": -0.11713302958815029,
+    "high": 0.19400505555479183,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_current_starts_risk_base_earlier",
+    "n": 137,
+    "low": -0.15197427242181413,
+    "high": 0.2838055053180614,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "4h_current_starts_risk_base_recent",
+    "n": 64,
+    "low": -0.26533430394489127,
+    "high": 0.2953706462042243,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_current_starts_risk_base_full",
+    "n": 38,
+    "low": 0.16979065926622078,
+    "high": 0.7842813793843348,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_current_starts_risk_base_earlier",
+    "n": 25,
+    "low": 0.1704752914519599,
+    "high": 0.9657072883222562,
+    "block_trades": 5,
+    "resamples": 2000
+  },
+  {
+    "group": "1d_current_starts_risk_base_recent",
+    "n": 15,
+    "low": -0.2589806085836942,
+    "high": 0.5260397622603614,
+    "block_trades": 5,
+    "resamples": 2000
+  }
+]

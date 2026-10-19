@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "source_sha256": "636755aa24a544222df48135bf224fd58f3dadc7dfb0e64499dc1fdb6ddd9844",
+  "protocol_sha256": "35af1124728e24376ded8e227007d79cfcd3db5b3bfdc68c3c3aa0698fd60afb",
+  "datasets": [
+    {
+      "tf": "4h",
+      "source_bars": 14880,
+      "signal_span_mismatches": 0,
+      "signals_recomputed": true,
+      "prefix_stable": true,
+      "full_timeline_matches_v4_formal_core": true
+    },
+    {
+      "tf": "1d",
+      "source_bars": 2480,
+      "signal_span_mismatches": 0,
+      "signals_recomputed": true,
+      "prefix_stable": true,
+      "full_timeline_matches_v4_formal_core": true
+    }
+  ],
+  "formal_core_exactly_equal_v41": true,
+  "batch_and_streaming_events_equal": true,
+  "old_quality_results_equal": true,
+  "TradingView_full_history_export": "PENDING",
+  "scope": "Python specification replay; not a Pine interpreter or new data feed validation."
+}

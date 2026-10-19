@@ -1,0 +1,87 @@
+[
+  {
+    "tf": "4h",
+    "changed_events": [
+      {
+        "current": {
+          "tf": "4h",
+          "indicator": "Hist_v4.3.2",
+          "period": "full",
+          "seq": 99,
+          "direction": -1,
+          "status": "failure",
+          "signal_time": 1699646400000,
+          "confirm_time": 1699660799999,
+          "pivot_time": 1699531200000,
+          "pivot_confirm_time": 1699617599999,
+          "divergence_length": 8,
+          "structure_start": 1699531200000,
+          "structure_end": 1699660799999,
+          "structure_high": 38499.9,
+          "structure_low": 35304.0,
+          "confirmation_level": 35304.0,
+          "invalidation_level": 38808.88329367933,
+          "reference_price": 37330.4,
+          "atr_at_signal": 617.9665873586706,
+          "reference_index": 8459,
+          "resolution_index": 8590,
+          "status_time": 1701547199999,
+          "path_last_time": 1701547199999,
+          "resolution_close": 39416.4,
+          "wait_days": 21.833333333333332,
+          "wait_bars": 131,
+          "confirmation_distance_atr": 3.279141690590902,
+          "failure_distance_atr": 2.3924971413077603,
+          "mfe_pct": 0.07725874890169938,
+          "mae_pct": 0.06883397981269952,
+          "mfe_atr": 4.667080808247734,
+          "mae_atr": 4.158153616335556,
+          "after_old_horizon": true
+        },
+        "old_quality": null
+      }
+    ],
+    "quality_only": [
+      {
+        "tf": "4h",
+        "indicator": "Hist",
+        "period": "full",
+        "seq": 99,
+        "direction": -1,
+        "status": "failure",
+        "signal_time": 1700841600000,
+        "confirm_time": 1700855999999,
+        "pivot_time": 1700496000000,
+        "pivot_confirm_time": 1700582399999,
+        "divergence_length": 24,
+        "structure_start": 1700496000000,
+        "structure_end": 1700855999999,
+        "structure_high": 38425.0,
+        "structure_low": 35610.7,
+        "confirmation_level": 35610.7,
+        "invalidation_level": 38698.6697469148,
+        "reference_price": 37758.5,
+        "atr_at_signal": 547.3394938295909,
+        "reference_index": 8542,
+        "resolution_index": 8584,
+        "status_time": 1701460799999,
+        "path_last_time": 1701460799999,
+        "resolution_close": 38750.1,
+        "wait_days": 7.0,
+        "wait_bars": 42,
+        "confirmation_distance_atr": 3.9240727632724064,
+        "failure_distance_atr": 1.7177085840027317,
+        "mfe_pct": 0.028033422937881535,
+        "mae_pct": 0.03258868863964405,
+        "mfe_atr": 1.9339002793201585,
+        "mae_atr": 2.2481476558369913,
+        "after_old_horizon": true
+      }
+    ]
+  },
+  {
+    "tf": "1d",
+    "changed_events": [],
+    "quality_only": []
+  }
+]

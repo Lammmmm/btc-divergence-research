@@ -1,0 +1,20 @@
+{
+  "status": "PASS_CONTENT",
+  "sections": 11,
+  "tables": 7,
+  "tables_generated_from_saved_results": true,
+  "visual_review": "PASS_BROWSER",
+  "browser_table_count": 7,
+  "browser_body_rows": [
+    2,
+    4,
+    2,
+    2,
+    2,
+    4,
+    4
+  ],
+  "document_overflow": false,
+  "equity_image_loaded": true,
+  "screenshot": "reports/hist_v432_backtest_preview.png"
+}

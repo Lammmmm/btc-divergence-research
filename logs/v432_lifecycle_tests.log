@@ -1,0 +1,13 @@
+test_failure_not_rescued_by_later_price (test_hist_lifecycle.HistLifecycleTests.test_failure_not_rescued_by_later_price) ... ok
+test_intrabar_cannot_resolve_or_mutate (test_hist_lifecycle.HistLifecycleTests.test_intrabar_cannot_resolve_or_mutate) ... ok
+test_long_wait_no_expiry (test_hist_lifecycle.HistLifecycleTests.test_long_wait_no_expiry) ... ok
+test_new_signal_does_not_move_frozen_box (test_hist_lifecycle.HistLifecycleTests.test_new_signal_does_not_move_frozen_box) ... ok
+test_progress_has_direction_and_can_reverse (test_hist_lifecycle.HistLifecycleTests.test_progress_has_direction_and_can_reverse) ... ok
+test_same_close_can_finish_then_start (test_hist_lifecycle.HistLifecycleTests.test_same_close_can_finish_then_start) ... ok
+test_short_direction_and_conflicts (test_hist_lifecycle.HistLifecycleTests.test_short_direction_and_conflicts) ... ok
+test_wick_crossings_and_equality_do_not_resolve (test_hist_lifecycle.HistLifecycleTests.test_wick_crossings_and_equality_do_not_resolve) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK

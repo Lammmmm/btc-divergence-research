@@ -1,0 +1,20 @@
+{
+  "version": "hist-v4.3.2-focused-1",
+  "registered_client_date": "2026-10-19",
+  "history_already_seen": true,
+  "source": "pine/Hist_Divergence_Line_v4_3_2.pine",
+  "source_sha256": "636755aa24a544222df48135bf224fd58f3dadc7dfb0e64499dc1fdb6ddd9844",
+  "data": "Reuse frozen Binance USD-M BTCUSDT perpetual snapshot; 2020 warmup, 2021-01-01 inclusive to 2026-10-16 exclusive UTC. No new data or optimization.",
+  "timeframes": ["4h", "1d"],
+  "defaults": {"pivot_period": 5, "max_pivots": 10, "max_bars": 100, "macd": [12, 26, 9], "source": "Close", "regular_only": true, "wait_for_close": true, "buffer_atr": 0.5},
+  "primary": "Actual event starts: one active structure across both directions, ignore all new signals while active, resolve first then allow same-close restart. No duration expiry. Frozen target and invalidation exactly match current source. Wicks warn but do not resolve. Pending is not success/failure.",
+  "display": "Color, horizontal holds and candidate scores never generate entries. Signals use startedBull/startedBear, not first colored segment. No trade or probability interpretation for the gray curve.",
+  "structure_periods": ["full:2021-01-01/2026-10-16", "earlier:2021-01-01/2025-01-01", "recent:2025-01-01/2026-10-16"],
+  "period_state": "Each period resets structure tracking; earlier data still warms indicators. Recent period is diagnostic, not unseen out-of-sample. Do not pool periods.",
+  "structure_data_quality": "Primary reproduces current Pine on native saved bars without hardcoded quarantine. Also repeat old quarantine policy separately to expose its effects. Do not silently remove suspect bars from current signal stream.",
+  "secondary_profit": "Feed current formal starts into the original research.run execution engine unchanged: next-open entry, ATR14*1.5 stop, 2R target, maximum 10 native bars, 0.5% planned risk, <=1x notional, 10000 USDT per account, 0.05% fee and 0.02% slippage each side, historical funding, hourly stop-first ambiguity policy and old data-quality purges. Early trade exit does not end the indicator structure.",
+  "profit_scenarios": ["risk_base", "cost_2x (fees/slippage doubled; actual funding unchanged)"],
+  "comparison": "Full-period raw Hist baseline, same execution engine and costs. Compare current event stream to original raw signal stream. No 10-indicator sweep or parameter search.",
+  "validation": "Recompute MACD/ATR/signals; compare saved spans. Streaming events independently compared with batch structure search, prefix stability, strict-boundary tests, independent trade execution/accounting replay. Full TradingView exported-history reconciliation remains pending.",
+  "interpretation": "Structural success is a frozen close-through event, not guaranteed lasting reversal or trade profitability. Profit results are an additional old trading rule applied to this indicator, not native indicator P&L. No claims of newly improved edge from visual changes."
+}

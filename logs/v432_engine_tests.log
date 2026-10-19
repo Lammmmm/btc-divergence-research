@@ -1,0 +1,16 @@
+test_bad_price_window_purged_before_outcome (test_engine.EngineTests.test_bad_price_window_purged_before_outcome) ... ok
+test_boundary_uses_maximum_horizon (test_engine.EngineTests.test_boundary_uses_maximum_horizon) ... ok
+test_fixed_timing_and_cap (test_engine.EngineTests.test_fixed_timing_and_cap) ... ok
+test_funding_sign_boundary (test_engine.EngineTests.test_funding_sign_boundary) ... ok
+test_future_changes_do_not_modify_trade (test_engine.EngineTests.test_future_changes_do_not_modify_trade) ... ok
+test_gap (test_engine.EngineTests.test_gap) ... ok
+test_long_stop_cash (test_engine.EngineTests.test_long_stop_cash) ... ok
+test_short_stop_cash (test_engine.EngineTests.test_short_stop_cash) ... ok
+test_short_target (test_engine.EngineTests.test_short_target) ... ok
+test_single_position_both_directions (test_engine.EngineTests.test_single_position_both_directions) ... ok
+test_stop_first_long_and_short (test_engine.EngineTests.test_stop_first_long_and_short) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.017s
+
+OK

@@ -1,0 +1,11 @@
+test_bad_data_is_unscored (test_structure_reversal.StructureTests.test_bad_data_is_unscored) ... ok
+test_failure_cannot_be_rescued_later (test_structure_reversal.StructureTests.test_failure_cannot_be_rescued_later) ... ok
+test_frozen_box_uses_no_future (test_structure_reversal.StructureTests.test_frozen_box_uses_no_future) ... ok
+test_long_sideways_then_confirm (test_structure_reversal.StructureTests.test_long_sideways_then_confirm) ... ok
+test_pending_not_failure (test_structure_reversal.StructureTests.test_pending_not_failure) ... ok
+test_short_and_strict_close (test_structure_reversal.StructureTests.test_short_and_strict_close) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK

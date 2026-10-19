@@ -1,0 +1,22 @@
+{
+  "pine/Hist_Divergence_Line_v4_3_2.pine": "636755aa24a544222df48135bf224fd58f3dadc7dfb0e64499dc1fdb6ddd9844",
+  "config/hist_v432_backtest.json": "35af1124728e24376ded8e227007d79cfcd3db5b3bfdc68c3c3aa0698fd60afb",
+  "config/protocol.json": "d55b737e62e442afef2f249f9fe19f51b0fb4df60b1bbb20dc0490fc2b00c2b3",
+  "src/research.py": "412226eee751cb971fa776290f79a657638b47cb1b401019e1b5be0ca21b67f7",
+  "src/signal_port.py": "e885340c42aeb0f2d2900744ac14e6e8d6d8cdbe049da2b2d89c4e610c26932b",
+  "src/structure_reversal.py": "24ab454486354df8afe93cc5772cf650532793d8c4c961e5dc92e778a28810fc",
+  "src/verify_hist_lifecycle.py": "5bdcb79dbabe31f6de09489222125ef43f16bbf22e7441c01ed401941d5ebec9",
+  "src/backtest_hist_v432.py": "c3af1b381d84c705f447e88426669c849c83eb5442086543efe19defb7659cd8",
+  "data/raw/binance_BTCUSDT_1d.json": "55136818047e541924442e1b6331071bc90707e44d828a8d974288ab2ed4a5bd",
+  "data/raw/binance_BTCUSDT_1h_trade.json": "a38a9f547f1498cbc3efd4c0553cd9d289be9013355384ffdf708fdbfa21e8b2",
+  "data/raw/binance_BTCUSDT_1h_trade.provenance.json": "d1694c80ab52639079c984f07cf386b8a8242a0f197f99414ada877d08413aaa",
+  "data/raw/binance_BTCUSDT_4h.json": "721e2bab9e9d35eb87e73196852a80c947a84d5aa3f67b9797a76122dbada8ed",
+  "data/raw/binance_BTCUSDT_4h_mark.json": "c48770429837dfc54f2d91c75287a4a4693e84912368ae360a6e23f6f6de11af",
+  "data/raw/binance_BTCUSDT_4h_mark.provenance.json": "dff6a7b2b15b6b79564c30a88db534f55f27ce6e456dd0daa5ef7fb99a7ed1d4",
+  "data/raw/binance_BTCUSDT_funding.json": "cb5b5484a49f821b6aace93b6f79a0f5aaaf88e3e5c9392c18c567220e2acb95",
+  "data/raw/data_manifest.json": "1199a871194ca52ade874b4de5d2274300847d215810980730f791b141d727e0",
+  "data/raw/discrepancy_requeries.json": "1de0a39ceea62793676ee64e7cddd93804b9fa8842f5ad4384eddcb6550506ac",
+  "data/derived/funding_resolved.jsonl.gz": "6fb62258066d0b495c16e200444e1ea5121e27cc31a41442b403964bdc744bab",
+  "data/derived/indicators_signals_1d.jsonl.gz": "794deedc2e92d4951ce401bb2bc98a3c965c57fc3fe89d7b76d102ccce0bddba",
+  "data/derived/indicators_signals_4h.jsonl.gz": "3d3649069fec6a05217b7be1d667fce5a53e93442a28a01dc346bc212108cf76"
+}

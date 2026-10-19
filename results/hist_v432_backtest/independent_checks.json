@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "structure_rows_all_runs": 968,
+  "trade_rows_all_runs": 1661,
+  "first_close_outcomes": true,
+  "levels_and_excursions": true,
+  "next_open_entries": true,
+  "independent_hourly_exit_replay": true,
+  "individual_funding_and_fees": true,
+  "hourly_equity_marks_replayed": true,
+  "drawdown": true,
+  "max_cash_error": 1.0913936421275139e-11,
+  "old_raw_hist_baselines_reproduced": true,
+  "notes": "Includes repeated histories across periods and cost scenarios; not independent sample counts."
+}

@@ -8,6 +8,8 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
+**当前版本专项回测（2026-10-19）：** [完整结果与方法](reports/HIST_V432_BACKTEST.md) · [离线 HTML 报告](reports/hist_v432_backtest.html) · [逐事件、逐笔交易与检查](results/hist_v432_backtest/) · [冻结方案](config/hist_v432_backtest.json)。只测 v4.3.2 正式事件启动，沿用 2021-01-01 至 2026-10-15 的同一历史快照。日线结构成功 27/38（71.05%），4H 83/201（41.29%），各有 1 个待定。套用旧 ATR 交易规则后的累计净收益分别 +9.46%、+3.05%；手续费/滑点翻倍后为 +8.98%、−3.37%。结构成功率不是交易胜率。日线只有 38 笔交易，近期表现减弱；完整 TradingView 历史导出对账仍待完成。25 项既有测试和独立逐笔复核通过，原指标未修改。复现：`python run_hist_v432_backtest.py`。
+
 **当前修复版：Hist Line v4.3.2。** [源码](pine/Hist_Divergence_Line_v4_3_2.pine) · [修复说明](docs/HIST_LINE_V4_3_2_SEGMENTS.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3-2)。修复进入横线的斜线提前变红/蓝：只有同一次正式事件内的 0/100 水平段着色，其余连接保持灰色且不断线。主线数值、触发、确认、失效和警报不变。已对 14,798 根保存记录检查，彩色斜线为 0，并在 TradingView 核对实际绘制。
 
 **保留配色版本：Hist Line v4.3.1。** [源码](pine/Hist_Divergence_Line_v4_3_1.pine) · [配色说明](docs/HIST_LINE_V4_3_1_COLORS.md) · [完整下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-3-1)。正式顶背离生效显示红色，正式底背离生效显示蓝色，其他阶段全部灰色；横线和全部判定规则保持 v4.3 不变。风险信息保留在面板及数据窗口，不再覆盖主线颜色。已在 TradingView 4H、1D 运行检查，旧版保留。
