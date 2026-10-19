@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "source_sha256": "4c66e6cc4924544119b762dc64e95707d49b3c68163037ca3152971018cd89fa",
+  "defaults": {
+    "length": 3,
+    "max_step": 15
+  },
+  "formal_candidate_core_exact_v44": true,
+  "original_audit_and_alerts_exact_v44": true,
+  "color_and_warning_expressions_exact_v44": true,
+  "datasets": [
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "events": 202,
+      "max_raw_step": 99.98078330443248,
+      "max_smoothed_step": 15.000000000000007,
+      "mean_raw_step": 7.738899909759587,
+      "mean_smoothed_step": 4.276341044870498,
+      "mean_absolute_display_lag": 5.370562287297334,
+      "raw_steps_above_15": 1710,
+      "smooth_steps_above_15": 0,
+      "color_sequence_exact_v44": true,
+      "color_outside_active_events": 0,
+      "disable_exact_v44": true,
+      "hold_mode_exact_v44": true,
+      "prefix_invariant": true
+    },
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "events": 39,
+      "max_raw_step": 99.81448033186213,
+      "max_smoothed_step": 15.000000000000007,
+      "mean_raw_step": 9.60065035137273,
+      "mean_smoothed_step": 5.441711778183593,
+      "mean_absolute_display_lag": 7.407675326912725,
+      "raw_steps_above_15": 394,
+      "smooth_steps_above_15": 0,
+      "color_sequence_exact_v44": true,
+      "color_outside_active_events": 0,
+      "disable_exact_v44": true,
+      "hold_mode_exact_v44": true,
+      "prefix_invariant": true
+    }
+  ],
+  "limit": "Saved-record display replay plus source equality; not full TradingView historical export reconciliation. Smoothing deliberately lags numerical position, never state transitions."
+}

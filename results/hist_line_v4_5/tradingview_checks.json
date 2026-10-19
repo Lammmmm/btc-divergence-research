@@ -1,0 +1,36 @@
+{
+  "status": "PASS_SMOKE_TEST",
+  "date_local": "2026-10-19",
+  "timezone": "Asia/Shanghai",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "source_sha256": "4c66e6cc4924544119b762dc64e95707d49b3c68163037ca3152971018cd89fa",
+  "script_name": "Hist 背离平滑曲线 v4.5",
+  "editor_readback_equals_local": true,
+  "compiled_and_rendered": [
+    "4H",
+    "1D"
+  ],
+  "default_inputs_verified": {
+    "length": 3,
+    "max_step": 15,
+    "buffer_atr": 0.5,
+    "macd": [
+      12,
+      26,
+      9
+    ]
+  },
+  "smoothing_toggle_tested_on": "4H",
+  "final_timeframe": "4H",
+  "final_smoothing_enabled": true,
+  "screenshots": [
+    "reports/hist_line_v4_5_4h_smooth.png",
+    "reports/hist_line_v4_5_4h_raw.png",
+    "reports/hist_line_v4_5_1d_smooth.png"
+  ],
+  "limits": [
+    "UI compile/runtime smoke checks; full historical export reconciliation not performed.",
+    "No realtime failure event induced; exact unchanged state/color/warning source plus saved-record regression checked.",
+    "Numerical display smoothing lags raw position; states, alerts and color gates do not use smoothed value."
+  ]
+}

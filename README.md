@@ -8,7 +8,9 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
-**当前显示版本：Hist Line v4.4。** [源码](pine/Hist_Divergence_Line_v4_4.pine) · [完整说明](docs/HIST_LINE_V4_4_GUIDE.md) · [下载归档](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-4)。默认改为结构位置：触发后0表示冻结失效边界、100表示冻结反转确认边界，红顶蓝底；可切回与v4.3.2完全一致的持续横线模式。面板明确“已触发／等待结构结果”。正式信号、形成评分、确认、失效和警报代码未改，不设置超时。14,798根显示回归与8项边界断言通过；TradingView已在4H、1D编译运行，并核对日线模式切换。百分比不是概率，收益仍参考下方同规则回测。复现：`python src/verify_hist_line_v44.py`。
+**当前显示版本：Hist Line v4.5。** [源码](pine/Hist_Divergence_Line_v4_5.pine) · [平滑公式与使用说明](docs/HIST_LINE_V4_5_GUIDE.md) · [下载](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-5)。只对最终显示曲线增加因果平滑，默认周期3、单根变化上限15点；关闭即可恢复v4.4原值，横线模式不受影响。MACD、正式信号、确认/失效及配色规则未改。4H和1D的平均单根变化分别由7.74/9.60点降到4.28/5.44点；数值会滞后，面板保留“平滑 / 原值”，状态、风险和变色不等待平滑。14,798根显示回归通过，TradingView 4H/1D已编译运行。非概率，不代表收益或准确率提升。复现：`python src/verify_hist_line_v45.py`。
+
+**保留显示版本：Hist Line v4.4。** [源码](pine/Hist_Divergence_Line_v4_4.pine) · [完整说明](docs/HIST_LINE_V4_4_GUIDE.md) · [下载归档](https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-line-v4-4)。默认改为结构位置：触发后0表示冻结失效边界、100表示冻结反转确认边界，红顶蓝底；可切回与v4.3.2完全一致的持续横线模式。面板明确“已触发／等待结构结果”。正式信号、形成评分、确认、失效和警报代码未改，不设置超时。14,798根显示回归与8项边界断言通过；TradingView已在4H、1D编译运行，并核对日线模式切换。百分比不是概率，收益仍参考下方同规则回测。复现：`python src/verify_hist_line_v44.py`。
 
 **当前版本专项回测（2026-10-19）：** [完整结果与方法](reports/HIST_V432_BACKTEST.md) · [离线 HTML 报告](reports/hist_v432_backtest.html) · [逐事件、逐笔交易与检查](results/hist_v432_backtest/) · [冻结方案](config/hist_v432_backtest.json)。只测 v4.3.2 正式事件启动，沿用 2021-01-01 至 2026-10-15 的同一历史快照。日线结构成功 27/38（71.05%），4H 83/201（41.29%），各有 1 个待定。套用旧 ATR 交易规则后的累计净收益分别 +9.46%、+3.05%；手续费/滑点翻倍后为 +8.98%、−3.37%。结构成功率不是交易胜率。日线只有 38 笔交易，近期表现减弱；完整 TradingView 历史导出对账仍待完成。25 项既有测试和独立逐笔复核通过，原指标未修改。复现：`python run_hist_v432_backtest.py`。
 
