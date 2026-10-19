@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "formal_curve_and_existing_alerts_exact_v452": true,
+  "source_sha256": "43e32523975b824542c937ee789dd4be93464bc284268698fb25eecfc6abecb6",
+  "datasets": [
+    {
+      "timeframe": "4h",
+      "bars": 12684,
+      "active_raw_signal_bars": 139,
+      "new_reference_groups": 83,
+      "merged_repeats": 56,
+      "conflicting_bars_skipped": 0,
+      "max_reference_storage": 4,
+      "opposite_groups": 42,
+      "same_groups": 41
+    },
+    {
+      "timeframe": "1d",
+      "bars": 2114,
+      "active_raw_signal_bars": 16,
+      "new_reference_groups": 8,
+      "merged_repeats": 8,
+      "conflicting_bars_skipped": 0,
+      "max_reference_storage": 3,
+      "opposite_groups": 4,
+      "same_groups": 4
+    }
+  ],
+  "scope": "Display-only aggregation over saved closed-bar records; not a new return backtest or full TradingView export reconciliation."
+}

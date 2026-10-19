@@ -1,0 +1,460 @@
+// This source code is subject to the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Original divergence search: © LonesomeTheBlue.
+// Hist-only pane, preview and frozen-structure lifecycle: 2026 research adaptation.
+//@version=6
+indicator("Hist 背离端点横线 v4.6", shorttitle="Hist Line v4.6", precision=1, overlay=false, max_bars_back=1000, max_labels_count=200)
+
+// Defaults match the single-indicator structure study. Only regular/Close signals.
+int pivotPeriod = input.int(5, "枢轴确认根数", minval=1, maxval=50, group="信号参数")
+int maxPivots = input.int(10, "检查最近枢轴数", minval=1, maxval=20, group="信号参数")
+int maxBars = input.int(100, "最大背离跨度", minval=30, maxval=200, group="信号参数")
+int fastLen = input.int(12, "MACD 快线", minval=1, group="信号参数")
+int slowLen = input.int(26, "MACD 慢线", minval=2, group="信号参数")
+int signalLen = input.int(9, "MACD 信号线", minval=1, group="信号参数")
+float bufferATR = input.float(0.5, "结构失效缓冲 / ATR(14)", minval=0, step=0.1, group="结构跟踪", tooltip="底背离：冻结区间下沿减缓冲；顶背离相反。只看收盘，等待没有根数上限。修改后不再等同已报告的回测参数。")
+int trackingStart = input.time(timestamp("01 Jan 2021 00:00 +0000"), "跟踪起始时间", group="结构跟踪", tooltip="只影响正式事件；指标和枢轴仍使用图表已加载的更早数据预热。")
+bool showLabels = input.bool(false, "显示详细标签（默认关闭）", group="显示")
+string displayMode = input.string("持续横线", "主线显示模式", options=["结构位置", "持续横线"], group="显示", tooltip="结构位置：触发后，0=冻结失效价，100=冻结反转确认价；仅100顶背离横线红、0底背离横线蓝，中间折线全部灰色。位置不是胜率。持续横线：沿用v4.3.2，底背离固定0、顶背离固定100。两种模式都不改变信号和事件期限。形成阶段仍为原来的0–99条件评分，与结构位置含义不同。")
+bool structureMode = displayMode == "结构位置"
+bool smoothDisplay = input.bool(true, "启用形成曲线平滑", group="曲线平滑", tooltip="只平滑显示，不影响MACD、候选评分、正式触发、确认、失效或警报。曲线会滞后原值；状态和红蓝/灰色不延迟。横线模式只平滑未触发阶段，正式事件立即固定在0/100。")
+int smoothLength = input.int(3, "平滑周期", minval=1, maxval=20, group="曲线平滑", tooltip="指数递推周期，越大越平缓、滞后越多。1表示不做指数平滑，但仍受单根变化上限约束。")
+float displayMaxStep = input.float(15.0, "单根最大变化（点）", minval=1, maxval=100, step=1, group="曲线平滑", tooltip="相对于上一根收盘显示值的变化上限，不是每次报价累加。越小越平缓。关闭曲线平滑恢复原值。正式横线及结果当根不受变化上限约束。")
+int lineWidth = input.int(1, "折线粗细", minval=1, maxval=5, group="显示")
+int histVolLength = input.int(20, "Hist 波动窗口", minval=5, maxval=100, group="形成进度")
+float priceApproachBand = input.float(1.0, "价格评分尺度 / ATR", minval=0.1, step=0.1, group="形成进度")
+float histApproachBand = input.float(1.0, "Hist 评分尺度 / 标准差", minval=0.1, step=0.1, group="形成进度")
+bool showPanel = input.bool(true, "显示进度面板", group="显示")
+string panelCorner = input.string("右上", "面板位置", options=["右上", "左上", "右下", "左下"], group="显示")
+string panelSize = input.string("小", "面板字号", options=["小", "正常"], group="显示")
+
+color bullColor = input.color(#1744D1, "底背离生效颜色", group="显示")
+color bearColor = input.color(#D50032, "顶背离生效颜色", group="显示")
+color successColor = #20C997
+color failureColor = #D50032
+color mutedColor = #9099AB
+color panelBg = #111B2C
+color panelText = #F1F5F9
+[macdValue, signalValue, hist] = ta.macd(close, fastLen, slowLen, signalLen)
+float atrValue = ta.atr(14)
+float ph = ta.pivothigh(close, pivotPeriod, pivotPeriod)
+float pl = ta.pivotlow(close, pivotPeriod, pivotPeriod)
+var array<int> highPositions = array.new_int()
+var array<int> lowPositions = array.new_int()
+
+// Commit pivots only at the close that makes their right-side bars known.
+if barstate.isconfirmed
+    if not na(ph)
+        array.unshift(highPositions, bar_index - pivotPeriod)
+        if array.size(highPositions) > 20
+            array.pop(highPositions)
+    if not na(pl)
+        array.unshift(lowPositions, bar_index - pivotPeriod)
+        if array.size(lowPositions) > 20
+            array.pop(lowPositions)
+
+// start=1 reproduces the original confirmed endpoint and current-bar OR gate.
+// start=0 is only a potential setup; it never starts a formal event or alert.
+f_find(float src, bool bullish, int start, bool requireTurn) =>
+    int found = 0
+    bool turnOK = not requireTurn or (bullish ? src > src[1] or close > close[1] : src < src[1] or close < close[1])
+    array<int> positions = bullish ? lowPositions : highPositions
+    int count = math.min(maxPivots, array.size(positions))
+    if turnOK and count > 0
+        for x = 0 to count - 1
+            int span = bar_index - array.get(positions, x)
+            if span > maxBars
+                break
+            if span > 5 and not na(src[span])
+                bool endpointsOK = bullish ? src[start] > src[span] and close[start] < close[span] : src[start] < src[span] and close[start] > close[span]
+                if endpointsOK
+                    float slopeH = (src[start] - src[span]) / (span - start)
+                    float slopeP = (close[start] - close[span]) / (span - start)
+                    float virtualH = src[start] - slopeH
+                    float virtualP = close[start] - slopeP
+                    bool clear = true
+                    for y = start + 1 to span - 1
+                        bool crossed = bullish ? src[y] < virtualH or close[y] < virtualP : src[y] > virtualH or close[y] > virtualP
+                        if crossed
+                            clear := false
+                            break
+                        virtualH -= slopeH
+                        virtualP -= slopeP
+                    if clear
+                        found := span
+                        break
+    found
+
+int bullLength = f_find(hist, true, 1, true)
+int bearLength = f_find(hist, false, 1, true)
+int previewBullLength = f_find(hist, true, 0, false)
+int previewBearLength = f_find(hist, false, 0, false)
+int signalSpan = math.max(bullLength, bearLength)
+float possibleHigh = ta.highest(high, signalSpan + 1)
+float possibleLow = ta.lowest(low, signalSpan + 1)
+bool rawBull = bullLength > 0
+bool rawBear = bearLength > 0
+bool conflicting = rawBull and rawBear
+bool trackingAllowed = time >= trackingStart and not na(atrValue) and atrValue > 0
+
+var bool active = false
+var int direction = 0
+var int eventId = 0
+var int startedBar = na
+var int startedTime = na
+var float referencePrice = na
+var float frozenHigh = na
+var float frozenLow = na
+var float frozenATR = na
+var float confirmationPrice = na
+var float invalidationPrice = na
+var float maxAdverse = 0.0
+var int ignoredSignals = 0
+var int previousPreview = 0
+var int lastOutcome = 0
+var int lastResultId = 0
+var int lastResultDirection = 0
+var int lastResultBars = 0
+var string lastResultText = "尚无已完成事件"
+
+// Pulses are reset on each execution; permanent transitions are close-only.
+bool startedBull = false
+bool startedBear = false
+bool succeeded = false
+bool failed = false
+bool previewCancelled = false
+int resolvedDirection = 0
+// Snapshot before close transitions; never test earlier wicks against a newly frozen boundary.
+bool priorInvalidTouch = active and bar_index > startedBar and (direction == 1 ? low <= invalidationPrice : high >= invalidationPrice)
+if barstate.isconfirmed
+    if active and bar_index > startedBar
+        float adverse = direction == 1 ? referencePrice - low : high - referencePrice
+        maxAdverse := math.max(maxAdverse, adverse)
+        bool confirms = direction == 1 ? close > confirmationPrice : close < confirmationPrice
+        bool invalidates = direction == 1 ? close < invalidationPrice : close > invalidationPrice
+        if confirms or invalidates
+            succeeded := confirms
+            failed := invalidates
+            resolvedDirection := direction
+            lastOutcome := confirms ? 1 : -1
+            lastResultId := eventId
+            lastResultDirection := direction
+            lastResultBars := bar_index - startedBar
+            lastResultText := "#" + str.tostring(eventId) + (direction == 1 ? " 底 · " : " 顶 · ") + (confirms ? "反转确认" : "结构失效") + " · " + str.tostring(lastResultBars) + " 根"
+            if showLabels
+                label.new(bar_index, confirms ? 100 : 0, lastResultText, style=direction == 1 ? label.style_label_down : label.style_label_up, color=confirms ? successColor : failureColor, textcolor=color.white, size=size.small, tooltip="提示收盘价：" + str.tostring(referencePrice, format.mintick) + "\n冻结确认位：" + str.tostring(confirmationPrice, format.mintick) + "\n冻结失效位：" + str.tostring(invalidationPrice, format.mintick) + "\n收盘结果不可被后续行情改写。")
+            active := false
+    // Resolve the previous event first. A new signal on that same close is allowed.
+    if trackingAllowed and (rawBull or rawBear)
+        if active
+            ignoredSignals += 1
+        else if not conflicting
+            active := true
+            direction := rawBull ? 1 : -1
+            eventId += 1
+            startedBar := bar_index
+            startedTime := time_close
+            referencePrice := close
+            frozenHigh := possibleHigh
+            frozenLow := possibleLow
+            frozenATR := atrValue
+            confirmationPrice := direction == 1 ? frozenHigh : frozenLow
+            invalidationPrice := direction == 1 ? frozenLow - bufferATR * frozenATR : frozenHigh + bufferATR * frozenATR
+            maxAdverse := 0.0
+            ignoredSignals := 0
+            startedBull := direction == 1
+            startedBear := direction == -1
+            if showLabels
+                label.new(bar_index, 100, "#" + str.tostring(eventId) + (direction == 1 ? " 底背离生效" : " 顶背离生效"), style=direction == 1 ? label.style_label_up : label.style_label_down, color=direction == 1 ? bullColor : bearColor, textcolor=direction == 1 ? color.black : color.white, size=size.small, tooltip="背离已收盘确认，反转尚未确认。\n确认位：" + str.tostring(confirmationPrice, format.mintick) + "\n失效位：" + str.tostring(invalidationPrice, format.mintick) + "\n等待不限根数，之后的提示不会重置边界。")
+
+// BEGIN v4.6 notice aggregation (read-only consumer of formal signals).
+// A group is direction + historical reference pivot, within the current event.
+// Later endpoints with the same reference are merged, even after a signal gap.
+var array<int> noticeBullRefs = array.new_int()
+var array<int> noticeBearRefs = array.new_int()
+var int noticeSameBar = na
+var int noticeOppositeBar = na
+var int noticeSameCount = 0
+var int noticeOppositeCount = 0
+bool noticeNewSame = false
+bool noticeNewOpposite = false
+f_noticePrune(array<int> refs) =>
+    int i = array.size(refs) - 1
+    while i >= 0
+        if array.get(refs, i) < bar_index - maxBars
+            array.remove(refs, i)
+        i -= 1
+f_noticeFresh(array<int> refs, int ref) =>
+    bool fresh = not array.includes(refs, ref)
+    if fresh
+        array.push(refs, ref)
+    fresh
+if barstate.isconfirmed
+    if startedBull or startedBear or not active
+        array.clear(noticeBullRefs)
+        array.clear(noticeBearRefs)
+        noticeSameBar := na
+        noticeOppositeBar := na
+        noticeSameCount := 0
+        noticeOppositeCount := 0
+        // Seed the original event so its repeat signals cannot become new notices.
+        if startedBull
+            array.push(noticeBullRefs, bar_index - bullLength)
+        if startedBear
+            array.push(noticeBearRefs, bar_index - bearLength)
+    else if active and trackingAllowed
+        f_noticePrune(noticeBullRefs)
+        f_noticePrune(noticeBearRefs)
+        // Ambiguous two-sided bars are not classified as a new direction.
+        if not conflicting and (rawBull or rawBear)
+            int noticeSide = rawBull ? 1 : -1
+            int noticeRef = bar_index - (rawBull ? bullLength : bearLength)
+            bool fresh = f_noticeFresh(rawBull ? noticeBullRefs : noticeBearRefs, noticeRef)
+            if fresh
+                if noticeSide == direction
+                    noticeSameBar := bar_index
+                    noticeSameCount += 1
+                    noticeNewSame := true
+                else
+                    noticeOppositeBar := bar_index
+                    noticeOppositeCount += 1
+                    noticeNewOpposite := true
+// END v4.6 notice aggregation
+
+int previewDirection = not active and trackingAllowed and not conflicting ? (previewBullLength > 0 and previewBearLength == 0 ? 1 : previewBearLength > 0 and previewBullLength == 0 ? -1 : 0) : 0
+if barstate.isconfirmed
+    previewCancelled := previousPreview != 0 and previewDirection != previousPreview and not startedBull and not startedBear
+    previousPreview := previewDirection
+
+// Display-only scoring; all formal search and lifecycle code above is unchanged.
+float shortVol = ta.stdev(hist, histVolLength)[1]
+float longVol = ta.stdev(hist, 100)[1]
+float longATR = ta.atr(100)[1]
+float priceScaleNow = math.max(syminfo.mintick, math.max(nz(atrValue[1], syminfo.mintick), 0.5 * nz(longATR, 0)))
+float histScaleNow = math.max(syminfo.mintick, math.max(nz(shortVol, syminfo.mintick), 0.5 * nz(longVol, 0)))
+f_score(float z) =>
+    100 / (1 + math.exp(-math.max(-20, math.min(20, z))))
+
+f_candidate42(bool bull, bool enabled) =>
+    var int ref = -1
+    var float priceScale = na
+    var float histScale = na
+    var bool priceWasMet = false
+    var bool histWasMet = false
+    var int badCloses = 0
+    array<int> positions = bull ? lowPositions : highPositions
+    int count = math.min(maxPivots, array.size(positions))
+    int newest = -1
+    bool stillEligible = false
+    if enabled and count > 0
+        for k = 0 to count - 1
+            int p = array.get(positions, k)
+            int span = bar_index - p
+            if span > maxBars
+                break
+            if span > 5 and not na(hist[span])
+                if newest == -1
+                    newest := p
+                if p == ref
+                    stillEligible := true
+    int chosen = enabled ? (stillEligible ? ref : newest) : -1
+    // A new pivot alone does not displace a coherent existing reference.
+    // After three broken closes a newer eligible reference may replace it.
+    if enabled and badCloses >= 3 and newest != -1 and newest != chosen
+        chosen := newest
+    bool changed = chosen != ref
+    if changed
+        ref := chosen
+        priceScale := priceScaleNow
+        histScale := histScaleNow
+        priceWasMet := false
+        histWasMet := false
+        badCloses := 0
+    float score = na
+    float pricePct = na
+    float histPct = na
+    float pivotPrice = na
+    float pivotHist = na
+    int pivotTime = na
+    bool broken = false
+    bool clear = false
+    if chosen != -1
+        int span = bar_index - chosen
+        pivotPrice := close[span]
+        pivotHist := hist[span]
+        pivotTime := time[span]
+        float pm = (bull ? pivotPrice - close : close - pivotPrice) / priceScale
+        float hm = (bull ? hist - pivotHist : pivotHist - hist) / histScale
+        pricePct := f_score(pm / priceApproachBand)
+        histPct := f_score(hm / histApproachBand)
+        score := math.min(99, math.min(pricePct, histPct))
+        float slopeH = (hist - pivotHist) / span
+        float slopeP = (close - pivotPrice) / span
+        float virtualH = hist - slopeH
+        float virtualP = close - slopeP
+        clear := true
+        for y = 1 to span - 1
+            if bull ? hist[y] < virtualH or close[y] < virtualP : hist[y] > virtualH or close[y] > virtualP
+                clear := false
+                break
+            virtualH -= slopeH
+            virtualP -= slopeP
+        broken := not clear or (priceWasMet and pm <= 0) or (histWasMet and hm <= 0)
+        if barstate.isconfirmed
+            priceWasMet := priceWasMet or pm > 0
+            histWasMet := histWasMet or hm > 0
+            badCloses := broken ? badCloses + 1 : 0
+    else
+        badCloses := 0
+    [chosen, pivotTime, score, pricePct, histPct, broken, changed, clear, pivotPrice, pivotHist, priceScale, histScale]
+
+bool forming = not active and not succeeded and not failed and trackingAllowed
+[bullRef, bullTime, bullScore, bullPricePct, bullHistPct, bullBroken, bullChanged, bullClear, bullPivotPrice, bullPivotHist, bullATR, bullVol] = f_candidate42(true, forming)
+[bearRef, bearTime, bearScore, bearPricePct, bearHistPct, bearBroken, bearChanged, bearClear, bearPivotPrice, bearPivotHist, bearATR, bearVol] = f_candidate42(false, forming)
+bool started = startedBull or startedBear
+float structureProgress = active ? math.max(0, math.min(100, 100 * (close - invalidationPrice) / (confirmationPrice - invalidationPrice))) : na
+var int eventPivotTime = na
+var float eventPivotPrice = na
+var float eventPivotHist = na
+if started
+    eventPivotTime := time[signalSpan]
+    eventPivotPrice := close[signalSpan]
+    eventPivotHist := hist[signalSpan]
+
+var int focus = 0
+var int challenger = 0
+var int challengeCloses = 0
+float bs = nz(bullScore, 0)
+float ts = nz(bearScore, 0)
+if active
+    focus := direction
+    challenger := 0
+    challengeCloses := 0
+else if forming
+    bool missingFocus = focus == 0 or (focus == 1 ? bullRef == -1 : bearRef == -1)
+    if missingFocus
+        focus := bullRef == -1 and bearRef == -1 ? 0 : bullRef == -1 ? -1 : bearRef == -1 ? 1 : bs >= ts ? 1 : -1
+        challenger := 0
+        challengeCloses := 0
+    else if barstate.isconfirmed
+        int other = -focus
+        bool advantage = focus == 1 ? bearRef != -1 and ts > bs + 15 : bullRef != -1 and bs > ts + 15
+        challengeCloses := advantage ? (challenger == other ? challengeCloses + 1 : 1) : 0
+        challenger := advantage ? other : 0
+        if challengeCloses >= 3
+            focus := other
+            challengeCloses := 0
+            challenger := 0
+else
+    challenger := 0
+    challengeCloses := 0
+
+int focusedRef = focus == 1 ? bullRef : focus == -1 ? bearRef : -1
+float focusedScore = focus == 1 ? bullScore : focus == -1 ? bearScore : na
+bool focusedBroken = focus == 1 ? bullBroken : focus == -1 ? bearBroken : false
+int phaseKey = active ? 2 : succeeded or failed ? 3 : forming and focusedRef != -1 ? 1 : 0
+// Result bars belong to the event they resolve; only real identity changes break joins.
+int contextPhase = phaseKey == 3 ? 2 : phaseKey
+int contextRef = contextPhase == 2 ? eventId : phaseKey == 1 ? focusedRef : -1
+int contextSide = contextPhase == 2 ? 0 : focus
+bool seam = contextPhase != nz(contextPhase[1], -1) or contextRef != nz(contextRef[1], -2) or contextSide != nz(contextSide[1], 0)
+// Display only. Formation scores and formal lifecycle above remain unchanged.
+// Both modes keep a continuous line; gray phase bridges are not progress.
+float heldValue = active ? (direction == 1 ? 0.0 : 100.0) : succeeded or failed ? (resolvedDirection == 1 ? 0.0 : 100.0) : phaseKey == 1 ? nz(focusedScore, 50) : 50.0
+float rawMainValue = structureMode ? (active ? structureProgress : succeeded ? 100.0 : failed ? 0.0 : heldValue) : heldValue
+// Causal display filter only. Always anchor to the previous CLOSED bar.
+// Never feed display values into formal/candidate calculations or event colors.
+float displayAlpha = 2.0 / (smoothLength + 1.0)
+var float mainValue = na
+float previousDisplay = nz(mainValue[1], rawMainValue)
+float displayStep = math.max(-displayMaxStep, math.min(displayMaxStep, displayAlpha * (rawMainValue - previousDisplay)))
+bool smoothThisBar = smoothDisplay and (structureMode or not (active or succeeded or failed))
+mainValue := smoothThisBar ? math.max(0.0, math.min(100.0, previousDisplay + displayStep)) : rawMainValue
+bool warning = priorInvalidTouch or failed or (phaseKey == 1 and focusedBroken)
+color mainColor = active ? (direction == 1 ? bullColor : bearColor) : mutedColor
+// Only horizontal endpoints are colored, in EVERY display mode.
+// Top active event at 100 = red; bottom active event at 0 = blue.
+// Every sloped segment and every entry/exit/event switch stays gray.
+bool sameActiveEvent = active and active[1] and eventId == eventId[1] and direction == direction[1]
+bool heldSegment = sameActiveEvent and mainValue == mainValue[1] and mainValue == (direction == 1 ? 0.0 : 100.0)
+color segmentColor = heldSegment ? mainColor : mutedColor
+plot(mainValue, "显示曲线（可平滑，非概率）", color=segmentColor, linewidth=lineWidth, style=plot.style_line)
+hline(100, "100", color=color.new(mutedColor, 75))
+hline(50, "50", color=color.new(mutedColor, 85))
+hline(0, "0", color=color.new(mutedColor, 75))
+
+string positionChoice = panelCorner == "左上" ? position.top_left : panelCorner == "右下" ? position.bottom_right : panelCorner == "左下" ? position.bottom_left : position.top_right
+string textSize = panelSize == "小" ? size.small : size.normal
+var table panel = table.new(positionChoice, 2, 6, bgcolor=panelBg, frame_color=#334155, frame_width=1)
+f_row(int row, string key, string value, color valueColor) =>
+    table.cell(panel, 0, row, key, text_color=mutedColor, text_size=textSize, text_halign=text.align_left)
+    table.cell(panel, 1, row, value, text_color=valueColor, text_size=textSize, text_halign=text.align_left)
+f_pct(float n) => na(n) ? "—" : str.tostring(n, "#.0") + "%"
+if barstate.islast and showPanel
+    string side = focus == 1 ? "底背离" : "顶背离"
+    string phase = active ? side + "已触发" : succeeded ? "反转确认" : failed ? "收盘失效" : phaseKey == 1 ? side + " · 形成" : "暂无候选"
+    string phaseText = active ? "等待结构结果" : succeeded or failed ? "本次结束" : phaseKey == 1 ? "尚未正式触发" : "等待候选"
+    string hint = started and (succeeded or failed) ? "上次已结束 · 本次等待" : priorInvalidTouch ? "触失效位 · 收盘定结果" : active ? (structureMode ? (smoothDisplay ? "原值0失效 · 100确认" : "0失效 · 100反转确认") : "底0顶100 · 结构 " + f_pct(structureProgress)) : succeeded ? "反转确认 · 本次结束" : failed ? "收盘失效 · 本次结束" : phaseKey == 1 and focusedBroken ? "关系破坏 / 连线受阻" : phaseKey == 0 ? "中性占位 · 暂无候选" : seam ? "参照切换 · 连接非进度" : "形成评分 · 50=关系临界"
+    f_row(0, phase, phaseText, mainColor)
+    f_row(1, smoothThisBar ? "平滑 / 原值" : structureMode ? "结构模式 · 当前值" : "横线模式 · 当前值", smoothThisBar ? f_pct(mainValue) + " / " + f_pct(rawMainValue) : f_pct(mainValue), mainColor)
+    f_row(2, "非概率", hint, warning ? failureColor : mutedColor)
+    // Display the existing frozen event boundaries; never recompute them here.
+    string confirmText = active ? (direction == 1 ? "收盘 > " : "收盘 < ") + str.tostring(confirmationPrice, format.mintick) : "—（正式触发后冻结）"
+    string invalidText = active ? (direction == 1 ? "收盘 < " : "收盘 > ") + str.tostring(invalidationPrice, format.mintick) : "—（无进行中背离）"
+    f_row(3, "反转确认价（冻结）", confirmText, active ? successColor : mutedColor)
+    f_row(4, "背离失效价（冻结）", invalidText, active ? failureColor : mutedColor)
+    // One historical notice only. Opposite signals take display priority.
+    string noticeText = not active ? "—" : not na(noticeOppositeBar) ? "曾现反向" + (direction == 1 ? "顶" : "底") + "背离 · " + str.tostring(bar_index - noticeOppositeBar) + "根前" : not na(noticeSameBar) ? "曾现同向新参照 · " + str.tostring(bar_index - noticeSameBar) + "根前" : "暂无新参照（重复合并）"
+    f_row(5, "期间信号（不切换）", noticeText, active and not na(noticeOppositeBar) ? #F59E0B : mutedColor)
+
+plot(rawMainValue, "未平滑主线原值（状态判定不使用平滑值）", display=display.data_window)
+plot(bullScore, "底形成原值 0–99", display=display.data_window)
+plot(bearScore, "顶形成原值 0–99", display=display.data_window)
+plot(focus, "主线方向 底1顶-1", display=display.data_window)
+plot(phaseKey, "主线阶段 无候选0形成1结构2结果3", display=display.data_window)
+plot(seam ? 1 : 0, "参照或阶段切换（连接非进度）", display=display.data_window)
+plot(started ? 100 : na, "正式形成确认 100", display=display.data_window)
+plot(hist, "原始 Hist", display=display.data_window)
+plot(bullTime, "底参照时间 UTC ms", display=display.data_window)
+plot(bearTime, "顶参照时间 UTC ms", display=display.data_window)
+plot(bullPivotPrice, "底参照 Close", display=display.data_window)
+plot(bullPivotHist, "底参照 Hist", display=display.data_window)
+plot(bearPivotPrice, "顶参照 Close", display=display.data_window)
+plot(bearPivotHist, "顶参照 Hist", display=display.data_window)
+plot(bullPricePct, "底价格接近程度", display=display.data_window)
+plot(bullHistPct, "底Hist接近程度", display=display.data_window)
+plot(bearPricePct, "顶价格接近程度", display=display.data_window)
+plot(bearHistPct, "顶Hist接近程度", display=display.data_window)
+plot(bullATR, "底冻结价格尺度", display=display.data_window)
+plot(bullVol, "底冻结Hist尺度", display=display.data_window)
+plot(bearATR, "顶冻结价格尺度", display=display.data_window)
+plot(bearVol, "顶冻结Hist尺度", display=display.data_window)
+plot(bullBroken ? 1 : 0, "底条件破坏", display=display.data_window)
+plot(bearBroken ? 1 : 0, "顶条件破坏", display=display.data_window)
+plot(bullClear ? 1 : 0, "底当前连线通过", display=display.data_window)
+plot(bearClear ? 1 : 0, "顶当前连线通过", display=display.data_window)
+plot(eventPivotTime, "正式事件原始参照时间", display=display.data_window)
+plot(eventPivotPrice, "正式事件原始参照 Close", display=display.data_window)
+plot(eventPivotHist, "正式事件原始参照 Hist", display=display.data_window)
+plot(barstate.isconfirmed ? bullLength : na, "Audit Bull Length", display=display.data_window)
+plot(barstate.isconfirmed ? bearLength : na, "Audit Bear Length", display=display.data_window)
+plot(active ? direction : 0, "Audit Active Direction", display=display.data_window)
+plot(active ? confirmationPrice : na, "Audit Confirmation", display=display.data_window)
+plot(active ? invalidationPrice : na, "Audit Invalidation", display=display.data_window)
+plot(structureProgress, "结构价格位置（非胜率）", display=display.data_window)
+plot(startedBull ? 1 : startedBear ? -1 : 0, "Audit Start", display=display.data_window)
+plot(succeeded ? resolvedDirection : 0, "Audit Success", display=display.data_window)
+plot(failed ? resolvedDirection : 0, "Audit Failure", display=display.data_window)
+plot(priorInvalidTouch ? 1 : 0, "结构触线预警", display=display.data_window)
+
+// BEGIN v4.6 notice audits
+plot(noticeNewSame ? 1 : 0, "合并提示：新增同向参照（收盘）", display=display.data_window)
+plot(noticeNewOpposite ? 1 : 0, "合并提示：新增反向参照（收盘）", display=display.data_window)
+plot(active ? noticeSameCount : 0, "本轮新增同向参照组数", display=display.data_window)
+plot(active ? noticeOppositeCount : 0, "本轮新增反向参照组数", display=display.data_window)
+plot(active and not na(noticeOppositeBar) ? bar_index - noticeOppositeBar : na, "最近反向新参照距今根数（曾出现，非当前有效）", display=display.data_window)
+// END v4.6 notice audits
+
+alertcondition(startedBull, "底背离正式生效", "{{ticker}} {{interval}} Hist 底背离已收盘生效；等待结构反转，查看副图确认位与失效位。")
+alertcondition(startedBear, "顶背离正式生效", "{{ticker}} {{interval}} Hist 顶背离已收盘生效；等待结构反转，查看副图确认位与失效位。")
+alertcondition(succeeded, "结构反转确认", "{{ticker}} {{interval}} Hist 背离已完成冻结结构的收盘突破；不代表保证持续趋势。")
+alertcondition(failed, "背离结构失效", "{{ticker}} {{interval}} Hist 背离已收盘突破冻结失效位，本次事件结束。")

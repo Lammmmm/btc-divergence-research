@@ -1,0 +1,20 @@
+{
+  "status": "PASS_SMOKE_TEST",
+  "date": "2026-10-19",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "compiled_rendered": [
+    "1D",
+    "4H"
+  ],
+  "source_readback_matches": true,
+  "source_sha256": "43e32523975b824542c937ee789dd4be93464bc284268698fb25eecfc6abecb6",
+  "observations": {
+    "1D": "One main curve; current top event, no new reference notice.",
+    "4H": "Current bottom event held at 0; panel showed past same-direction new reference, 4 bars ago; frozen prices remained displayed."
+  },
+  "screenshots": [
+    "reports/hist_line_v4_6_1d.png",
+    "reports/hist_line_v4_6_4h.png"
+  ],
+  "limits": "Opposite/conflict/reset paths tested offline; not all states exercised in live UI. Not full historical TradingView export reconciliation."
+}
