@@ -8,7 +8,11 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
-**当前版本：Hist Line v4.6。** [源码](pine/Hist_Divergence_Line_v4_6.pine) · [使用与分组说明](docs/HIST_LINE_V4_6_GUIDE.md)。保留一条主线和冻结边界，右侧一行合并期间新增结构/反向信号；不重复报警、不切换当前事件。v4.5.2已先行固定发布，后续不覆盖。
+**当前面板修正版：Hist Line v4.6.1。** [源码](pine/Hist_Divergence_Line_v4_6_1.pine) · [变更说明](docs/HIST_LINE_V4_6_1_PANEL.md)。将“期间信号”移到第二行，确认价、失效价紧随其后，避免重要信息藏在窄副图面板末尾。主线及全部规则与 v4.6 一致，不宣称缩短横线。
+
+**失效边界专项对照：** [完整报告](reports/HIST_BOUNDARY_COMPARISON.md) · [方案](config/hist_boundary_comparison.json) · [逐根与逐事件数据](results/hist_boundary_comparison/)。只比较原边界、末端6根、末端2根；4H横线占用减少约1.2%–1.3%，日线最多减少10.3%，但会提前结束后来成功的事件。两方案均未达到默认替换条件，未部署到指标。原始触发和反转确认价不变；本轮不是收益回测。
+
+**保留版本：Hist Line v4.6。** [源码](pine/Hist_Divergence_Line_v4_6.pine) · [使用与分组说明](docs/HIST_LINE_V4_6_GUIDE.md)。保留一条主线和冻结边界，右侧一行合并期间新增结构/反向信号；不重复报警、不切换当前事件。v4.5.2已先行固定发布，后续不覆盖。
 
 **固定基线：Hist Line v4.5.2。** [源码](pine/Hist_Divergence_Line_v4_5_2.pine) · [说明](docs/HIST_LINE_V4_5_2_PANEL.md)。右侧新增冻结反转确认价、背离失效价，并显示收盘大于/小于条件；曲线和判断规则与v4.5.1一致。
 

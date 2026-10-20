@@ -1,0 +1,24 @@
+{
+  "name": "Focused invalidation boundary comparison",
+  "history_already_seen": true,
+  "source_baseline": "pine/Hist_Divergence_Line_v4_5_2.pine",
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "periods": [
+    "full",
+    "earlier_before_2025",
+    "recent_from_2025"
+  ],
+  "arms": {
+    "original": "Full divergence interval wick extreme + frozen 0.5 ATR",
+    "local6": "Last 6 closed bars including trigger (t-5..t) wick extreme + same frozen 0.5 ATR",
+    "local2": "Endpoint and trigger bars (t-1..t) wick extreme + same frozen 0.5 ATR"
+  },
+  "unchanged": "Saved MACD Hist raw signal spans, turn and line check, close confirmation, full-interval reversal target, one active event, resolve then same-close restart, no timeout",
+  "paired": "For every baseline event start compare first close resolution under alternative boundary on identical future; count baseline successes converted to early failures. This is a counterfactual comparison, not extra tradable events.",
+  "stream": "Separately replay each arm and count accepted starts, ignored raw signal bars, genuinely new reference groups, occupied bars and completed wait distributions. Pending excluded from completed accuracy, reported separately.",
+  "decision": "Do not automatically replace baseline. A boundary is eligible for a proposed default only if both full timeframes reduce occupied bars at least 20%, sacrifice no more than 5% of baseline successes in paired comparison, and recent periods do not contradict that tradeoff. These are engineering acceptance criteria, not evidence of profitability.",
+  "limits": "Already inspected historical snapshot through 2026-10-15 UTC; recent period diagnostic not unseen holdout. No leverage, P&L or trading orders. Native saved data matching Pine baseline; keep anomaly history, do not silently clean."
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS_SMOKE_TEST",
+  "date": "2026-10-20",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "compiled_rendered": ["4H", "1D"],
+  "source_readback_matches": true,
+  "source_sha256": "102496e335a696e138f5748b4959325723bd46548a066d89a9ec108c315978aa",
+  "observations": {
+    "4H": "Blue bottom-event hold at 0. Notice is visible in second row: past same-direction new reference, 6 bars ago. Frozen target and invalidation visible below it.",
+    "1D": "Red top-event hold at 100. Second row reports no new reference (duplicates merged). Frozen target and invalidation visible below it."
+  },
+  "screenshots": ["reports/hist_line_v4_6_1_4h.png", "reports/hist_line_v4_6_1_1d.png"],
+  "limits": "Visual compilation/runtime smoke check, not full historical TradingView export reconciliation. Boundary experiments remain offline and were not applied to Pine. Existing version remains saved separately. Initial Basic plan limit resolved by hiding old indicator; reload restored initially blank chart."
+}

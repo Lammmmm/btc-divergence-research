@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "baseline_matches_saved_timelines_all_periods": true,
+  "stream_matches_independent_first_crossing": true,
+  "prefix_stability": true,
+  "targets_unchanged_and_invalidations_only_tighter": true,
+  "eligible_default_arms": [],
+  "protocol_sha256": "850f29bd3bfa5e36416804b4d492fbd3f663e8219f2cc7996f9f6f7e189ffac0"
+}
