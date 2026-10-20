@@ -8,6 +8,8 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
+**2026-10-20 局部反转完成专项测试：** [三项完整结果](reports/HIST_LOCAL_COMPLETION.md) · [冻结方案](config/hist_local_completion.json) · [全部事件、逐根状态和检查](results/hist_local_completion/)。只测试一个局部3根拐点方案，并加入仅去重对照。局部完成＋去重使4H/1D横线占用减少51.1%/34.7%，但局部完成后再创新低／新高分别为23/61和1/13；4H实际最长等待降至132根，日线最长仍78根。同起点对照表明缩短也来自去重与起点变化。仅去重已减少24.3%/22.4%占用。不是收益回测或新样本外验证，当前线上v4.6.1未改，局部完成未冒充原规则成功。
+
 **当前面板修正版：Hist Line v4.6.1。** [源码](pine/Hist_Divergence_Line_v4_6_1.pine) · [变更说明](docs/HIST_LINE_V4_6_1_PANEL.md)。将“期间信号”移到第二行，确认价、失效价紧随其后，避免重要信息藏在窄副图面板末尾。主线及全部规则与 v4.6 一致，不宣称缩短横线。
 
 **失效边界专项对照：** [完整报告](reports/HIST_BOUNDARY_COMPARISON.md) · [方案](config/hist_boundary_comparison.json) · [逐根与逐事件数据](results/hist_boundary_comparison/)。只比较原边界、末端6根、末端2根；4H横线占用减少约1.2%–1.3%，日线最多减少10.3%，但会提前结束后来成功的事件。两方案均未达到默认替换条件，未部署到指标。原始触发和反转确认价不变；本轮不是收益回测。

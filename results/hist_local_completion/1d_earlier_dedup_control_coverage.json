@@ -1,0 +1,29 @@
+{
+  "added_starts": [
+    {
+      "seq": 2,
+      "direction": -1,
+      "start_index": 469,
+      "start_time": 1618358400000,
+      "pivot_index": 437,
+      "reference": 63019.1,
+      "target": 50452.08,
+      "invalid": 66449.69468492606,
+      "atr": 2927.1693698521262,
+      "status": "success",
+      "local_target": null,
+      "local_pivot": null,
+      "local_known_at": null,
+      "end_index": 479,
+      "end_time": 1619308799999,
+      "wait_bars": 10
+    }
+  ],
+  "added_reference_groups": [
+    {
+      "direction": -1,
+      "pivot_index": 437
+    }
+  ],
+  "omitted_reference_groups": []
+}

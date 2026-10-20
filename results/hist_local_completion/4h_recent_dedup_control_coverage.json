@@ -1,0 +1,95 @@
+{
+  "added_starts": [
+    {
+      "seq": 16,
+      "direction": 1,
+      "start_index": 12091,
+      "start_time": 1751947200000,
+      "pivot_index": 12079,
+      "reference": 108440.7,
+      "target": 109684.7,
+      "invalid": 107027.42891135604,
+      "atr": 745.142177287932,
+      "status": "success",
+      "local_target": null,
+      "local_pivot": null,
+      "local_known_at": null,
+      "end_index": 12100,
+      "end_time": 1752091199999,
+      "wait_bars": 9
+    },
+    {
+      "seq": 23,
+      "direction": 1,
+      "start_index": 12359,
+      "start_time": 1755806400000,
+      "pivot_index": 12347,
+      "reference": 112462.2,
+      "target": 114777.0,
+      "invalid": 111417.71416778826,
+      "atr": 1052.571664423473,
+      "status": "success",
+      "local_target": null,
+      "local_pivot": null,
+      "local_known_at": null,
+      "end_index": 12363,
+      "end_time": 1755878399999,
+      "wait_bars": 4
+    },
+    {
+      "seq": 46,
+      "direction": -1,
+      "start_index": 14188,
+      "start_time": 1782144000000,
+      "pivot_index": 14178,
+      "reference": 64447.9,
+      "target": 63220.0,
+      "invalid": 65966.58392930758,
+      "atr": 738.7678586151641,
+      "status": "success",
+      "local_target": null,
+      "local_pivot": null,
+      "local_known_at": null,
+      "end_index": 14191,
+      "end_time": 1782201599999,
+      "wait_bars": 3
+    },
+    {
+      "seq": 50,
+      "direction": 1,
+      "start_index": 14401,
+      "start_time": 1785211200000,
+      "pivot_index": 14383,
+      "reference": 63476.8,
+      "target": 65722.5,
+      "invalid": 62723.775211888096,
+      "atr": 594.4495762238101,
+      "status": "failure",
+      "local_target": null,
+      "local_pivot": null,
+      "local_known_at": null,
+      "end_index": 14421,
+      "end_time": 1785513599999,
+      "wait_bars": 20
+    }
+  ],
+  "added_reference_groups": [
+    {
+      "direction": -1,
+      "pivot_index": 14178
+    },
+    {
+      "direction": 1,
+      "pivot_index": 12079
+    },
+    {
+      "direction": 1,
+      "pivot_index": 12347
+    },
+    {
+      "direction": 1,
+      "pivot_index": 14383
+    }
+  ],
+  "omitted_reference_groups": []
+}

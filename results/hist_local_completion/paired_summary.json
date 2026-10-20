@@ -1,0 +1,80 @@
+[
+  {
+    "timeframe": "4h",
+    "period": "full",
+    "baseline_events": 202,
+    "earlier_local_exits": 61,
+    "total_saved_bars": 2132,
+    "median_all_observed_wait_original": 12.0,
+    "median_all_observed_wait_local": 10.0,
+    "max_observed_wait_original": 655,
+    "max_observed_wait_local": 490,
+    "wick_relapses": 18,
+    "censored": 0
+  },
+  {
+    "timeframe": "4h",
+    "period": "earlier",
+    "baseline_events": 138,
+    "earlier_local_exits": 45,
+    "total_saved_bars": 1825,
+    "median_all_observed_wait_original": 12.0,
+    "median_all_observed_wait_local": 10.0,
+    "max_observed_wait_original": 655,
+    "max_observed_wait_local": 490,
+    "wick_relapses": 15,
+    "censored": 1
+  },
+  {
+    "timeframe": "4h",
+    "period": "recent",
+    "baseline_events": 64,
+    "earlier_local_exits": 16,
+    "total_saved_bars": 299,
+    "median_all_observed_wait_original": 10.0,
+    "median_all_observed_wait_local": 8.0,
+    "max_observed_wait_original": 132,
+    "max_observed_wait_local": 132,
+    "wick_relapses": 3,
+    "censored": 0
+  },
+  {
+    "timeframe": "1d",
+    "period": "full",
+    "baseline_events": 39,
+    "earlier_local_exits": 15,
+    "total_saved_bars": 132,
+    "median_all_observed_wait_original": 11.0,
+    "median_all_observed_wait_local": 10.0,
+    "max_observed_wait_original": 78,
+    "max_observed_wait_local": 78,
+    "wick_relapses": 1,
+    "censored": 0
+  },
+  {
+    "timeframe": "1d",
+    "period": "earlier",
+    "baseline_events": 26,
+    "earlier_local_exits": 8,
+    "total_saved_bars": 67,
+    "median_all_observed_wait_original": 10.0,
+    "median_all_observed_wait_local": 10.0,
+    "max_observed_wait_original": 65,
+    "max_observed_wait_local": 64,
+    "wick_relapses": 1,
+    "censored": 0
+  },
+  {
+    "timeframe": "1d",
+    "period": "recent",
+    "baseline_events": 15,
+    "earlier_local_exits": 7,
+    "total_saved_bars": 65,
+    "median_all_observed_wait_original": 11.0,
+    "median_all_observed_wait_local": 9.0,
+    "max_observed_wait_original": 54,
+    "max_observed_wait_local": 36,
+    "wick_relapses": 0,
+    "censored": 0
+  }
+]
