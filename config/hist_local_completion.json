@@ -1,0 +1,28 @@
+{
+  "name": "Local swing completion: waiting, false bounces, and additional signal turnover",
+  "date": "2026-10-20",
+  "history_already_seen": true,
+  "data": "Existing saved Binance USD-M BTCUSDT perpetual, 2020 warmup, 2021-01-01 through 2026-10-15 UTC. No new data cleaning.",
+  "timeframes": ["4h", "1d"],
+  "periods": ["full", "earlier_before_2025", "recent_from_2025"],
+  "arms": ["original", "dedup_control", "local3"],
+  "original": "Existing v4.6.1 lifecycle, one event, frozen original target and invalidation, resolve then allow same-close restart.",
+  "dedup_control": "Original lifecycle except each direction + original historical reference pivot may start only once per period. Identical raw MACD signals.",
+  "local3": {
+    "dedup": "Same as dedup_control; no cooldown or parameter search.",
+    "pivot": "Strict unique wick high/low with 3 left and 3 right closed bars. Available only at pivot_index+3. These pivots only govern display completion, never MACD divergence detection.",
+    "target_selection": "At event start choose most recent confirmed opposite swing inside original divergence interval, strictly ahead of trigger close and strictly nearer than original confirmation price. If none, wait for first subsequently confirmed qualifying swing; require swing at or after original reference pivot and no more than 100 bars old when selected. Freeze on selection, never trail.",
+    "exit": "From bar after event start, original strict close confirmation/failure has priority. Otherwise strict close beyond known frozen local target ends foreground observation. Equality and wick touches do not end it.",
+    "background": "Every accepted foreground event retains original frozen target/invalidation until its independent original close resolution. These outcomes are research-only and never feed foreground decisions. Original baseline tracker is replayed separately without change.",
+    "meaning": "Local completion is neither original reversal confirmation nor invalidation. Foreground may accept a different reference signal on same close after completion."
+  },
+  "questions": {
+    "1": "Occupied bars; median/p90 completed observation duration; longest observed event and longest uninterrupted same-direction endpoint run; paired identical-baseline-start savings.",
+    "2": "For every local exit, freeze adverse wick extreme over endpoint (start-1) through local exit. From next bar through original resolution inclusive, count fresh wick and close breaches of that extreme. Record within-6-bar wick relapse separately. If no breach and original still pending, label unknown/censored, not clean success. Also report subsequent original success/failure/pending.",
+    "3": "Added starts vs baseline, added distinct direction/reference groups, baseline groups omitted, repeats suppressed, local-exit-to-next-start <=3 bars and opposite-direction next-start <=6 bars. These bar horizons are descriptive only, not exits (4H: 12/24 hours; 1D: 3/6 days)."
+  },
+  "paired": "Apply local3 exit to identical original starts; no dedup or altered starting opportunities. Compare local end with original end, original outcome retained. Separate from actual foreground stream.",
+  "validation": "Exact original timeline equality against saved v4.3.2 baseline; independent local-target/first-close search; synthetic causal pivot, equality, invalidation precedence, deferred target, and dedup cases; truncated-input prefix replay; source/data hashes.",
+  "decision": "No automatic live deployment. Descriptive comparison only; reject treating shorter holds as improved accuracy. No tuning additional pivot windows after seeing outcomes.",
+  "limits": "Recent period is reused diagnostic history, not unseen out-of-sample data. Three periods overlap and must not be summed. Local and background events may overlap; not trades or independent samples. No P&L recalculation or trading execution."
+}
