@@ -281,6 +281,10 @@
       "bytes": 4047,
       "sha256": "a225ab071bdc32c5ce40d48924f05591e065da82edd5a78b1a84779cd2da2656"
     },
+    "docs/HIST_PEAKS_V1_GUIDE.md": {
+      "bytes": 4142,
+      "sha256": "939c0c9106c291ab60b0d54d8a9c6bc17e4a58587535a6c38b7ced4b826cadcd"
+    },
     "docs/HIST_PROGRESS_V4_GUIDE.md": {
       "bytes": 7759,
       "sha256": "490120bd1bc3901401ffd1e4c5581a671cb78908eeeed756adc7c8f853947b6e"
@@ -521,6 +525,10 @@
       "bytes": 29177,
       "sha256": "102496e335a696e138f5748b4959325723bd46548a066d89a9ec108c315978aa"
     },
+    "pine/Hist_Divergence_Peaks_v1.pine": {
+      "bytes": 11396,
+      "sha256": "f1ef1f732f8383b9cb5f013bdc5a9cd52f4b788f0871f300ea6c201ae1700551"
+    },
     "pine/Hist_Divergence_Progress_v4.pine": {
       "bytes": 21009,
       "sha256": "2dc31ec1873db8895cd61f681284edb836342658d37338236a02b037f3f1f763"
@@ -542,8 +550,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 18576,
-      "sha256": "0bb4dd309850256fc31680d19a0a39dc7f83a84f5ef4466dd2f45eda7e6eb395"
+      "bytes": 19077,
+      "sha256": "aeaf54b25a25ea5a6311ce69b31967c07532cdb607d4d93ee9c51f4556a639c8"
     },
     "reports/HIST_BOUNDARY_COMPARISON.md": {
       "bytes": 3957,
@@ -676,6 +684,14 @@
     "reports/HIST_LOCAL_COMPLETION.md": {
       "bytes": 9250,
       "sha256": "2efea3a2939f3e72c15ee08fb6fcf7b8d609c02b2891dc264227fe88a5d6282e"
+    },
+    "reports/hist_peaks_v1_1d.png": {
+      "bytes": 142217,
+      "sha256": "895fac3e28760c00755c05f23757f651ed0d6913b7b7d401e3e08b1b30123764"
+    },
+    "reports/hist_peaks_v1_4h.png": {
+      "bytes": 144524,
+      "sha256": "091607ea9e87fe75787f5421eeca9d09dfce43df712b071bc3ac47144834d2ad"
     },
     "reports/hist_progress_v4_1d_tradingview.png": {
       "bytes": 132005,
@@ -3608,6 +3624,30 @@
     "results/hist_local_completion/summary.json": {
       "bytes": 22129,
       "sha256": "f986b8dfaadf6808123ec2c053e2f49662db2b8291bac12991b7055a755d0ae7"
+    },
+    "results/hist_peaks_v1/checks.json": {
+      "bytes": 801,
+      "sha256": "732659fab1c7f6910ebffb9b8ccb466de440cc4a422fd991893d51c571e1a580"
+    },
+    "results/hist_peaks_v1/pairs_all_raw_1d.jsonl.gz": {
+      "bytes": 3147,
+      "sha256": "ecaa8ce1ef84b7a089374967bfc877bd01b8cecb89e7f5bb766d4a6bfc9f610d"
+    },
+    "results/hist_peaks_v1/pairs_all_raw_4h.jsonl.gz": {
+      "bytes": 18368,
+      "sha256": "05f4f134cd97b76b85ade628793361ae2245f8c9e207ab4f89a19ea460648deb"
+    },
+    "results/hist_peaks_v1/pairs_first_reference_1d.jsonl.gz": {
+      "bytes": 2562,
+      "sha256": "a7936882de734adab45169ee96c2b47318be5a1b151e8dbafd92778e4040b1ae"
+    },
+    "results/hist_peaks_v1/pairs_first_reference_4h.jsonl.gz": {
+      "bytes": 14583,
+      "sha256": "a86eb90310020a0248cc45d5aa9b2b56f4c64ea6ebf0362d11af984da4f6a706"
+    },
+    "results/hist_peaks_v1/tradingview_checks.json": {
+      "bytes": 1255,
+      "sha256": "56d4586f741847ab118c01557be1ab9717264d7edfd4451b6e6c4ff2a7d80088"
     },
     "results/hist_progress_v4/checks.json": {
       "bytes": 1000,
@@ -9020,6 +9060,10 @@
     "src/verify_hist_line_v46.py": {
       "bytes": 6632,
       "sha256": "b864db651b409689dfb2ccd7984e69871785a05f0bb45db7b7c5408874fe725f"
+    },
+    "src/verify_hist_peaks_v1.py": {
+      "bytes": 5808,
+      "sha256": "ba55250d14baa832c4c31c8271be019cac0f9d96567ded809d20ad9ff415e9e9"
     },
     "src/verify_hist_progress_v4.py": {
       "bytes": 5462,

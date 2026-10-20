@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "exact_original_core": true,
+  "core_sha256": "a56db4047313f458a98c675f96e011bf63bb0d83623c3e627dc330a4829739af",
+  "synthetic_checks": 9,
+  "datasets": [
+    {
+      "tf": "4h",
+      "bars": 14880,
+      "raw_pairs": 341,
+      "first_reference_pairs": 237,
+      "exact_saved_spans": true,
+      "endpoints_verified": true,
+      "prefix_checks": 3
+    },
+    {
+      "tf": "1d",
+      "bars": 2480,
+      "raw_pairs": 55,
+      "first_reference_pairs": 39,
+      "exact_saved_spans": true,
+      "endpoints_verified": true,
+      "prefix_checks": 3
+    }
+  ],
+  "scope": "Python replay and source equivalence; TradingView compilation/UI checked separately. No return/accuracy study.",
+  "full_TradingView_export_reconciliation": "NOT_PERFORMED"
+}

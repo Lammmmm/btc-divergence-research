@@ -1,0 +1,175 @@
+// This source code is subject to the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Original divergence search: © LonesomeTheBlue.
+// Hist comparison-point view: 2026 research adaptation.
+//@version=6
+indicator("Hist 背离峰谷配对 v1", shorttitle="Hist Peaks v1", overlay=false, max_bars_back=1000, max_labels_count=100)
+
+int pivotPeriod = input.int(5, "枢轴确认根数", minval=1, maxval=50, group="信号参数")
+int maxPivots = input.int(10, "检查最近枢轴数", minval=1, maxval=20, group="信号参数")
+int maxBars = input.int(100, "最大背离跨度", minval=30, maxval=200, group="信号参数")
+int fastLen = input.int(12, "MACD 快线", minval=1, group="信号参数")
+int slowLen = input.int(26, "MACD 慢线", minval=2, group="信号参数")
+int signalLen = input.int(9, "MACD 信号线", minval=1, group="信号参数")
+int trackingStart = input.time(timestamp("01 Jan 2021 00:00 +0000"), "显示起始时间", group="显示")
+int keepPairs = input.int(6, "保留最近配对组数", minval=1, maxval=20, group="显示", tooltip="每组保留A、B两个历史比较点。更早标签删除只影响显示，原始信号仍在数据窗口。")
+bool firstReferenceOnly = input.bool(true, "同方向同参照只标首次", group="显示", tooltip="仅合并显示，不改原始信号。之后同参照的新末端不移动旧B点。关闭可复盘每次原始配对。")
+bool showPointValues = input.bool(true, "标签显示Hist和对应收盘价", group="显示")
+bool showConfirmMarks = input.bool(true, "标出实际收盘确认根", group="显示", tooltip="顶部红三角=顶背离，底部蓝三角=底背离。A/B标签是该根确认后回标的历史比较位置，不代表在A/B当时已知信号。")
+bool showPanel = input.bool(true, "显示最近配对面板", group="显示")
+color bullColor = input.color(#2962FF, "底背离", group="颜色")
+color bearColor = input.color(#FF1744, "顶背离", group="颜色")
+color neutralColor = input.color(#8B95A5, "普通Hist柱", group="颜色")
+
+[macdValue, signalValue, hist] = ta.macd(close, fastLen, slowLen, signalLen)
+float atrValue = ta.atr(14)
+float ph = ta.pivothigh(close, pivotPeriod, pivotPeriod)
+float pl = ta.pivotlow(close, pivotPeriod, pivotPeriod)
+var array<int> highPositions = array.new_int()
+var array<int> lowPositions = array.new_int()
+
+// Commit pivots only at the close that makes their right-side bars known.
+if barstate.isconfirmed
+    if not na(ph)
+        array.unshift(highPositions, bar_index - pivotPeriod)
+        if array.size(highPositions) > 20
+            array.pop(highPositions)
+    if not na(pl)
+        array.unshift(lowPositions, bar_index - pivotPeriod)
+        if array.size(lowPositions) > 20
+            array.pop(lowPositions)
+
+// start=1 reproduces the original confirmed endpoint and current-bar OR gate.
+// start=0 is only a potential setup; it never starts a formal event or alert.
+f_find(float src, bool bullish, int start, bool requireTurn) =>
+    int found = 0
+    bool turnOK = not requireTurn or (bullish ? src > src[1] or close > close[1] : src < src[1] or close < close[1])
+    array<int> positions = bullish ? lowPositions : highPositions
+    int count = math.min(maxPivots, array.size(positions))
+    if turnOK and count > 0
+        for x = 0 to count - 1
+            int span = bar_index - array.get(positions, x)
+            if span > maxBars
+                break
+            if span > 5 and not na(src[span])
+                bool endpointsOK = bullish ? src[start] > src[span] and close[start] < close[span] : src[start] < src[span] and close[start] > close[span]
+                if endpointsOK
+                    float slopeH = (src[start] - src[span]) / (span - start)
+                    float slopeP = (close[start] - close[span]) / (span - start)
+                    float virtualH = src[start] - slopeH
+                    float virtualP = close[start] - slopeP
+                    bool clear = true
+                    for y = start + 1 to span - 1
+                        bool crossed = bullish ? src[y] < virtualH or close[y] < virtualP : src[y] > virtualH or close[y] > virtualP
+                        if crossed
+                            clear := false
+                            break
+                        virtualH -= slopeH
+                        virtualP -= slopeP
+                    if clear
+                        found := span
+                        break
+    found
+
+int bullLength = f_find(hist, true, 1, true)
+int bearLength = f_find(hist, false, 1, true)
+
+// Display raw confirmed comparisons independently of the old one-event lifecycle.
+// This does not introduce a new divergence rule or a new reversal-success rule.
+bool rawBull = bullLength > 0
+bool rawBear = bearLength > 0
+bool conflicting = rawBull and rawBear
+bool allowed = time >= trackingStart and not na(atrValue) and atrValue > 0
+var array<int> seenBull = array.new_int()
+var array<int> seenBear = array.new_int()
+var array<label> pairLabels = array.new<label>()
+var int pairId = 0
+var int lastSide = 0
+var int lastConfirmedTime = na
+var float lastAH = na
+var float lastBH = na
+var float lastAP = na
+var float lastBP = na
+bool shownBull = false
+bool shownBear = false
+f_prune(array<int> refs) =>
+    int i = array.size(refs) - 1
+    while i >= 0
+        if array.get(refs, i) < bar_index - maxBars
+            array.remove(refs, i)
+        i -= 1
+f_hist(float x) => str.tostring(x, "0.00")
+f_price(float x) => str.tostring(x, format.mintick)
+f_time(int t) => str.format_time(t, "yyyy-MM-dd HH:mm", "UTC")
+f_note(int id, bool bull, int span) =>
+    "#" + str.tostring(id) + (bull ? " 底背离配对" : " 顶背离配对") +
+      "\nA 原价格枢轴：" + f_time(time[span]) + " UTC" +
+      "\nA Hist：" + f_hist(hist[span]) + " | Close：" + f_price(close[span]) +
+      "\nB 背离末端：" + f_time(time[1]) + " UTC" +
+      "\nB Hist：" + f_hist(hist[1]) + " | Close：" + f_price(close[1]) +
+      "\n实际收盘确认：" + f_time(time_close) + " UTC" +
+      "\nA/B为确认后回标的比较点，不一定是Hist局部极值。" +
+      "\n配对确认不等于反转成功，未采用旧版单事件占用限制。"
+if barstate.isconfirmed and allowed
+    f_prune(seenBull)
+    f_prune(seenBear)
+    if not conflicting and (rawBull or rawBear)
+        bool bull = rawBull
+        int span = bull ? bullLength : bearLength
+        int ref = bar_index - span
+        array<int> refs = bull ? seenBull : seenBear
+        bool fresh = not array.includes(refs, ref)
+        if fresh
+            array.push(refs, ref)
+        if not firstReferenceOnly or fresh
+            pairId += 1
+            shownBull := bull
+            shownBear := not bull
+            lastSide := bull ? 1 : -1
+            lastAH := hist[span]
+            lastBH := hist[1]
+            lastAP := close[span]
+            lastBP := close[1]
+            lastConfirmedTime := time_close
+            color c = bull ? bullColor : bearColor
+            string aText = "#" + str.tostring(pairId) + " A" + (showPointValues ? "\nH " + f_hist(hist[span]) + "\nP " + f_price(close[span]) : "")
+            string bText = "#" + str.tostring(pairId) + " B" + (showPointValues ? "\nH " + f_hist(hist[1]) + "\nP " + f_price(close[1]) : "")
+            string note = f_note(pairId, bull, span)
+            array.push(pairLabels, label.new(x=bar_index-span, y=hist[span], text=aText, xloc=xloc.bar_index, yloc=yloc.price, style=label.style_label_right, color=color.new(c, 45), textcolor=color.white, size=size.small, tooltip=note))
+            array.push(pairLabels, label.new(x=bar_index-1, y=hist[1], text=bText, xloc=xloc.bar_index, yloc=yloc.price, style=label.style_label_left, color=c, textcolor=color.white, size=size.small, tooltip=note))
+            while array.size(pairLabels) > 2 * keepPairs
+                label.delete(array.shift(pairLabels))
+
+// Only the actual confirmation bar is colored. No historical column recoloring.
+color columnColor = shownBull ? bullColor : shownBear ? bearColor : neutralColor
+plot(hist, "原始 MACD Histogram", color=columnColor, style=plot.style_columns)
+hline(0, "Hist零轴（不是背离阈值）", color=color.new(neutralColor, 50))
+plotshape(showConfirmMarks and shownBull, title="底背离实际确认根", style=shape.triangleup, location=location.bottom, color=bullColor, size=size.tiny)
+plotshape(showConfirmMarks and shownBear, title="顶背离实际确认根", style=shape.triangledown, location=location.top, color=bearColor, size=size.tiny)
+
+var table panel = table.new(position.top_right, 2, 6, bgcolor=#111B2C, frame_color=#334155, frame_width=1)
+f_row(int row, string key, string value, color c) =>
+    table.cell(panel, 0, row, key, text_color=#A9B3C5, text_size=size.small, text_halign=text.align_left)
+    table.cell(panel, 1, row, value, text_color=c, text_size=size.small, text_halign=text.align_left)
+if barstate.islast and showPanel
+    color c = lastSide == 1 ? bullColor : lastSide == -1 ? bearColor : neutralColor
+    f_row(0, "最近展示配对", lastSide == 0 ? "等待收盘信号" : "#" + str.tostring(pairId) + (lastSide == 1 ? " 底背离" : " 顶背离"), c)
+    f_row(1, "Hist A → B", lastSide == 0 ? "—" : f_hist(lastAH) + " → " + f_hist(lastBH), c)
+    f_row(2, "Close A → B", lastSide == 0 ? "—" : f_price(lastAP) + " → " + f_price(lastBP), #F1F5F9)
+    f_row(3, "实际确认 UTC", na(lastConfirmedTime) ? "—" : f_time(lastConfirmedTime), #F1F5F9)
+    f_row(4, "显示口径", firstReferenceOnly ? "同参照首次 · 非全部事件" : "全部原始配对", #A9B3C5)
+    f_row(5, "历史比较点", "确认后回标 · 非反转结果", #A9B3C5)
+
+// Non-backdated data-window series for reproducible exports.
+plot(barstate.isconfirmed and allowed ? bullLength : na, "Audit Bull Length", display=display.data_window)
+plot(barstate.isconfirmed and allowed ? bearLength : na, "Audit Bear Length", display=display.data_window)
+plot(shownBull ? 1 : shownBear ? -1 : 0, "Audit Shown Direction", display=display.data_window)
+plot(shownBull or shownBear ? time[shownBull ? bullLength : bearLength] : na, "Audit Reference Time", display=display.data_window)
+plot(shownBull or shownBear ? time[1] : na, "Audit Endpoint Time", display=display.data_window)
+plot(shownBull or shownBear ? time_close : na, "Audit Confirmation Time", display=display.data_window)
+plot(shownBull or shownBear ? lastAH : na, "Audit A Hist", display=display.data_window)
+plot(shownBull or shownBear ? lastBH : na, "Audit B Hist", display=display.data_window)
+plot(shownBull or shownBear ? lastAP : na, "Audit A Close", display=display.data_window)
+plot(shownBull or shownBear ? lastBP : na, "Audit B Close", display=display.data_window)
+// Alerts intentionally use raw confirmed comparisons, not the display dedup switch.
+alertcondition(barstate.isconfirmed and allowed and rawBull and not conflicting, "底背离原始配对确认", "{{ticker}} {{interval}} Hist底背离原始配对已收盘确认；并非反转结果。")
+alertcondition(barstate.isconfirmed and allowed and rawBear and not conflicting, "顶背离原始配对确认", "{{ticker}} {{interval}} Hist顶背离原始配对已收盘确认；并非反转结果。")

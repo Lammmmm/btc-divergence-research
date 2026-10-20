@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "checked_date": "2026-10-20",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "pine_version": 6,
+  "cloud_script": "Hist 背离峰谷配对 v1",
+  "compiled_and_running": true,
+  "cloud_source_readback_equal": true,
+  "source_sha256": "f1ef1f732f8383b9cb5f013bdc5a9cd52f4b788f0871f300ea6c201ae1700551",
+  "visual_checks": [
+    "Original Hist columns with raw-value axis",
+    "A/B labels show Hist and Close at original comparison locations",
+    "A left / B right labels reduce paired-label overlap",
+    "Red bearish / blue bullish confirmation marks",
+    "Latest pair table distinguishes retrospective points from reversal outcome"
+  ],
+  "screenshots": [
+    "reports/hist_peaks_v1_4h.png",
+    "reports/hist_peaks_v1_1d.png"
+  ],
+  "old_v461_source_sha256": "102496e335a696e138f5748b4959325723bd46548a066d89a9ec108c315978aa",
+  "old_script_preserved": true,
+  "old_curve_hidden": true,
+  "full_history_export_reconciliation": "NOT_PERFORMED",
+  "live_future_signal_validation": "NOT_PERFORMED",
+  "notes": "UI compilation/visual checks and source readback; no claim of exhaustive Pine history reconciliation or future profitability. Current chart returned to 4H."
+}
