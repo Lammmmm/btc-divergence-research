@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "source_sha256": "314c966e6dfdf2de4b7705d87ac70ae1772b57375646c3d5bf56a3c2bf53b486",
+  "exact_original_core_and_lifecycle": true,
+  "no_label_or_shape_or_circle_calls": true,
+  "default_panel_hidden": true,
+  "synthetic_checks": 7,
+  "datasets": [
+    {
+      "tf": "4h",
+      "bars": 12684,
+      "exact_saved_lifecycle": true,
+      "starts": 202,
+      "failed": 118,
+      "confirmed": 83,
+      "same_bar_restarts": 1
+    },
+    {
+      "tf": "1d",
+      "bars": 2114,
+      "exact_saved_lifecycle": true,
+      "starts": 39,
+      "failed": 11,
+      "confirmed": 27,
+      "same_bar_restarts": 0
+    }
+  ],
+  "scope": "Source equivalence and Python closed-bar replay against the original saved lifecycle. Not a new profitability backtest or Pine interpreter.",
+  "full_TradingView_export_reconciliation": "NOT_PERFORMED"
+}

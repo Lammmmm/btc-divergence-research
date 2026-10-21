@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "checked_date": "2026-10-21",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "cloud_script": "Hist 背离状态柱 v1.3",
+  "source_sha256": "314c966e6dfdf2de4b7705d87ac70ae1772b57375646c3d5bf56a3c2bf53b486",
+  "cloud_source_readback_equal": true,
+  "compiled_and_running": true,
+  "no_visible_labels": true,
+  "default_panel_hidden": true,
+  "visual_checks": [
+    "Only original-value Hist columns and zero line",
+    "Red active bearish / blue active bullish ranges",
+    "Orange failed-close column and light-gray reversal-confirmed column",
+    "No A/B labels, named badges, circles, background bands or connecting lines",
+    "Original Peaks v1.2 hidden; cloud sources retained"
+  ],
+  "screenshots": [
+    "reports/hist_bars_v1_3_4h.png",
+    "reports/hist_bars_v1_3_1d.png",
+    "reports/hist_bars_v1_3_compact.png"
+  ],
+  "rules_reference": "Hist_Divergence_Line_v4_6_1.pine frozen-structure lifecycle",
+  "difference_from_v12": "A lifecycle event is now tracked until its original boundary result; raw pair counts are not accepted starts.",
+  "full_history_export_reconciliation": "NOT_PERFORMED",
+  "scope": "Source equivalence, closed-bar research replay and TradingView UI checks; no new profitability backtest."
+}
