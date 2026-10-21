@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "checked_date": "2026-10-21",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "additional_feed": "BINANCE:BTCUSDT spot 4h (early visual build)",
+  "cloud_script": "Hist 背离峰谷配对 v1.2",
+  "compiled_and_running": true,
+  "cloud_source_readback_equal": true,
+  "source_sha256": "ab0e69d7add69c1ddba0634bc6cadd0e7dbdca53cca9cff38d7e36e3bcb30ee3",
+  "visual_checks": [
+    "Named red top / blue bottom confirmation badges at actual bar",
+    "Width 6 trigger Histogram and circles at raw Hist values",
+    "Same-direction words merged within 20 bars; every shown trigger bar and dot retained",
+    "Last one A reference / B endpoint only",
+    "Compact-pane labels visibly readable; chart resizing attempt did not change pane height"
+  ],
+  "final_screenshots": [
+    "reports/hist_peaks_v1_2_4h.png",
+    "reports/hist_peaks_v1_2_1d.png",
+    "reports/hist_peaks_v1_2_compact.png"
+  ],
+  "earlier_visual_build_screenshots": [
+    "reports/hist_peaks_v1_2_spot_4h.png",
+    "reports/hist_peaks_v1_2_spot_compact.png"
+  ],
+  "old_versions_preserved": true,
+  "old_v11_hidden": true,
+  "full_history_export_reconciliation": "NOT_PERFORMED",
+  "scope": "Visual/UI compilation and source-block equivalence; not a new profitability backtest."
+}

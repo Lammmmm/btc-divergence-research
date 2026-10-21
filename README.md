@@ -8,6 +8,8 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
+**最新峰谷提示版：Hist Peaks v1.2。** [源码](pine/Hist_Divergence_Peaks_v1_2.pine) · [读图说明](docs/HIST_PEAKS_V1_2_GUIDE.md)。实际确认根直接显示红色“顶背离”/蓝色“底背离”，加粗原值触发柱；默认仅最近1组“A参照/B末端”，避免编号难读。纯显示更新，信号和警报源码不变。
+
 **最新峰谷显示版：Hist Peaks v1.1。** [源码](pine/Hist_Divergence_Peaks_v1_1.pine) · [变化说明](docs/HIST_PEAKS_V1_1_GUIDE.md)。正负普通柱用低饱和灰绿/灰金，确认柱与确认圆点用亮红/亮蓝；默认仅最近2组小标签，数值保留在悬停和面板。所有信号与去重规则不变，v1保留。
 
 **新展示方案：Hist Peaks v1。** [源码](pine/Hist_Divergence_Peaks_v1.pine) · [读图与口径说明](docs/HIST_PEAKS_V1_GUIDE.md) · [检查及逐组配对](results/hist_peaks_v1/)。原始 Hist 柱状图，红色顶背离、蓝色底背离，A/B 直接标出原算法实际比较的 Hist 与收盘价，并记录真正收盘确认的时间。独立显示原始配对，不再等待旧折线生命周期结束；原始 MACD 与正式搜索源码块不变。旧折线版本全部保留。

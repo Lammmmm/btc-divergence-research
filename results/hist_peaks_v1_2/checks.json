@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "source_sha256": "ab0e69d7add69c1ddba0634bc6cadd0e7dbdca53cca9cff38d7e36e3bcb30ee3",
+  "compared_to": "Hist_Divergence_Peaks_v1_1.pine",
+  "scope": "Exact MACD, confirmed pivot search, trigger, deduplication, A/B values, audit and alert blocks; display-only change.",
+  "prior_replay": "results/hist_peaks_v1/checks.json",
+  "changes": [
+    "Top red / bottom blue named confirmation badges at actual confirmation bar",
+    "Width 6 actual-value trigger Histogram and circle",
+    "Only last one A/B pair by default",
+    "A/B roles named and sequence IDs hidden by default",
+    "Ordinary-column transparency 55"
+  ]
+}
