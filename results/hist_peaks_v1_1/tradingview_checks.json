@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "checked_date": "2026-10-21",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "timeframes": [
+    "4h",
+    "1d"
+  ],
+  "cloud_script": "Hist 背离峰谷配对 v1.1",
+  "compiled_and_running": true,
+  "cloud_source_readback_equal": true,
+  "source_sha256": "7e09efe989abf239a4fd1de60b74c7e5a56118047ce48308defe3aeda3c388c3",
+  "visual_checks": [
+    "Muted green positive and muted gold negative Hist columns",
+    "Saturated red/blue confirmation bars and actual-bar dots",
+    "Only last two compact A/B pairs by default",
+    "No edge triangles by default",
+    "No auxiliary marker scale/status values"
+  ],
+  "old_v1_preserved": true,
+  "old_v1_hidden": true,
+  "screenshots": [
+    "reports/hist_peaks_v1_1_4h.png",
+    "reports/hist_peaks_v1_1_1d.png"
+  ],
+  "full_history_export_reconciliation": "NOT_PERFORMED",
+  "scope": "Display-only UI checks and source equivalence; not a new return backtest."
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Exact source equivalence for MACD, pivots, divergence search, confirmation, deduplication, endpoint values, audit exports and alerts; display-only change.",
+  "compared_to": "Hist_Divergence_Peaks_v1.pine",
+  "source_sha256": "7e09efe989abf239a4fd1de60b74c7e5a56118047ce48308defe3aeda3c388c3",
+  "previous_replay": "results/hist_peaks_v1/checks.json",
+  "visual_defaults": {
+    "keep_pairs": 2,
+    "numeric_labels": false,
+    "edge_triangles": false,
+    "positive": "#668E7B",
+    "negative": "#A88B60",
+    "ordinary_transparency": 40,
+    "bull": "#2979FF",
+    "bear": "#FF1744",
+    "confirmation_dot": "actual confirmation bar at unchanged Hist value"
+  }
+}

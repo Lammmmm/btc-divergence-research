@@ -281,6 +281,10 @@
       "bytes": 4047,
       "sha256": "a225ab071bdc32c5ce40d48924f05591e065da82edd5a78b1a84779cd2da2656"
     },
+    "docs/HIST_PEAKS_V1_1_GUIDE.md": {
+      "bytes": 1751,
+      "sha256": "91349a43bbd32a243020c57c2131c7fa2298e70eeb2b255517eb9de51fd3509e"
+    },
     "docs/HIST_PEAKS_V1_GUIDE.md": {
       "bytes": 4142,
       "sha256": "939c0c9106c291ab60b0d54d8a9c6bc17e4a58587535a6c38b7ced4b826cadcd"
@@ -529,6 +533,10 @@
       "bytes": 11396,
       "sha256": "f1ef1f732f8383b9cb5f013bdc5a9cd52f4b788f0871f300ea6c201ae1700551"
     },
+    "pine/Hist_Divergence_Peaks_v1_1.pine": {
+      "bytes": 12039,
+      "sha256": "7e09efe989abf239a4fd1de60b74c7e5a56118047ce48308defe3aeda3c388c3"
+    },
     "pine/Hist_Divergence_Progress_v4.pine": {
       "bytes": 21009,
       "sha256": "2dc31ec1873db8895cd61f681284edb836342658d37338236a02b037f3f1f763"
@@ -550,8 +558,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 19077,
-      "sha256": "aeaf54b25a25ea5a6311ce69b31967c07532cdb607d4d93ee9c51f4556a639c8"
+      "bytes": 19423,
+      "sha256": "77c5d987d892788f40ece0c63853ea39713ce957e10b78de759e7dbaa7334864"
     },
     "reports/HIST_BOUNDARY_COMPARISON.md": {
       "bytes": 3957,
@@ -684,6 +692,14 @@
     "reports/HIST_LOCAL_COMPLETION.md": {
       "bytes": 9250,
       "sha256": "2efea3a2939f3e72c15ee08fb6fcf7b8d609c02b2891dc264227fe88a5d6282e"
+    },
+    "reports/hist_peaks_v1_1_1d.png": {
+      "bytes": 132019,
+      "sha256": "fc4b534fe3185ada6302e55f095ed2d4ec16972f5d5a7f0e555fbe1c06697c9d"
+    },
+    "reports/hist_peaks_v1_1_4h.png": {
+      "bytes": 123574,
+      "sha256": "664cbfec7f54ed5b4174a8572bd7f8eca41b0942cffd06a1f4a34c13bb07ca6c"
     },
     "reports/hist_peaks_v1_1d.png": {
       "bytes": 142217,
@@ -3648,6 +3664,14 @@
     "results/hist_peaks_v1/tradingview_checks.json": {
       "bytes": 1255,
       "sha256": "56d4586f741847ab118c01557be1ab9717264d7edfd4451b6e6c4ff2a7d80088"
+    },
+    "results/hist_peaks_v1_1/checks.json": {
+      "bytes": 717,
+      "sha256": "0d9a05ee786c5f720040a59d509739388b7544153a0589cd8f01132b3021bec6"
+    },
+    "results/hist_peaks_v1_1/tradingview_checks.json": {
+      "bytes": 948,
+      "sha256": "3e900a7fe4e90020626132493a07e3948665c4f13f50dd1d1ea6c1c63d5a5b53"
     },
     "results/hist_progress_v4/checks.json": {
       "bytes": 1000,
@@ -9064,6 +9088,10 @@
     "src/verify_hist_peaks_v1.py": {
       "bytes": 5808,
       "sha256": "ba55250d14baa832c4c31c8271be019cac0f9d96567ded809d20ad9ff415e9e9"
+    },
+    "src/verify_hist_peaks_v11.py": {
+      "bytes": 953,
+      "sha256": "5bc23d9eeff90f14451b4c11aa4c5f4dab3b039586539e4ad0ac47e61d8bd659"
     },
     "src/verify_hist_progress_v4.py": {
       "bytes": 5462,
