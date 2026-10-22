@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "source_sha256": "ddc6d2d3a0989f9b4302212ab60bb0939dab6571d7e47fd826a0f166eb948fed",
+  "compared_to": "Hist_Divergence_Bars_v1_3.pine",
+  "exact_macd_and_lifecycle": true,
+  "exact_audits_and_alerts": true,
+  "one_raw_hist_column_plot": true,
+  "no_outcome_colors_or_partial_overlay": true,
+  "no_labels_or_shapes": true,
+  "color_rule": "active -> blue/bull or red/bear; inactive/resolved -> ordinary positive/negative color; same-bar replacement -> new active direction",
+  "scope": "Source equivalence for a display-only color simplification; no new return backtest.",
+  "prior_lifecycle_replay": "results/hist_bars_v1_3/checks.json"
+}

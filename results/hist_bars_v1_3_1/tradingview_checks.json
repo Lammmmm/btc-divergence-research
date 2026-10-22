@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "date_local": "2026-10-22",
+  "symbol": "BINANCE:BTCUSDT.P",
+  "saved_script": "Hist 背离状态柱 v1.3.1",
+  "source_readback_matches_normalized_newlines": true,
+  "compile_and_add_to_chart": "PASS",
+  "timeframes_observed": ["1D", "4H"],
+  "visual_observations": [
+    "Active bullish events use blue columns; active bearish events use red columns.",
+    "Ordinary columns retain the existing muted positive/negative colors.",
+    "No white/light-gray outcome columns, orange warning/failure columns, or partial outcome overlay.",
+    "No labels, A/B annotations, circles, bands, or connecting lines."
+  ],
+  "screenshots": ["reports/hist_bars_v1_3_1_1d.png", "reports/hist_bars_v1_3_1_4h.png"],
+  "prior_source_preserved": "pine/Hist_Divergence_Bars_v1_3.pine",
+  "full_tradingview_history_export_reconciliation": "NOT_PERFORMED",
+  "scope": "UI compilation, exact source readback, and visual verification only. Unchanged lifecycle verified by source comparison in checks.json; no new return backtest."
+}

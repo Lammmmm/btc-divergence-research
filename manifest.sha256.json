@@ -225,6 +225,10 @@
       "bytes": 1659,
       "sha256": "72453bc738932840deea8bac5c00301ffc0c54a50973e974e2b77a4ef7cbc02e"
     },
+    "docs/HIST_BARS_V1_3_1_GUIDE.md": {
+      "bytes": 1121,
+      "sha256": "44a770cdbc60d1e70f6dac24143cc7e9b27bb93f3903d6b5b65e5572e07a6cde"
+    },
     "docs/HIST_BARS_V1_3_GUIDE.md": {
       "bytes": 3282,
       "sha256": "1661533899542b5e28688f6959f26690b51ce35b33b162149086d1fad6a92cbb"
@@ -489,6 +493,10 @@
       "bytes": 12196,
       "sha256": "314c966e6dfdf2de4b7705d87ac70ae1772b57375646c3d5bf56a3c2bf53b486"
     },
+    "pine/Hist_Divergence_Bars_v1_3_1.pine": {
+      "bytes": 11688,
+      "sha256": "ddc6d2d3a0989f9b4302212ab60bb0939dab6571d7e47fd826a0f166eb948fed"
+    },
     "pine/Hist_Divergence_Lifecycle_v1.pine": {
       "bytes": 17708,
       "sha256": "9b4d8e5d1795e11eb60e4cd91de78003165872db96cda7073f1062168023f658"
@@ -574,8 +582,16 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 20237,
-      "sha256": "36f2fe57ff8c6fe77c553b4fea2c75ce0a8533a7e4c4da5754bc1c6660492801"
+      "bytes": 20543,
+      "sha256": "f775437b614393695a6521531a2d222b7d8f767571a177066d218af80d6361c0"
+    },
+    "reports/hist_bars_v1_3_1_1d.png": {
+      "bytes": 130958,
+      "sha256": "c0b1ad4e2e0a89e75831993ddaf77842500ed5c6bad1fee301bdb9a6bf68775d"
+    },
+    "reports/hist_bars_v1_3_1_4h.png": {
+      "bytes": 115951,
+      "sha256": "782787ee652693a40ca18f140d02d0b92c4ce8becd5118375f1c5b05fcc869de"
     },
     "reports/hist_bars_v1_3_1d.png": {
       "bytes": 102936,
@@ -2872,6 +2888,14 @@
     "results/hist_bars_v1_3/tradingview_checks.json": {
       "bytes": 1311,
       "sha256": "d954edae34d09941a5b161a083f28092fcf91e7eb000f443d03f0910d90e3e66"
+    },
+    "results/hist_bars_v1_3_1/checks.json": {
+      "bytes": 674,
+      "sha256": "b5a9cf1c6facf51102c5bfa24904fcdb24f73dce49f00ea1591816e0384d0bf3"
+    },
+    "results/hist_bars_v1_3_1/tradingview_checks.json": {
+      "bytes": 1034,
+      "sha256": "49c73f8c6c4897b03a8974d91083e2b391eb746bc0ee74d9931b65a5432a5e33"
     },
     "results/hist_boundary_comparison/1d_earlier_local2_events.jsonl.gz": {
       "bytes": 1719,
