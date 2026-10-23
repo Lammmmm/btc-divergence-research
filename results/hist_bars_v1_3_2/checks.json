@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "compared_to": "Hist_Divergence_Bars_v1_3_1.pine",
+  "source_sha256": "411a8c2993eb3837e6e8d1ec9a14074ab3851f71dad4ed859d881d370daf113f",
+  "exact_macd_search_and_lifecycle": true,
+  "exact_hist_plot_and_color_logic": true,
+  "exact_audits_and_alerts": true,
+  "panel_default_on": true,
+  "panel_evidence": "Frozen from close[formal span], hist[formal span], close[1], hist[1] only on started pulse; display variables never feed into original decisions.",
+  "inactive_panel": "Rules shown; no stale numeric active boundaries.",
+  "scope": "Display-only panel update. No new return backtest. Prior lifecycle replay remains applicable."
+}

@@ -229,6 +229,10 @@
       "bytes": 1121,
       "sha256": "44a770cdbc60d1e70f6dac24143cc7e9b27bb93f3903d6b5b65e5572e07a6cde"
     },
+    "docs/HIST_BARS_V1_3_2_GUIDE.md": {
+      "bytes": 2138,
+      "sha256": "aa2491960f25f3b4ef3dbf1a91de65b1531ceca80ab07bd31c7d8b9d6d35c9de"
+    },
     "docs/HIST_BARS_V1_3_GUIDE.md": {
       "bytes": 3282,
       "sha256": "1661533899542b5e28688f6959f26690b51ce35b33b162149086d1fad6a92cbb"
@@ -497,6 +501,10 @@
       "bytes": 11688,
       "sha256": "ddc6d2d3a0989f9b4302212ab60bb0939dab6571d7e47fd826a0f166eb948fed"
     },
+    "pine/Hist_Divergence_Bars_v1_3_2.pine": {
+      "bytes": 13866,
+      "sha256": "411a8c2993eb3837e6e8d1ec9a14074ab3851f71dad4ed859d881d370daf113f"
+    },
     "pine/Hist_Divergence_Lifecycle_v1.pine": {
       "bytes": 17708,
       "sha256": "9b4d8e5d1795e11eb60e4cd91de78003165872db96cda7073f1062168023f658"
@@ -582,8 +590,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 20543,
-      "sha256": "f775437b614393695a6521531a2d222b7d8f767571a177066d218af80d6361c0"
+      "bytes": 20847,
+      "sha256": "cdf606019c543e0f7bf3ff0c0e1c808ffd2b1a4efd67b2acb4abf20893aff74e"
     },
     "reports/hist_bars_v1_3_1_1d.png": {
       "bytes": 130958,
@@ -596,6 +604,14 @@
     "reports/hist_bars_v1_3_1d.png": {
       "bytes": 102936,
       "sha256": "5b1796dbb1b4f58fcc8d7e613ba173c6d60dcecb8266dd02ec89a61b43a71d7d"
+    },
+    "reports/hist_bars_v1_3_2_1d.png": {
+      "bytes": 123056,
+      "sha256": "5d6fc3831d3e38fb42abb3388fc05341cd885594ccd9c6b8f1471e823644ca15"
+    },
+    "reports/hist_bars_v1_3_2_4h.png": {
+      "bytes": 121836,
+      "sha256": "2750f18f27d559d1310128a31a7e476cfc7581588ee1e9669e10ed7ab0d5aff3"
     },
     "reports/hist_bars_v1_3_4h.png": {
       "bytes": 99844,
@@ -2896,6 +2912,14 @@
     "results/hist_bars_v1_3_1/tradingview_checks.json": {
       "bytes": 1034,
       "sha256": "49c73f8c6c4897b03a8974d91083e2b391eb746bc0ee74d9931b65a5432a5e33"
+    },
+    "results/hist_bars_v1_3_2/checks.json": {
+      "bytes": 673,
+      "sha256": "1ae396b1ff5685f925eef011d1e434a5bc26008d8d803c97ed68b68e2a5dca44"
+    },
+    "results/hist_bars_v1_3_2/tradingview_checks.json": {
+      "bytes": 1789,
+      "sha256": "6dc795dbb3ffd8865d681c51b6f72c44833f4fcebe3222a06df78a5fffbe2bcf"
     },
     "results/hist_boundary_comparison/1d_earlier_local2_events.jsonl.gz": {
       "bytes": 1719,

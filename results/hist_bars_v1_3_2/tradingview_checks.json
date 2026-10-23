@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "date_local": "2026-10-23",
+  "observed_chart_symbol": "BINANCE:BTCUSDT",
+  "note": "The existing user chart was Binance spot BTCUSDT despite a BTCUSDT.P URL query. Kept the user's selected symbol; this is display validation, not a new perpetual-contract backtest.",
+  "saved_script": "Hist 背离状态柱 v1.3.2",
+  "compile_and_running": true,
+  "source_readback_matches_normalized_newlines": true,
+  "observed_timeframes": ["4H", "1D"],
+  "panel_default_visible": true,
+  "4h_panel_observation": {
+    "state": "bullish divergence active",
+    "endpoint_price": 81037.99,
+    "reference_price": 83494.58,
+    "endpoint_hist_display": -378.9683,
+    "reference_hist_display": -484.8551,
+    "confirmation": "close > 87220.00",
+    "invalidation": "close < 79940.21"
+  },
+  "1d_panel_observation": {
+    "state": "bearish divergence active",
+    "endpoint_price": 86620.00,
+    "reference_price": 80249.58,
+    "endpoint_hist_display": 398.2458,
+    "reference_hist_display": 1306.4931,
+    "confirmation": "close < 74967.97",
+    "invalidation": "close > 88618.42"
+  },
+  "visual_checks": [
+    "One six-row table at top right, with stage, original trigger evidence, frozen target and failure price, and close/turn/line-check reminder.",
+    "Underlying raw Hist columns and blue bullish/red bearish colors unchanged.",
+    "No labels, A/B markers, circles, connecting lines, or white/orange outcome columns."
+  ],
+  "full_history_export_reconciliation": "NOT_PERFORMED",
+  "intrabar_touch_warning": "Source reviewed; no artificial live tick or wick injection performed in TradingView.",
+  "scope": "Compilation, exact source readback, and 4H/1D display inspection. Algorithm/columns/audits/alerts equivalence recorded in checks.json; no new return backtest."
+}

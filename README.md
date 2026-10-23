@@ -8,6 +8,8 @@ BINANCE BTCUSDT USDT 永续合约，10 个内置指标分别测试 4H 和 1D。�
 
 ## 当前指标与完整说明
 
+**当前状态框版：Hist Bars v1.3.2。** [源码](pine/Hist_Divergence_Bars_v1_3_2.pine) · [状态框说明](docs/HIST_BARS_V1_3_2_GUIDE.md)。右上角默认显示当前阶段、正式触发时的价格/Hist比较、冻结反转确认价和失效价。柱色、判定和警报与v1.3.1不变。
+
 **当前简化配色版：Hist Bars v1.3.1。** [源码](pine/Hist_Divergence_Bars_v1_3_1.pine) · [说明](docs/HIST_BARS_V1_3_1_GUIDE.md)。去掉白色、橙色、盘中橙色预警和结果叠色；生效中红/蓝，结束直接恢复普通正负柱色。无label，判定和警报与v1.3不变。
 
 **当前简洁状态柱：Hist Bars v1.3。** [源码](pine/Hist_Divergence_Bars_v1_3.pine) · [颜色和开始/结束规则](docs/HIST_BARS_V1_3_GUIDE.md)。移除全部label、文字框、A/B和圆点，只用原值Hist柱：蓝底背离、红顶背离，持续到橙色收盘失效或浅灰反转确认后恢复普通柱色。接回已研究的Line v4.6.1冻结结构生命周期，原始背离搜索不变；与仅展示配对的v1.2口径不同。
