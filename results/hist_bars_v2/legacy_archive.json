@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "commit": "35ecc43447ceee94403951686eef8a148d3f2383",
+  "release": "https://github.com/Lammmmm/btc-divergence-research/releases/tag/hist-bars-v1-3-2",
+  "assets": [
+    {
+      "file": "Hist_Divergence_Bars_v1_3_2.pine",
+      "bytes": 13866,
+      "sha256": "411a8c2993eb3837e6e8d1ec9a14074ab3851f71dad4ed859d881d370daf113f",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/Hist_Divergence_Bars_v1_3_2.pine"
+    },
+    {
+      "file": "HIST_BARS_V1_3_2_GUIDE.md",
+      "bytes": 2138,
+      "sha256": "aa2491960f25f3b4ef3dbf1a91de65b1531ceca80ab07bd31c7d8b9d6d35c9de",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/HIST_BARS_V1_3_2_GUIDE.md"
+    },
+    {
+      "file": "checks.json",
+      "bytes": 673,
+      "sha256": "1ae396b1ff5685f925eef011d1e434a5bc26008d8d803c97ed68b68e2a5dca44",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/checks.json"
+    },
+    {
+      "file": "tradingview_checks.json",
+      "bytes": 1789,
+      "sha256": "6dc795dbb3ffd8865d681c51b6f72c44833f4fcebe3222a06df78a5fffbe2bcf",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/tradingview_checks.json"
+    },
+    {
+      "file": "hist_bars_v1_3_2_4h.png",
+      "bytes": 121836,
+      "sha256": "2750f18f27d559d1310128a31a7e476cfc7581588ee1e9669e10ed7ab0d5aff3",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/hist_bars_v1_3_2_4h.png"
+    },
+    {
+      "file": "hist_bars_v1_3_2_1d.png",
+      "bytes": 123056,
+      "sha256": "5d6fc3831d3e38fb42abb3388fc05341cd885594ccd9c6b8f1471e823644ca15",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/hist_bars_v1_3_2_1d.png"
+    },
+    {
+      "file": "btc-divergence-research.zip",
+      "bytes": 58676368,
+      "sha256": "f9f8c926f0f222af5459c19c896092e0e4629184c9ba78f2d02bc31d5132453d",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/btc-divergence-research.zip"
+    },
+    {
+      "file": "btc-divergence-research.zip.sha256",
+      "bytes": 95,
+      "sha256": "b7607d0a3b37f806b5e125a6cf9ec957e27949bba6b40bc2f39ae34d0ccde3eb",
+      "url": "https://github.com/Lammmmm/btc-divergence-research/releases/download/hist-bars-v1-3-2/btc-divergence-research.zip.sha256"
+    }
+  ]
+}

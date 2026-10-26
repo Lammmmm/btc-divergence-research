@@ -1,0 +1,162 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Original divergence detection: © LonesomeTheBlue.
+// Hist-only Regular signal column display. No added structure/lifecycle rules.
+//@version=4
+study("Hist 背离原版信号柱 v2.0", shorttitle="Hist Bars v2.0", overlay=false, max_bars_back=1000)
+
+prd = input(defval=5, title="Pivot Period", minval=1, maxval=50)
+source = input(defval="Close", title="Source for Pivot Points", options=["Close", "High/Low"])
+maxpp = input(defval=10, title="Maximum Pivot Points to Check", minval=1, maxval=20)
+maxbars = input(defval=100, title="Maximum Bars to Check", minval=30, maxval=200)
+dontconfirm = input(defval=false, title="Don't Wait for Confirmation")
+bullColor = input(defval=#2979FF, title="底背离触发柱", type=input.color)
+bearColor = input(defval=#FF1744, title="顶背离触发柱", type=input.color)
+positiveColor = input(defval=#668E7B, title="普通正柱", type=input.color)
+negativeColor = input(defval=#A88B60, title="普通负柱", type=input.color)
+ordinaryFade = input(defval=55, title="普通柱透明度", minval=0, maxval=85)
+showPanel = input(defval=true, title="显示原版信号状态框")
+
+[macd, signal, deltamacd] = macd(close, 12, 26, 9) // MACD
+float ph = pivothigh((source == "Close" ? close : high), prd, prd)
+float pl = pivotlow((source == "Close" ? close : low), prd, prd)
+
+// keep values and positions of Pivot Highs/Lows in the arrays
+var int maxarraysize = 20
+var ph_positions = array.new_int(maxarraysize, 0)
+var pl_positions = array.new_int(maxarraysize, 0)
+var ph_vals = array.new_float(maxarraysize, 0.)
+var pl_vals = array.new_float(maxarraysize, 0.)
+
+// add PHs to the array
+if ph
+    array.unshift(ph_positions, bar_index)
+    array.unshift(ph_vals, ph)
+    if array.size(ph_positions) > maxarraysize
+        array.pop(ph_positions)
+        array.pop(ph_vals)
+
+// add PLs to the array
+if pl
+    array.unshift(pl_positions, bar_index)
+    array.unshift(pl_vals, pl)
+    if array.size(pl_positions) > maxarraysize
+        array.pop(pl_positions)
+        array.pop(pl_vals)
+
+// functions to check Regular Divergences and Hidden Divergences
+
+// function to check positive regular or negative hidden divergence
+// cond == 1 => positive_regular, cond == 2=> negative_hidden
+positive_regular_positive_hidden_divergence(src, cond)=>
+    divlen = 0
+    prsc = source == "Close" ? close : low
+    // if indicators higher than last value and close price is higher than las close 
+    if dontconfirm or src > src[1] or close > close[1]
+        startpoint = dontconfirm ? 0 : 1 // don't check last candle
+        // we search last 15 PPs
+        for x = 0 to maxpp - 1
+            len = bar_index - array.get(pl_positions, x) + prd
+            // if we reach non valued array element or arrived 101. or previous bars then we don't search more
+            if array.get(pl_positions, x) == 0 or len > maxbars
+                break
+            if len > 5 and 
+               ((cond == 1 and src[startpoint] > src[len] and prsc[startpoint] < nz(array.get(pl_vals, x))) or
+               (cond == 2 and src[startpoint] < src[len] and prsc[startpoint] > nz(array.get(pl_vals, x))))
+                slope1 = (src[startpoint] - src[len]) / (len - startpoint)
+                virtual_line1 = src[startpoint] - slope1
+                slope2 = (close[startpoint] - close[len]) / (len - startpoint)
+                virtual_line2 = close[startpoint] - slope2
+                arrived = true
+                for y = 1 + startpoint to len - 1
+                    if src[y] < virtual_line1 or nz(close[y]) < virtual_line2
+                        arrived := false
+                        break
+                    virtual_line1 := virtual_line1 - slope1
+                    virtual_line2 := virtual_line2 - slope2
+                
+                if arrived
+                    divlen := len
+                    break
+    divlen
+
+// function to check negative regular or positive hidden divergence
+// cond == 1 => negative_regular, cond == 2=> positive_hidden
+negative_regular_negative_hidden_divergence(src, cond)=>
+    divlen = 0
+    prsc = source == "Close" ? close : high
+    // if indicators higher than last value and close price is higher than las close 
+    if dontconfirm or src < src[1] or close < close[1]
+        startpoint = dontconfirm ? 0 : 1 // don't check last candle
+        // we search last 15 PPs
+        for x = 0 to maxpp - 1
+            len = bar_index - array.get(ph_positions, x) + prd
+            // if we reach non valued array element or arrived 101. or previous bars then we don't search more
+            if array.get(ph_positions, x) == 0 or len > maxbars
+                break
+            if len > 5 and 
+               ((cond == 1 and src[startpoint] < src[len] and prsc[startpoint] > nz(array.get(ph_vals, x))) or 
+               (cond == 2 and src[startpoint] > src[len] and prsc[startpoint] < nz(array.get(ph_vals, x))))
+                slope1 = (src[startpoint] - src[len]) / (len - startpoint)
+                virtual_line1 = src[startpoint] - slope1
+                slope2 = (close[startpoint] - nz(close[len])) / (len - startpoint)
+                virtual_line2 = close[startpoint] - slope2
+                arrived = true
+                for y = 1 + startpoint to len - 1
+                    if src[y] > virtual_line1 or nz(close[y]) > virtual_line2
+                        arrived := false
+                        break
+                    virtual_line1 := virtual_line1 - slope1
+                    virtual_line2 := virtual_line2 - slope2
+                
+                if arrived
+                    divlen := len
+                    break
+    divlen
+
+// End original algorithm. Only the Hist Regular branches are selected.
+// Equivalent scope: Hist enabled, Regular, Minimum Number of Divergence = 1.
+bullLength = positive_regular_positive_hidden_divergence(deltamacd, 1)
+bearLength = negative_regular_negative_hidden_divergence(deltamacd, 1)
+rawBull = bullLength > 0
+rawBear = bearLength > 0
+bothDirections = rawBull and rawBear
+startpoint = dontconfirm ? 0 : 1
+
+// Stateless display: every execution uses only the current original signal flags.
+// No offset: the trigger is colored on the detection bar, not back-painted on its endpoint.
+normalColor = color.new(deltamacd >= 0 ? positiveColor : negativeColor, ordinaryFade)
+columnColor = rawBear ? bearColor : rawBull ? bullColor : normalColor
+plot(deltamacd, "原始Hist：本根底蓝/顶红/未检出普通色", color=columnColor, style=plot.style_columns)
+hline(0, "Hist零轴", color=color.new(#9099AB, 65))
+
+// Keep both signals. Red has display priority only if both are true.
+// These hidden series do not affect the pane scale or the detection logic.
+plot(bullLength, "Audit Bull Length", display=display.none)
+plot(bearLength, "Audit Bear Length", display=display.none)
+plot(bothDirections ? 1 : 0, "Audit Both Directions", display=display.none)
+
+var table panel = table.new(position.top_right, 2, 5, bgcolor=#111B2C, frame_color=#334155, frame_width=1)
+if barstate.islast and showPanel
+    panelText = #A9B3C5
+    state = bothDirections ? "顶/底同时触发（柱色顶红）" : rawBull ? "本根底背离触发" : rawBear ? "本根顶背离触发" : "本根未检出背离"
+    span = rawBear ? bearLength : bullLength
+    refPrice = span > 0 ? (source == "Close" ? close[span] : rawBear ? high[span] : low[span]) : na
+    endPrice = source == "Close" ? close[startpoint] : rawBear ? high[startpoint] : low[startpoint]
+    priceText = bothDirections ? "双向均保留；两个警报独立" : span > 0 ? tostring(endPrice, format.mintick) + (rawBear ? " > " : " < ") + tostring(refPrice, format.mintick) + "（参照）" : "底：价更低；顶：价更高"
+    histText = bothDirections ? "按各自历史枢轴分别比较" : span > 0 ? tostring(deltamacd[startpoint], "#.####") + (rawBear ? " < " : " > ") + tostring(deltamacd[span], "#.####") + "（参照）" : "底：Hist更高；顶：Hist更低"
+    confirmText = dontconfirm ? "当根末端 + 连线检查" : "上一根末端 + 当前拐头 + 连线"
+    // barstate.isconfirmed is informational here, never a signal gate.
+    timingText = barstate.isconfirmed ? "本根已收盘；未检出≠结构失效" : "盘中可出现/撤销，不锁定延续"
+    table.cell(panel, 0, 0, "当前检测", text_color=panelText, text_size=size.small)
+    table.cell(panel, 1, 0, state, text_color=(rawBull or rawBear) ? columnColor : panelText, text_size=size.small)
+    table.cell(panel, 0, 1, "价格条件", text_color=panelText, text_size=size.small)
+    table.cell(panel, 1, 1, priceText, text_color=panelText, text_size=size.small)
+    table.cell(panel, 0, 2, "Hist条件", text_color=panelText, text_size=size.small)
+    table.cell(panel, 1, 2, histText, text_color=panelText, text_size=size.small)
+    table.cell(panel, 0, 3, "原版确认", text_color=panelText, text_size=size.small)
+    table.cell(panel, 1, 3, confirmText, text_color=panelText, text_size=size.small)
+    table.cell(panel, 0, 4, "实时说明", text_color=panelText, text_size=size.small)
+    table.cell(panel, 1, 4, timingText, text_color=panelText, text_size=size.small)
+
+alertcondition(rawBull, title="原版Hist底背离", message="{{ticker}} {{interval}} 原版Hist普通底背离条件成立；盘中可能撤销，不附加结构确认/失效价。")
+alertcondition(rawBear, title="原版Hist顶背离", message="{{ticker}} {{interval}} 原版Hist普通顶背离条件成立；盘中可能撤销，不附加结构确认/失效价。")

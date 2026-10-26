@@ -237,6 +237,10 @@
       "bytes": 3282,
       "sha256": "1661533899542b5e28688f6959f26690b51ce35b33b162149086d1fad6a92cbb"
     },
+    "docs/HIST_BARS_V2_GUIDE.md": {
+      "bytes": 3443,
+      "sha256": "9ff6f3026d226d77875e522a20e87939427829ada7667e6d21f55fe7b7ee2959"
+    },
     "docs/HIST_INDICATOR_MANUAL.md": {
       "bytes": 17757,
       "sha256": "a7a48af62b4ff8651f00881ff33b31be73db358ecc1b6cad5aab8adbb23cd501"
@@ -505,6 +509,10 @@
       "bytes": 13866,
       "sha256": "411a8c2993eb3837e6e8d1ec9a14074ab3851f71dad4ed859d881d370daf113f"
     },
+    "pine/Hist_Divergence_Bars_v2.pine": {
+      "bytes": 9768,
+      "sha256": "6b043db77c0cdde858922df7d17fb83efc5dc182c301c1aaa6f028b7bec24740"
+    },
     "pine/Hist_Divergence_Lifecycle_v1.pine": {
       "bytes": 17708,
       "sha256": "9b4d8e5d1795e11eb60e4cd91de78003165872db96cda7073f1062168023f658"
@@ -590,8 +598,8 @@
       "sha256": "8efaf70eb75ca028b882333e8c2ea947b6783d9cb41c0e37d4c4f4a789cafa93"
     },
     "README.md": {
-      "bytes": 20847,
-      "sha256": "cdf606019c543e0f7bf3ff0c0e1c808ffd2b1a4efd67b2acb4abf20893aff74e"
+      "bytes": 21262,
+      "sha256": "5bf21b8528722aec59ed5d5bc928802a15f7e452a5b933e7e73625e26e1162a6"
     },
     "reports/hist_bars_v1_3_1_1d.png": {
       "bytes": 130958,
@@ -620,6 +628,14 @@
     "reports/hist_bars_v1_3_compact.png": {
       "bytes": 122896,
       "sha256": "f9d3b6c6353beffdf1fa030042bd8db2513ac40598fa935d3800da4846b8edbc"
+    },
+    "reports/hist_bars_v2_1d.png": {
+      "bytes": 123706,
+      "sha256": "030cdd0f683d5ae46b60c9194ecf1f521d17b14a2a85bc86cb05fedc4f75a3ed"
+    },
+    "reports/hist_bars_v2_4h.png": {
+      "bytes": 125359,
+      "sha256": "e446070b4cd0523457677afabd38d78eff06b694cb79f70c29c5c52f4e9ef36d"
     },
     "reports/HIST_BOUNDARY_COMPARISON.md": {
       "bytes": 3957,
@@ -2920,6 +2936,26 @@
     "results/hist_bars_v1_3_2/tradingview_checks.json": {
       "bytes": 1789,
       "sha256": "6dc795dbb3ffd8865d681c51b6f72c44833f4fcebe3222a06df78a5fffbe2bcf"
+    },
+    "results/hist_bars_v2/checks.json": {
+      "bytes": 3016,
+      "sha256": "aaa4b6a2c477b0146e1fd11cc0abea461c211ce2be0426e2f0c2c5deefd6dae9"
+    },
+    "results/hist_bars_v2/columns_1d.jsonl.gz": {
+      "bytes": 64618,
+      "sha256": "875ee6c4d60da9bd4e6baa773632f32a6490f5b72cb6dd41255a19b1c29fb08c"
+    },
+    "results/hist_bars_v2/columns_4h.jsonl.gz": {
+      "bytes": 370583,
+      "sha256": "1be852f7cf19aad53342b237fc49a95dbb5f6fe076df354cc9b3a1c17089de8b"
+    },
+    "results/hist_bars_v2/legacy_archive.json": {
+      "bytes": 2553,
+      "sha256": "4ac50b19bdba4e476dfcd99aa3223c5e9e47af82fe5c0573a4d62d285583f259"
+    },
+    "results/hist_bars_v2/tradingview_checks.json": {
+      "bytes": 1708,
+      "sha256": "34cc0e5b624eca7adc9822df5d07ca1ec2f569db83bf209233956b86bee8566e"
     },
     "results/hist_boundary_comparison/1d_earlier_local2_events.jsonl.gz": {
       "bytes": 1719,
@@ -9172,6 +9208,10 @@
     "src/verify_hist_bars_v13.py": {
       "bytes": 4742,
       "sha256": "30103795c714ddc3e513fa38f15a57cb0d473b4d707d50f8edfb1871c6323219"
+    },
+    "src/verify_hist_bars_v2.py": {
+      "bytes": 9494,
+      "sha256": "393fdb7a648e7708878410804bd7352e88318dd044ab7f3a3518e7a7e9a52951"
     },
     "src/verify_hist_lifecycle.py": {
       "bytes": 7715,

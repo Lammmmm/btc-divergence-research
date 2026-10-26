@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "source_checks": {
+    "exact_original_pivot_and_search_block": true,
+    "original_core_sha256": "2965ebe850898e861aea3d20586e58347d19d388931924915517ce5c1ea55c7a",
+    "exact_original_macd_and_pivot_declarations": true,
+    "direct_independent_raw_conditions": true,
+    "top_color_precedence_only": true,
+    "independent_alert_conditions": true,
+    "no_structure_lifecycle_or_atr_gate": true,
+    "original_source_sha256": "6f4c60d954c856c4ec88f95169829df434c9b78e8492651ef1e79f5eb37ff372",
+    "product_source_sha256": "6b043db77c0cdde858922df7d17fb83efc5dc182c301c1aaa6f028b7bec24740"
+  },
+  "display_sanity": {
+    "mapping_cases": 4,
+    "dual_direction_alerts_preserved": true,
+    "same_bar_false_retracts_color": true,
+    "consecutive_signals_not_deduplicated": true,
+    "scope": "Pure display specification; not a live tick or Pine execution test"
+  },
+  "datasets": [
+    {
+      "timeframe": "4h",
+      "source_bars": 14880,
+      "compared_bars": 14880,
+      "mismatched_lengths": 0,
+      "exact_saved_lengths": true,
+      "exact_saved_flags": true,
+      "bottom_condition_bars": 171,
+      "top_condition_bars": 233,
+      "both_condition_bars": 0,
+      "no_condition_bars": 14476,
+      "all_rows_included_without_date_atr_or_event_filter": true,
+      "saved_reference_sha256": "3d3649069fec6a05217b7be1d667fce5a53e93442a28a01dc346bc212108cf76",
+      "raw_candles_sha256": "721e2bab9e9d35eb87e73196852a80c947a84d5aa3f67b9797a76122dbada8ed",
+      "columns_sha256": "1be852f7cf19aad53342b237fc49a95dbb5f6fe076df354cc9b3a1c17089de8b"
+    },
+    {
+      "timeframe": "1d",
+      "source_bars": 2480,
+      "compared_bars": 2480,
+      "mismatched_lengths": 0,
+      "exact_saved_lengths": true,
+      "exact_saved_flags": true,
+      "bottom_condition_bars": 27,
+      "top_condition_bars": 38,
+      "both_condition_bars": 0,
+      "no_condition_bars": 2415,
+      "all_rows_included_without_date_atr_or_event_filter": true,
+      "saved_reference_sha256": "794deedc2e92d4951ce401bb2bc98a3c965c57fc3fe89d7b76d102ccce0bddba",
+      "raw_candles_sha256": "55136818047e541924442e1b6331071bc90707e44d828a8d974288ab2ed4a5bd",
+      "columns_sha256": "875ee6c4d60da9bd4e6baa773632f32a6490f5b72cb6dd41255a19b1c29fb08c"
+    }
+  ],
+  "tested_configuration": {
+    "pivot_source": "Close",
+    "pivot_period": 5,
+    "max_pivots": 10,
+    "max_bars": 100,
+    "macd": [
+      12,
+      26,
+      9
+    ],
+    "divergence": "Regular",
+    "dontconfirm": false,
+    "minimum_divergences": 1
+  },
+  "scope": "Original-source identity plus Python reference replay over saved closed bars; not a Pine interpreter or TradingView execution. No profitability or reversal-outcome study.",
+  "optional_high_low_and_dontconfirm_true_runtime_validation": "NOT_PERFORMED",
+  "full_TradingView_export_reconciliation": "NOT_PERFORMED",
+  "live_intrabar_tick_validation": "NOT_PERFORMED; display retraction sanity only"
+}

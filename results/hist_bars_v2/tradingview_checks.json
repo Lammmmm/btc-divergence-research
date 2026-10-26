@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "date_local": "2026-10-26",
+  "saved_script": "Hist 背离原版信号柱 v2.0",
+  "pine_version": 4,
+  "observed_chart_symbol": "BINANCE:BTCUSDT",
+  "symbol_note": "The existing user chart is Binance spot BTCUSDT despite the BTCUSDT.P URL parameter. Kept the user's selected symbol. Historical Python reference comparison separately uses the existing Binance perpetual research snapshot.",
+  "compiled_and_running": true,
+  "source_readback_matches_normalized_newlines": true,
+  "timeframes_observed": ["1D", "4H"],
+  "settings": {"pivot_source": "Close", "pivot_period": 5, "max_pivots": 10, "max_bars": 100, "dontconfirm": false, "macd": [12, 26, 9]},
+  "observations": [
+    "Red and blue on individual original-rule detection bars; later bars return to ordinary sign colors without a latched active event.",
+    "Current ordinary bar is accompanied by a no-divergence-this-bar panel, rather than a structural failure claim.",
+    "Panel shows original confirmation method and live retraction note; frozen confirmation/invalidation levels are absent.",
+    "Old Hist Bars v1.3.2 chart instance hidden via its menu; cloud source preserved separately.",
+    "No labels, circles, A/B, connecting lines or white/orange outcome columns.",
+    "Layout saved with new version visible and 4H restored for viewing."
+  ],
+  "screenshots": ["reports/hist_bars_v2_1d.png", "reports/hist_bars_v2_4h.png"],
+  "full_TradingView_export_reconciliation": "NOT_PERFORMED",
+  "live_intrabar_tick_retraction": "NOT_PERFORMED; stateless source and Python mapping checked separately",
+  "scope": "TradingView compilation, source readback, default 4H/1D visual inspection; no new profitability study."
+}
